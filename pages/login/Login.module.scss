@@ -1,0 +1,66 @@
+.mainContainer {
+  width: 100%;
+  height: 100vh;
+  display: flex;
+  justify-content: space-around;
+  align-items: center;
+  gap: 2rem;
+}
+
+.budContainer {
+  width: 10rem;
+  height: 85%;
+  margin-left: 7rem;
+
+  position: relative;
+}
+
+.formContainer {
+  width: 45%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  margin-right: 7rem;
+}
+
+.ForgottenNote {
+  font-size: 12px;
+  text-decoration: underline;
+  align-self: end;
+  margin-top: 0;
+}
+
+.buttonContainer {
+  width: 55%;
+}
+
+.pElement {
+  font-weight: var(--font-weight-normal);
+  width: 2rem;
+  text-align: center;
+  position: relative;
+
+  &::after,
+  ::before {
+    content: " ";
+    display: block;
+    width: 8.4rem;
+    height: 0.1rem;
+    background-color: var(--secondary-bruin);
+    margin-top: 1rem;
+    position: absolute;
+    top: 0;
+    left: 2rem;
+  }
+  &::before {
+    content: " ";
+    display: block;
+    width: 8.4rem;
+    height: 0.1rem;
+    background-color: var(--secondary-bruin);
+    margin-top: 1rem;
+    position: absolute;
+    top: 0;
+    right: 2rem;
+  }
+}

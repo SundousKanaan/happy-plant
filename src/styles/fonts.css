@@ -1,0 +1,44 @@
+@font-face {
+  font-family: "Lemon";
+  src: url("../../public/fonts/Lemon-Regular.ttf") format("ttf"),
+    url("../../public/fonts/lemon-regular-webfont.woff2") format("woff2"),
+    url("../../public/fonts/lemon-regular-webfont.woff") format("woff");
+  font-weight: 400;
+  font-style: normal;
+}
+
+@font-face {
+  font-family: "Lemonada";
+  src: url("../../public/fonts/Lemonada-Regular.ttf") format("ttf"),
+    url("../../public/fonts/lemonada-regular-webfont.woff2") format("woff2"),
+    url("../../public/fonts/lemonada-regular-webfont.woff") format("woff");
+  font-weight: 400;
+  font-style: normal;
+}
+
+@font-face {
+  font-family: "Lemonada";
+  src: url("../../public/fonts/Lemonada-Light.ttf") format("ttf"),
+    url("../../public/fonts/lemonada-Light-webfont.woff2") format("woff2"),
+    url("../../public/fonts/lemonada-Light-webfont.woff") format("woff");
+  font-weight: 300;
+  font-style: normal;
+}
+
+@font-face {
+  font-family: "Lemonada";
+  src: url("../../public/fonts/Lemonada-SemiBold.ttf") format("ttf"),
+    url("../../public/fonts/lemonada-SemiBold-webfont.woff2") format("woff2"),
+    url("../../public/fonts/lemonada-SemiBold-webfont.woff") format("woff");
+  font-weight: 600;
+  font-style: normal;
+}
+
+@font-face {
+  font-family: "Lemonada";
+  src: url("../../public/fonts/Lemonada-bold.ttf") format("ttf"),
+    url("../../public/fonts/lemonada-bold-webfont.woff2") format("woff2"),
+    url("../../public/fonts/lemonada-bold-webfont.woff") format("woff");
+  font-weight: 700;
+  font-style: normal;
+}

@@ -1,0 +1,22 @@
+.formContainer {
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+}
+
+.fullnameContainer {
+  display: flex;
+  gap: 1rem;
+}
+
+.firstNameContainer,
+.lastNameContainer {
+  width: 50%;
+  height: 3rem;
+}
+
+.inputContainer {
+  width: 100%;
+  height: 3rem;
+}
