@@ -1,7 +1,7 @@
 [
   {
     "id": 1,
-    "userName": {
+    "userame": {
       "firstName": "first",
       "lastName": "last"
     },
@@ -21,9 +21,31 @@
         "background_imageSrc": "https://www.w3schools.com/howto/img_avatar.png"
       }
     ],
-    "posts": [{ "postId": 1, "plantId": 1, "userId": 1, "saved": false }],
-    "followers": [{ "userId": 2 }],
-    "following": [{ "userId": 7 }],
-    "savedPosts": [{ "plantId": 1, "userId": 5, "postId": 1, "saved": false }]
+    "posts": [
+      {
+        "postId": 1,
+        "plantId": 1,
+        "userId": 1,
+        "saved": false
+      }
+    ],
+    "followers": [
+      {
+        "userId": 2
+      }
+    ],
+    "following": [
+      {
+        "userId": 7
+      }
+    ],
+    "savedPosts": [
+      {
+        "plantId": 1,
+        "userId": 5,
+        "postId": 1,
+        "saved": false
+      }
+    ]
   }
 ]

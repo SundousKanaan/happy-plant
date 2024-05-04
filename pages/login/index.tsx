@@ -7,7 +7,7 @@ import { Bud } from "@/src/components/Bud/Bud";
 import $ from "./Login.module.scss";
 
 const Login = () => {
-  const { login, signup } = useAccount();
+  const { login, signup, errorMessage, refreshErrorMessage } = useAccount();
   const [signingUp, setSigningUp] = useState(false);
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
@@ -15,6 +15,7 @@ const Login = () => {
   const [lastName, setLastName] = useState("");
 
   const handleInputChange = (event: React.ChangeEvent<HTMLInputElement>) => {
+    refreshErrorMessage();
     const { type, value, name } = event.target;
     console.log("handleInputChange", event.target);
 
@@ -26,7 +27,8 @@ const Login = () => {
 
     if (name === "firstName") {
       setFirstName(value);
-    } else if (name === "lastName") {
+    }
+    if (name === "lastName") {
       setLastName(value);
     }
   };
@@ -49,11 +51,16 @@ const Login = () => {
       {!signingUp ? (
         <div className={$.formContainer}>
           <LoginForm onChange={handleInputChange} />
+
           <p className={$.ForgottenNote}>Forgotten password?</p>
+
+          <span className={$.errorMessage}>{errorMessage}</span>
+
           <div className={$.buttonContainer}>
             <Button text="Login" color="green" onClick={handleLogin} />
           </div>
           <p className={$.pElement}>Of</p>
+
           <div className={$.buttonContainer}>
             <Button
               text="Signup"
@@ -66,6 +73,9 @@ const Login = () => {
         <div className={$.formContainer}>
           <SingupForm onChange={handleInputChange} />
           <p className={$.ForgottenNote}>Forgotten password?</p>
+
+          <span className={$.errorMessage}>{errorMessage}</span>
+
           <div className={$.buttonContainer}>
             <Button text="Signup" color="bruin" onClick={handleSignup} />
           </div>

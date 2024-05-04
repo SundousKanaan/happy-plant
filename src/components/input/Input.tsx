@@ -12,6 +12,7 @@ interface InputProps {
 const Input: React.FC<InputProps> = ({
   type = "text",
   placeholder = "",
+  name = "",
   onChange,
 }) => {
   const [inputType, setInputType] = useState(type);
@@ -37,6 +38,7 @@ const Input: React.FC<InputProps> = ({
           className={cs($.input, {
             [$.boldFont]: !boldFont,
           })}
+          name={name}
           type={inputType}
           placeholder={placeholder}
           maxLength={10}
@@ -50,6 +52,7 @@ const Input: React.FC<InputProps> = ({
     return (
       <input
         className={$.input}
+        name={name}
         type={type}
         placeholder={placeholder}
         onChange={onChange}

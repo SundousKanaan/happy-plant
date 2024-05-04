@@ -1,4 +1,5 @@
 import React, { createContext, useContext, useState } from "react";
+import { useRouter } from "next/router";
 import dataBase from "@/data/BasisData.json";
 import { User } from "@/ts/types";
 
@@ -11,6 +12,8 @@ interface AccountContextType {
     firstName: string,
     lastName: string
   ) => void;
+  errorMessage: string;
+  refreshErrorMessage: () => void;
 }
 
 const AccountContext = createContext<AccountContextType | undefined>(undefined);
@@ -26,33 +29,45 @@ export const useAccount = () => {
 export const AccountProvider: React.FC<{ children: React.ReactNode }> = ({
   children,
 }) => {
+  const router = useRouter();
   const [isLoggedIn, setIsLoggedIn] = useState(false);
+  const [errorMessage, setErrorMessage] = useState<string>("");
+
+  const refreshErrorMessage = () => {
+    setErrorMessage("");
+  };
 
   const login = (email: string, password: string) => {
     // Zoek naar een gebruiker met de gegeven e-mail
-    console.log({ data: dataBase });
-
     const user = dataBase.find((user) => user.email === email);
 
     // Controleer of de gebruiker bestaat en of het wachtwoord overeenkomt
     if (user && user.password === password) {
       setIsLoggedIn(true);
       console.log("Login successful");
+      // Doorstuur de gebruiker naar de homepage
+      router.push("/homepage");
     } else {
-      console.log("Invalid email or password");
+      setErrorMessage("Invalid email or password");
     }
   };
 
-  const signup = (
+  const signup = async (
     email: string,
     password: string,
     firstName: string,
     lastName: string
   ) => {
+    // Controleer of alle variabelen waarden hebben
+    if (!email || !password || !firstName || !lastName) {
+      setErrorMessage("Please fill out all fields correctly");
+      return;
+    }
+
     // Controleer of de gebruiker al bestaat
     const userExists = dataBase.some((user) => user.email === email);
     if (userExists) {
-      console.log("User already exists");
+      setErrorMessage("User already exists");
     } else {
       // Voeg de nieuwe gebruiker toe aan de gegevens
       const newUser: User = {
@@ -71,13 +86,35 @@ export const AccountProvider: React.FC<{ children: React.ReactNode }> = ({
         savedPosts: [],
       };
       dataBase.push(newUser);
+      const dataStr: String = JSON.stringify(dataBase, null, 4);
+      const saveData = async (dataStr) => {
+        const response = await fetch("/api/saveData", {
+          method: "POST",
+          headers: {
+            "Content-Type": "application/json",
+          },
+          body: dataStr,
+        });
+
+        if (response.ok) {
+          console.log("Data saved successfully");
+        } else {
+          console.error("Failed to save data");
+        }
+      };
+
+      await saveData(dataStr);
       console.log("User signed up successfully");
+      // Doorstuur de gebruiker naar de homepage
+      // router.push("/homepage");
     }
     console.log({ data: dataBase });
   };
 
   return (
-    <AccountContext.Provider value={{ isLoggedIn, login, signup }}>
+    <AccountContext.Provider
+      value={{ isLoggedIn, login, signup, errorMessage, refreshErrorMessage }}
+    >
       {children}
     </AccountContext.Provider>
   );

@@ -27,7 +27,7 @@
   font-size: 12px;
   text-decoration: underline;
   align-self: end;
-  margin-top: 0;
+  margin: 0;
 }
 
 .buttonContainer {
@@ -63,4 +63,12 @@
     top: 0;
     right: 2rem;
   }
+}
+
+.errorMessage {
+  display: block;
+  height: 1.5rem;
+  color: var(--red);
+  font-size: 12px;
+  margin-bottom: 0.5rem;
 }
