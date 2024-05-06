@@ -20,8 +20,6 @@ const Input: React.FC<InputProps> = ({
 
   const showPassword = (event: React.MouseEvent<HTMLButtonElement>) => {
     event.preventDefault();
-    console.log(event);
-
     setInputType((prevType) => (prevType === "password" ? "text" : "password"));
     if (inputType === "password") {
       setBoldFont(true);

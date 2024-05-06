@@ -25,9 +25,10 @@
   --font-weight-semibold: 600;
   --font-weight-bold: 700;
 
-  --paper-border-radius: 1.3rem 0.3rem;
+  --paper-border-radius: 1.3rem 0.5rem;
   --button-box-shadow: inset 0.2rem 0.2rem 0.2rem #ffffff50,
     inset -0.2rem -0.2rem 0.2rem #00000050;
+  --intro-box-shadow: 4px 4px 10px #00000050;
 }
 
 body {
@@ -40,6 +41,7 @@ body {
 
   font-family: var(--secondary-font);
   color: var(--secondary-bruin);
+  box-sizing: border-box;
 }
 
 button,

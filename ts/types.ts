@@ -1,18 +1,6 @@
-// user type
-export type User = {
-  id: number;
-  userName: username;
-  email: string;
-  password: string;
-  imageSrc: string;
-  plants: Plant[];
-  posts: Post[];
-  followers: Follower[];
-  following: Following[];
-  savedPosts: Post[];
-};
+// types.ts
 
-export type username = {
+export type UserName = {
   firstName: string;
   lastName: string;
 };
@@ -22,11 +10,11 @@ export type Plant = {
   name: string;
   plantFamily: string;
   imageSrc: string;
-  position: plantPosition;
+  position: PlantPosition;
   background_imageSrc: string;
 };
 
-export type plantPosition = {
+export type PlantPosition = {
   x: string;
   y: string;
 };
@@ -44,4 +32,17 @@ export type Follower = {
 
 export type Following = {
   userId: number;
+};
+
+export type AccountType = {
+  id: number;
+  userName: UserName;
+  email: string;
+  password: string;
+  imageSrc: string;
+  plants: Plant[];
+  posts: Post[];
+  followers: Follower[];
+  following: Following[];
+  savedPosts: Post[];
 };

@@ -1,51 +1,17 @@
 [
   {
-    "id": 1,
-    "userame": {
-      "firstName": "first",
-      "lastName": "last"
+    "id": 0,
+    "userName": {
+      "firstName": "sun",
+      "lastName": "dous"
     },
-    "email": "test@gmail.com",
-    "password": "test",
-    "imageSrc": "https://www.w3schools.com/howto/img_avatar.png",
-    "plants": [
-      {
-        "id": 1,
-        "name": "plant1",
-        "plantFamily": "plant1",
-        "imageSrc": "https://www.w3schools.com/howto/img_avatar.png",
-        "position": {
-          "x": "0",
-          "y": "0"
-        },
-        "background_imageSrc": "https://www.w3schools.com/howto/img_avatar.png"
-      }
-    ],
-    "posts": [
-      {
-        "postId": 1,
-        "plantId": 1,
-        "userId": 1,
-        "saved": false
-      }
-    ],
-    "followers": [
-      {
-        "userId": 2
-      }
-    ],
-    "following": [
-      {
-        "userId": 7
-      }
-    ],
-    "savedPosts": [
-      {
-        "plantId": 1,
-        "userId": 5,
-        "postId": 1,
-        "saved": false
-      }
-    ]
+    "email": "test@hp.nl",
+    "password": "123",
+    "imageSrc": "",
+    "plants": [],
+    "posts": [],
+    "followers": [],
+    "following": [],
+    "savedPosts": []
   }
 ]

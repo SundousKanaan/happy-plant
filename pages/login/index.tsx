@@ -17,7 +17,6 @@ const Login = () => {
   const handleInputChange = (event: React.ChangeEvent<HTMLInputElement>) => {
     refreshErrorMessage();
     const { type, value, name } = event.target;
-    console.log("handleInputChange", event.target);
 
     if (type === "email") {
       setEmail(value);
@@ -34,12 +33,10 @@ const Login = () => {
   };
 
   const handleSignup = () => {
-    console.log("Signing up...", { firstName }, { lastName });
     signup(email, password, firstName, lastName);
   };
 
   const handleLogin = () => {
-    console.log("Logging in...");
     login(email, password);
   };
 

@@ -1,7 +1,7 @@
 import React, { createContext, useContext, useState } from "react";
 import { useRouter } from "next/router";
 import dataBase from "@/data/BasisData.json";
-import { User } from "@/ts/types";
+import { AccountType, UserName } from "@/ts/types";
 
 interface AccountContextType {
   isLoggedIn: boolean;
@@ -44,9 +44,7 @@ export const AccountProvider: React.FC<{ children: React.ReactNode }> = ({
     // Controleer of de gebruiker bestaat en of het wachtwoord overeenkomt
     if (user && user.password === password) {
       setIsLoggedIn(true);
-      console.log("Login successful");
-      // Doorstuur de gebruiker naar de homepage
-      router.push("/homepage");
+      router.push("/intro");
     } else {
       setErrorMessage("Invalid email or password");
     }
@@ -58,20 +56,17 @@ export const AccountProvider: React.FC<{ children: React.ReactNode }> = ({
     firstName: string,
     lastName: string
   ) => {
-    // Controleer of alle variabelen waarden hebben
     if (!email || !password || !firstName || !lastName) {
       setErrorMessage("Please fill out all fields correctly");
       return;
     }
 
-    // Controleer of de gebruiker al bestaat
     const userExists = dataBase.some((user) => user.email === email);
     if (userExists) {
       setErrorMessage("User already exists");
     } else {
-      // Voeg de nieuwe gebruiker toe aan de gegevens
-      const newUser: User = {
-        id: dataBase.length + 1,
+      const newUser: AccountType = {
+        id: dataBase.length,
         userName: {
           firstName: firstName,
           lastName: lastName,
@@ -85,9 +80,10 @@ export const AccountProvider: React.FC<{ children: React.ReactNode }> = ({
         following: [],
         savedPosts: [],
       };
+
       dataBase.push(newUser);
       const dataStr: String = JSON.stringify(dataBase, null, 4);
-      const saveData = async (dataStr) => {
+      const saveData = async (dataStr: any) => {
         const response = await fetch("/api/saveData", {
           method: "POST",
           headers: {
@@ -95,20 +91,11 @@ export const AccountProvider: React.FC<{ children: React.ReactNode }> = ({
           },
           body: dataStr,
         });
-
-        if (response.ok) {
-          console.log("Data saved successfully");
-        } else {
-          console.error("Failed to save data");
-        }
       };
 
       await saveData(dataStr);
-      console.log("User signed up successfully");
-      // Doorstuur de gebruiker naar de homepage
-      // router.push("/homepage");
+      router.push("/intro");
     }
-    console.log({ data: dataBase });
   };
 
   return (
