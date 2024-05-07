@@ -1,5 +1,3 @@
-// types.ts
-
 export type UserName = {
   firstName: string;
   lastName: string;

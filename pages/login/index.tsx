@@ -34,10 +34,16 @@ const Login = () => {
 
   const handleSignup = () => {
     signup(email, password, firstName, lastName);
+    if (errorMessage !== "") {
+      refreshErrorMessage();
+    }
   };
 
   const handleLogin = () => {
     login(email, password);
+    if (errorMessage !== "") {
+      refreshErrorMessage();
+    }
   };
 
   return (

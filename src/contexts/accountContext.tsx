@@ -38,8 +38,11 @@ export const AccountProvider: React.FC<{ children: React.ReactNode }> = ({
   };
 
   const login = (email: string, password: string) => {
+    // Typedefinitie voor de gebruikersarray toevoegen
+    const users: AccountType[] = dataBase;
+
     // Zoek naar een gebruiker met de gegeven e-mail
-    const user = dataBase.find((user) => user.email === email);
+    const user = users.find((user) => user.email === email);
 
     // Controleer of de gebruiker bestaat en of het wachtwoord overeenkomt
     if (user && user.password === password) {
@@ -61,7 +64,10 @@ export const AccountProvider: React.FC<{ children: React.ReactNode }> = ({
       return;
     }
 
-    const userExists = dataBase.some((user) => user.email === email);
+    // Typedefinitie voor de gebruikersarray toevoegen
+    const users: AccountType[] = dataBase;
+
+    const userExists = users.some((user) => user.email === email);
     if (userExists) {
       setErrorMessage("User already exists");
     } else {
@@ -81,9 +87,12 @@ export const AccountProvider: React.FC<{ children: React.ReactNode }> = ({
         savedPosts: [],
       };
 
-      dataBase.push(newUser);
-      const dataStr: String = JSON.stringify(dataBase, null, 4);
-      const saveData = async (dataStr: any) => {
+      // Typedefinitie voor de gebruikersarray toevoegen
+      const updatedUsers: AccountType[] = [...dataBase, newUser];
+
+      const dataStr: string = JSON.stringify(updatedUsers, null, 4);
+
+      const saveData = async (dataStr: string) => {
         const response = await fetch("/api/saveData", {
           method: "POST",
           headers: {

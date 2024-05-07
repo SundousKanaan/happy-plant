@@ -1,17 +1,1 @@
-[
-  {
-    "id": 0,
-    "userName": {
-      "firstName": "sun",
-      "lastName": "dous"
-    },
-    "email": "test@hp.nl",
-    "password": "123",
-    "imageSrc": "",
-    "plants": [],
-    "posts": [],
-    "followers": [],
-    "following": [],
-    "savedPosts": []
-  }
-]
+[]
