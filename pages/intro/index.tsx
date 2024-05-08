@@ -1,7 +1,9 @@
 import React from "react";
 import $ from "./Intro.module.scss";
-import Button from "@/src/components/button/Button";
+import Button from "@/src/components/Button/Button";
 import { useRouter } from "next/router";
+import { Icon } from "@/src/components/Icon/Icon";
+import cs from "classnames";
 
 const IntroPage = () => {
   const router = useRouter();
@@ -26,12 +28,31 @@ const IntroPage = () => {
             </p>
           </>
         ) : (
-          <p>test step 2</p>
+          <>
+            <p className={$.description}>
+              Het is handig om vertrouwd te raken met deze icons voordat je
+              HappyPlant gaat gebruiken
+            </p>
+            <ul className={$.iconsList}>
+              <li className={$.icon}>
+                <Icon icon="phone" text="Digitale plant" intro />
+              </li>
+              <li className={$.icon}>
+                <Icon icon="house" text="Echt plant" intro />
+              </li>
+              <li className={$.icon}>
+                <Icon icon="sticker" text="Stickers" intro />
+              </li>
+              <li className={$.icon}>
+                <Icon icon="lineview" text="Tijdlijn" intro />
+              </li>
+            </ul>
+          </>
         )}
       </div>
       <div className={$.points}>
-        <span className={$.point}></span>
-        <span className={$.point}></span>
+        <span className={cs($.point, { [$.dark]: step === 1 })}></span>
+        <span className={cs($.point, { [$.dark]: step === 2 })}></span>
       </div>
 
       <div className={$.buttonsContainer}>

@@ -1,7 +1,7 @@
 import React, { useState } from "react";
-import LoginForm from "@/src/components/loginForm/LoginForm";
-import SingupForm from "@/src/components/singupForm/SingupForm";
-import Button from "@/src/components/button/Button";
+import LoginForm from "@/src/components/Login-Form/LoginForm";
+import SingupForm from "@/src/components/Singup-Form/SingupForm";
+import Button from "@/src/components/Button/Button";
 import { useAccount } from "@/src/contexts/accountContext";
 import { Bud } from "@/src/components/Bud/Bud";
 import $ from "./Login.module.scss";
@@ -51,7 +51,26 @@ const Login = () => {
       <div className={$.budContainer}>
         <Bud type="login" />
       </div>
-      {!signingUp ? (
+      {signingUp ? (
+        <div className={$.formContainer}>
+          <SingupForm onChange={handleInputChange} />
+          <p className={$.ForgottenNote}>Forgotten password?</p>
+
+          <span className={$.errorMessage}>{errorMessage}</span>
+
+          <div className={$.buttonContainer}>
+            <Button text="Signup" color="bruin" onClick={handleSignup} />
+          </div>
+          <p className={$.pElement}>Of</p>
+          <div className={$.buttonContainer}>
+            <Button
+              text="Login"
+              color="green"
+              onClick={() => setSigningUp(false)}
+            />
+          </div>
+        </div>
+      ) : (
         <div className={$.formContainer}>
           <LoginForm onChange={handleInputChange} />
 
@@ -69,25 +88,6 @@ const Login = () => {
               text="Signup"
               color="bruin"
               onClick={() => setSigningUp(true)}
-            />
-          </div>
-        </div>
-      ) : (
-        <div className={$.formContainer}>
-          <SingupForm onChange={handleInputChange} />
-          <p className={$.ForgottenNote}>Forgotten password?</p>
-
-          <span className={$.errorMessage}>{errorMessage}</span>
-
-          <div className={$.buttonContainer}>
-            <Button text="Signup" color="bruin" onClick={handleSignup} />
-          </div>
-          <p className={$.pElement}>Of</p>
-          <div className={$.buttonContainer}>
-            <Button
-              text="Login"
-              color="green"
-              onClick={() => setSigningUp(false)}
             />
           </div>
         </div>

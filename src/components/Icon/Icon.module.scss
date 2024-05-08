@@ -1,0 +1,43 @@
+.container {
+  width: 100%;
+  height: 100%;
+  position: relative;
+
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.imageContainer {
+  width: 2.5rem;
+  aspect-ratio: 1;
+  position: relative;
+
+  &.noneText {
+    width: 100%;
+  }
+}
+
+.iconText {
+  max-width: 80px;
+  line-height: 0.8rem;
+  margin: 0;
+  text-align: center;
+  font-family: var(--secondary-font);
+  font-weight: var(--font-weight-bold);
+  font-size: 0.8rem;
+
+  margin-top: -0.8rem;
+  z-index: 1;
+
+  -webkit-text-stroke-width: 1px;
+  -webkit-text-stroke-color: var(--white);
+  paint-order: stroke fill;
+
+  &.introStyle {
+    max-width: fit-content;
+    margin: 0;
+    -webkit-text-stroke-width: 0;
+    line-height: normal;
+  }
+}

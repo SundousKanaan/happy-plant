@@ -1,6 +1,6 @@
 "use client";
 import React from "react";
-import Input from "../input/Input";
+import Input from "../Input/Input";
 import $ from "./SingupForm.module.scss";
 
 interface LiginFormProps {

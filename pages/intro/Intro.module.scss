@@ -72,6 +72,10 @@
   border-radius: 50%;
 
   opacity: 50%;
+
+  &.dark {
+    opacity: 100%;
+  }
 }
 
 .buttonsContainer {
@@ -82,4 +86,14 @@
 
   display: flex;
   gap: 0.8rem;
+}
+
+.iconsList {
+  list-style: none;
+  display: flex;
+  gap: 1.5rem;
+}
+
+.icon {
+  width: initial;
 }

@@ -1,14 +1,12 @@
 import React from "react";
 import Image from "next/image";
-import cs from "classnames";
-
 import $ from "./Bud.module.scss";
 
 interface BudProps {
   type: "login" | "normal" | "happy" | "scared";
 }
 
-export const Bud: React.FC<BudProps> = ({ type: type }) => {
+export const Bud: React.FC<BudProps> = ({ type }) => {
   let imageSrc = "";
   if (type === "normal") {
     imageSrc = "/images/Bud/Budnormal.svg";
