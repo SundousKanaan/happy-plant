@@ -4,7 +4,7 @@
 
   font-family: var(--primary-font);
   font-size: 1rem;
-  font-weight: var(--font-weight-normal);
+  font-weight: var(--font-normal);
 
   -webkit-text-stroke-width: 0.5px;
   paint-order: stroke fill;
@@ -15,6 +15,7 @@
 
   display: flex;
   align-items: center;
+  justify-content: center;
 
   &:active {
     transition: 1s;
@@ -30,13 +31,19 @@
 .green {
   background-color: var(--primary-green);
   -webkit-text-stroke-color: var(--white);
-  color: var(--secondary-bruin);
+  color: var(--secondary-brown);
 }
 
-.bruin {
-  background-color: var(--primary-bruin);
+.brown {
+  background-color: var(--primary-brown);
   -webkit-text-stroke-width: 0;
   color: var(--white);
+}
+
+.transparent {
+  background-color: transparent;
+  box-shadow: none;
+  border-radius: unset;
 }
 
 .disabled {
@@ -45,7 +52,6 @@
 
 .buttonText {
   margin: 0;
-  max-width: 7rem;
 }
 
 .iconContainer {
@@ -53,6 +59,12 @@
   height: 3rem;
   aspect-ratio: 1;
   margin-right: 0.3rem;
+
+  &.coveredIcon {
+    width: 100%;
+    height: auto;
+    margin: 0;
+  }
 }
 
 .icon {

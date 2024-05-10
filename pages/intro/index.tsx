@@ -12,7 +12,7 @@ const IntroPage = () => {
     if (step === 1) {
       setStep(2);
     } else {
-      router.push("/home");
+      router.push("/tutorial");
     }
   };
   return (
@@ -57,7 +57,7 @@ const IntroPage = () => {
 
       <div className={$.buttonsContainer}>
         {step === 2 && (
-          <Button text="Terug" color="bruin" onClick={() => setStep(1)} />
+          <Button text="Terug" color="brown" onClick={() => setStep(1)} />
         )}
         <Button text="Volgende" color="green" onClick={handleStep} />
       </div>

@@ -1,1 +1,18 @@
-[]
+[
+    {
+        "id": 0,
+        "userName": {
+            "firstName": "Sundous",
+            "lastName": "Kan"
+        },
+        "email": "sundous.kn@gmail.com",
+        "password": "123",
+        "stars": 0,
+        "userImage": "/images/user-placeholder-image.svg",
+        "plants": [],
+        "posts": [],
+        "followers": [],
+        "following": [],
+        "savedPosts": []
+    }
+]

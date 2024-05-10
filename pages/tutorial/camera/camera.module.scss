@@ -1,0 +1,44 @@
+.dialogContent {
+  width: 100%;
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  align-items: center;
+  gap: 1rem;
+
+  .backgroundReview {
+    border-radius: var(--paper-border-radius);
+    width: 100%;
+    height: 85%;
+    overflow: hidden;
+    position: relative;
+    .backgroundImage {
+      width: 100%;
+      height: 100%;
+      transform: rotateY(180deg);
+
+      background-position: center;
+      background-size: cover;
+    }
+  }
+
+  .dialogButtons {
+    width: 100%;
+    height: 15%;
+    margin-top: 0.5rem;
+    display: flex;
+    justify-content: space-around;
+    align-items: center;
+    gap: 1rem;
+  }
+
+  .dialogButton {
+    width: 35%;
+    height: 100%;
+    color: var(--white);
+    border: none;
+    border-radius: 0.5rem;
+    cursor: pointer;
+  }
+}

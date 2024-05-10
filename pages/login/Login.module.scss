@@ -31,11 +31,11 @@
 }
 
 .buttonContainer {
-  width: 55%;
+  width: 50%;
 }
 
 .pElement {
-  font-weight: var(--font-weight-normal);
+  font-weight: var(--font-normal);
   width: 2rem;
   text-align: center;
   position: relative;
@@ -46,7 +46,7 @@
     display: block;
     width: 8.4rem;
     height: 0.1rem;
-    background-color: var(--secondary-bruin);
+    background-color: var(--secondary-brown);
     margin-top: 1rem;
     position: absolute;
     top: 0;
@@ -57,7 +57,7 @@
     display: block;
     width: 8.4rem;
     height: 0.1rem;
-    background-color: var(--secondary-bruin);
+    background-color: var(--secondary-brown);
     margin-top: 1rem;
     position: absolute;
     top: 0;

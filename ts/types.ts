@@ -34,10 +34,11 @@ export type Following = {
 
 export type AccountType = {
   id: number;
+  stars: number;
   userName: UserName;
   email: string;
   password: string;
-  imageSrc: string;
+  userImage: string;
   plants: Plant[];
   posts: Post[];
   followers: Follower[];

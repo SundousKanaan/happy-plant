@@ -1,4 +1,4 @@
-import { AccountProvider } from "@/src/contexts/accountContext";
+import { AccountProvider } from "@/src/contexts/account/accountContext";
 import "@/public/styles/globals.css";
 
 export default function MyApp({ Component, pageProps }) {

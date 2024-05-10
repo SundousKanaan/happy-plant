@@ -1,0 +1,54 @@
+.container {
+  width: 100%;
+  height: 100vh;
+  display: grid;
+  grid-template-columns: 2rem repeat(7, 1fr) 4rem 2rem;
+  grid-template-rows: 1rem repeat(5, 1fr) 1rem;
+  gap: 0.5rem;
+}
+
+.bgContainer {
+  width: 100%;
+  height: 100%;
+  grid-area: 1/1/-1/-1;
+  position: relative;
+  &.bg {
+    width: 100%;
+    height: auto;
+    position: absolute;
+  }
+}
+
+.userContainer {
+  grid-area: 2/2/3/4;
+}
+
+.sittingsContainer {
+  grid-area: 2/9/3/10;
+  width: 100%;
+  aspect-ratio: 1;
+}
+
+.iconsList {
+  grid-area: 3/9/6/10;
+  width: 100%;
+  height: 100%;
+  margin: 0;
+  padding: 0;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  list-style: none;
+
+  .icon {
+    width: 100%;
+  }
+
+  .iconButton {
+    width: 100%;
+    background-color: transparent;
+    border: none;
+    padding: 0;
+    filter: var(--dropshadow) var(--dropshadow);
+  }
+}

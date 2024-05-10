@@ -16,17 +16,17 @@
 
   font-family: var(--secondary-font);
   font-size: 14px;
-  font-weight: var(--font-weight-normal);
+  font-weight: var(--font-normal);
   text-indent: 1rem;
-  color: var(--secondary-bruin);
+  color: var(--secondary-brown);
 }
 
 .input::placeholder {
-  color: var(--tertiary-bruin);
+  color: var(--tertiary-brown);
 }
 
 .boldFont {
-  font-weight: var(--font-weight-bold);
+  font-weight: var(--font-bold);
   letter-spacing: 0.2rem;
 }
 

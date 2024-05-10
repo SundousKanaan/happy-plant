@@ -6,10 +6,9 @@ import $ from "./Button.module.scss";
 
 interface ButtonProps {
   onClick?: () => void;
-  text: string;
-  color: "green" | "bruin" | "white";
+  text?: string;
+  color: "green" | "brown" | "white" | "transparent";
   disabled?: boolean;
-  withIcon?: boolean;
   icon?: string;
 }
 
@@ -18,27 +17,27 @@ const Button: React.FC<ButtonProps> = ({
   text,
   color,
   disabled = false,
-  withIcon = false,
-  icon = "house",
+  icon,
 }) => {
   let imageSrc = `/images/icons/${icon}.svg`;
-  if (withIcon === true) {
+  if (icon) {
     return (
       <button
         className={cs(
           $.button,
           {
             [$.green]: color === "green",
-            [$.bruin]: color === "bruin",
+            [$.brown]: color === "brown",
             [$.white]: color === "white",
+            [$.transparent]: color === "transparent",
           },
           { [$.disabled]: disabled },
-          { [$.withIcon]: withIcon }
+          { [$.withIcon]: icon }
         )}
         disabled={disabled}
         onClick={onClick}
       >
-        <div className={$.iconContainer}>
+        <div className={cs($.iconContainer, { [$.coveredIcon]: !text })}>
           <Image
             src={imageSrc}
             className={$.icon}
@@ -46,7 +45,7 @@ const Button: React.FC<ButtonProps> = ({
             alt="button icon"
           />
         </div>
-        <p className={$.buttonText}>{text}</p>
+        {text && <p className={$.buttonText}>{text}</p>}
       </button>
     );
   } else {
@@ -56,15 +55,16 @@ const Button: React.FC<ButtonProps> = ({
           $.button,
           {
             [$.green]: color === "green",
-            [$.bruin]: color === "bruin",
+            [$.brown]: color === "brown",
             [$.white]: color === "white",
+            [$.transparent]: color === "transparent",
           },
           { [$.disabled]: disabled }
         )}
         disabled={disabled}
         onClick={onClick}
       >
-        {text}
+        {text && <p className={$.buttonText}>{text}</p>}
       </button>
     );
   }

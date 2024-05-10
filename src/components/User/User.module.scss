@@ -1,0 +1,58 @@
+.container {
+  width: 100%;
+  height: 100%;
+  // background-color: rgba(255, 0, 0, 0.425);
+  position: relative;
+}
+
+.imgContainer {
+  flex-shrink: 0;
+  height: 4rem;
+  aspect-ratio: 1;
+  position: relative;
+  z-index: 1;
+  background-color: white;
+  border-radius: 50%;
+  border: solid 0.2rem black;
+  overflow: hidden;
+
+  &.userImage {
+    width: 100%;
+    height: 100%;
+  }
+}
+
+.nameContainer {
+  width: 85%;
+  height: 3.5rem;
+
+  position: absolute;
+  right: 0;
+  top: calc(50% - 3.5rem / 2);
+  background-color: var(--half-white);
+  border-radius: 0.5rem 0.5rem 1.3rem 0.5rem;
+
+  display: grid;
+  grid-template-columns: 2.5rem 1fr 0.5rem;
+  grid-template-rows: repeat(2, 50%);
+}
+
+.name {
+  grid-column: 2/3;
+  grid-row: 1/2;
+  width: 100%;
+  padding: 0;
+  margin: 0;
+  font-family: var(--primary-font);
+  font-size: 0.9rem;
+  align-self: center;
+  -webkit-text-stroke-width: 2px;
+  -webkit-text-stroke-color: var(--white);
+  paint-order: stroke fill;
+}
+
+.starLine {
+  grid-column: 2 / 3;
+  grid-row: 2/3;
+  height: 100%;
+}

@@ -1,7 +1,13 @@
-import React, { createContext, useContext, useState } from "react";
+import React, {
+  createContext,
+  use,
+  useContext,
+  useEffect,
+  useState,
+} from "react";
 import { useRouter } from "next/router";
 import dataBase from "@/data/BasisData.json";
-import { AccountType, UserName } from "@/ts/types";
+import { AccountType } from "@/ts/types";
 
 interface AccountContextType {
   isLoggedIn: boolean;
@@ -14,6 +20,8 @@ interface AccountContextType {
   ) => void;
   errorMessage: string;
   refreshErrorMessage: () => void;
+  account?: AccountType;
+  refreshAccount: () => void;
 }
 
 const AccountContext = createContext<AccountContextType | undefined>(undefined);
@@ -32,20 +40,21 @@ export const AccountProvider: React.FC<{ children: React.ReactNode }> = ({
   const router = useRouter();
   const [isLoggedIn, setIsLoggedIn] = useState(false);
   const [errorMessage, setErrorMessage] = useState<string>("");
+  const [account, setAccount] = useState<AccountType | undefined>(undefined);
 
   const refreshErrorMessage = () => {
     setErrorMessage("");
   };
 
   const login = (email: string, password: string) => {
-    // Typedefinitie voor de gebruikersarray toevoegen
     const users: AccountType[] = dataBase;
-
-    // Zoek naar een gebruiker met de gegeven e-mail
     const user = users.find((user) => user.email === email);
 
     // Controleer of de gebruiker bestaat en of het wachtwoord overeenkomt
     if (user && user.password === password) {
+      localStorage.setItem("account", JSON.stringify(user));
+
+      setAccount(user);
       setIsLoggedIn(true);
       router.push("/intro");
     } else {
@@ -79,7 +88,8 @@ export const AccountProvider: React.FC<{ children: React.ReactNode }> = ({
         },
         email: email,
         password: password,
-        imageSrc: "",
+        stars: 0,
+        userImage: "/images/user-placeholder-image.svg",
         plants: [],
         posts: [],
         followers: [],
@@ -103,13 +113,42 @@ export const AccountProvider: React.FC<{ children: React.ReactNode }> = ({
       };
 
       await saveData(dataStr);
+      setAccount(newUser);
+      localStorage.setItem("account", JSON.stringify(newUser));
+
       router.push("/intro");
     }
   };
 
+  const refreshAccount = () => {
+    const storedAccount = localStorage.getItem("account");
+    if (storedAccount) {
+      try {
+        const updatedAccount = JSON.parse(storedAccount);
+        setAccount(updatedAccount);
+      } catch (error) {
+        console.log("Error parsing account data:", error);
+      }
+    } else {
+      console.log("No account data found in localStorage");
+    }
+  };
+
+  useEffect(() => {
+    refreshAccount();
+  }, []);
+
   return (
     <AccountContext.Provider
-      value={{ isLoggedIn, login, signup, errorMessage, refreshErrorMessage }}
+      value={{
+        isLoggedIn,
+        login,
+        signup,
+        errorMessage,
+        refreshErrorMessage,
+        account,
+        refreshAccount,
+      }}
     >
       {children}
     </AccountContext.Provider>

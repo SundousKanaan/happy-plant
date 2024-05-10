@@ -2,7 +2,7 @@ import React, { useState } from "react";
 import LoginForm from "@/src/components/Login-Form/LoginForm";
 import SingupForm from "@/src/components/Singup-Form/SingupForm";
 import Button from "@/src/components/Button/Button";
-import { useAccount } from "@/src/contexts/accountContext";
+import { useAccount } from "@/src/contexts/account/accountContext";
 import { Bud } from "@/src/components/Bud/Bud";
 import $ from "./Login.module.scss";
 
@@ -59,7 +59,7 @@ const Login = () => {
           <span className={$.errorMessage}>{errorMessage}</span>
 
           <div className={$.buttonContainer}>
-            <Button text="Signup" color="bruin" onClick={handleSignup} />
+            <Button text="Signup" color="brown" onClick={handleSignup} />
           </div>
           <p className={$.pElement}>Of</p>
           <div className={$.buttonContainer}>
@@ -86,7 +86,7 @@ const Login = () => {
           <div className={$.buttonContainer}>
             <Button
               text="Signup"
-              color="bruin"
+              color="brown"
               onClick={() => setSigningUp(true)}
             />
           </div>
