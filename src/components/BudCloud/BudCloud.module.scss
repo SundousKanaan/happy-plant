@@ -1,0 +1,92 @@
+.budCloudContainer {
+  height: 100%;
+  width: 100%;
+  position: relative;
+
+  .openCloud {
+    animation: openBudCloud 1s 0.5s ease-in-out forwards;
+  }
+
+  .closeCloud {
+    animation: closeBudCloud 1s 0.5s ease-in-out both;
+    animation-direction: reverse;
+  }
+}
+
+@keyframes openBudCloud {
+  100% {
+    transform: translateY(0) translateX(0);
+  }
+}
+
+@keyframes closeBudCloud {
+  0% {
+    transform: translateY(0) translateX(0);
+  }
+
+  100% {
+    transform: translateY(100%) translateX(-100%);
+  }
+}
+
+.imageContainer {
+  width: 30%;
+  height: 100%;
+  position: absolute;
+  bottom: -1rem;
+  left: 0;
+  z-index: 1;
+
+  .image {
+    width: 100%;
+    height: 100%;
+    object-fit: contain;
+    object-position: -0.5rem 0.5rem;
+  }
+}
+
+.textContainer {
+  width: 67%;
+  height: fit-content;
+  background-color: white;
+  padding: 0.3rem 1rem 0.3rem 4rem;
+
+  position: absolute;
+  bottom: 1.5rem;
+  right: 0;
+  border-radius: var(--paper-border-radius);
+  box-shadow: 0 0 0.2rem 0.1rem var(--light-black);
+
+  transform-origin: left;
+
+  .openText {
+    animation: openText 1s 1.5s ease-in-out both;
+  }
+
+  .text {
+    margin: 0;
+    font-size: 0.75rem;
+    font-weight: var(--font-semibold);
+    line-height: 1rem;
+  }
+}
+
+@keyframes openText {
+  0% {
+    opacity: 0;
+    transform: scaleX(0);
+  }
+
+  100% {
+    opacity: 1;
+    transform: scaleX(1);
+  }
+}
+
+.children {
+  width: 70%;
+  height: 20%;
+  position: absolute;
+  bottom: -1rem;
+  right: 0;
+}

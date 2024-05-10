@@ -12,6 +12,7 @@
   height: 100%;
   grid-area: 1/1/-1/-1;
   position: relative;
+
   &.bg {
     width: 100%;
     height: auto;
@@ -51,4 +52,45 @@
     padding: 0;
     filter: var(--dropshadow) var(--dropshadow);
   }
+}
+
+.actionButtons {
+  grid-area: 6/6/7/10;
+  justify-self: end;
+  width: 90%;
+  height: 100%;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 1rem;
+
+  z-index: 1;
+}
+
+.nextButton {
+  width: 50%;
+  height: initial;
+
+  color: white;
+  cursor: pointer;
+}
+
+.backButton {
+  width: 50%;
+  height: initial;
+
+  color: white;
+  cursor: pointer;
+}
+
+.invisible {
+  visibility: hidden;
+}
+
+.budCloud {
+  grid-column: 2/6;
+  grid-row: 4/7;
+  align-self: end;
+  width: 100%;
+  height: 95%;
 }
