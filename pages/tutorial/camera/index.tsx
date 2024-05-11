@@ -20,7 +20,23 @@ const CameraPage = () => {
   const handleCloseDialog = () => {
     setCloseDialog(true);
   };
-
+  const handleSaveImage = async () => {
+    if (!savedBackgroundImage) return;
+    const saveImage = async (dataImg: Object) => {
+      const id = 0;
+      const dataStr = JSON.stringify({ ...dataImg, id });
+      const response = await fetch("/api/saveImage", {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: dataStr,
+      });
+      return response.json();
+    };
+    const res = await saveImage({ dataImg: savedBackgroundImage });
+    console.log(res);
+  };
   return (
     <section>
       <CameraComponent openReview={closeDialog}>
@@ -43,11 +59,7 @@ const CameraPage = () => {
               />
             </div>
             <div className={cs($.dialogButton, $.useButton)}>
-              <Button
-                text="Gebruik"
-                color="green"
-                onClick={() => console.log("1")}
-              />
+              <Button text="Gebruik" color="green" onClick={handleSaveImage} />
             </div>
           </div>
         </div>

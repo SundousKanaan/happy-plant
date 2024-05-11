@@ -17,7 +17,7 @@ interface CameraComponentProps {
 const CameraComponent: React.FC<CameraComponentProps> = ({
   plantCheck = false,
   children,
-  openReview = false,
+  openReview = true,
 }) => {
   const router = useRouter();
   const { savedpreviousStep, getSavedpreviousStep } = useStepper();
@@ -70,15 +70,15 @@ const CameraComponent: React.FC<CameraComponentProps> = ({
           )}
         </div>
       </div>
-      {openReview && (
-        <Dialog
-          isOpen
-          onClose={() => console.log({ openReview })}
-          title="Image Review"
-        >
-          {children}
-        </Dialog>
-      )}
+      {/* {openReview && ( */}
+      <Dialog
+        isOpen
+        onClose={() => console.log({ openReview })}
+        title="Image Review"
+      >
+        {children}
+      </Dialog>
+      {/* )} */}
     </>
   );
 };

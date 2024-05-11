@@ -3,13 +3,33 @@ export type UserName = {
   lastName: string;
 };
 
-export type Plant = {
+export type PlantType = {
+  backgroundImage: string;
   id: number;
-  name: string;
-  plantFamily: string;
-  imageSrc: string;
-  position: PlantPosition;
-  background_imageSrc: string;
+  plantName: string;
+  type: string;
+  familyName: string;
+  plantImage: string;
+  note: string;
+  careInfo: {
+    Watering: string;
+    Light: string;
+    Temperature: string;
+    Poisoning: string;
+  };
+  position: {
+    x: number;
+    y: number;
+  };
+  birthday: string;
+  awards: [
+    {
+      type: string;
+      totalStars: number;
+      imagesrc: string;
+      win: boolean;
+    }
+  ];
 };
 
 export type PlantPosition = {
@@ -39,7 +59,7 @@ export type AccountType = {
   email: string;
   password: string;
   userImage: string;
-  plants: Plant[];
+  plants: PlantType[];
   posts: Post[];
   followers: Follower[];
   following: Following[];

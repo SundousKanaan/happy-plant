@@ -25,6 +25,7 @@ const Tutorial = () => {
 
   const handleCameraClick = () => {
     router.push("/tutorial/camera");
+
     setIsBudCloudOpen(false);
   };
 
