@@ -50,14 +50,12 @@ export default function handler(req, res) {
           y: 0,
         },
         birthday: "",
-        awards: [
-          {
-            type: "",
-            totalStars: 0,
-            imagesrc: "",
-            win: false,
-          },
-        ],
+        awards: {
+          type: "",
+          totalStars: 0,
+          imagesrc: "",
+          win: false,
+        },
       },
     ];
 

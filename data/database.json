@@ -1,47 +1,45 @@
 [
-    {
+  {
+    "id": 0,
+    "userName": {
+      "firstName": "Sundous",
+      "lastName": "Kan"
+    },
+    "email": "sundous.kn@gmail.com",
+    "password": "123",
+    "stars": 0,
+    "userImage": "/images/user-placeholder-image.svg",
+    "plants": [
+      {
         "id": 0,
-        "userName": {
-            "firstName": "Sundous",
-            "lastName": "Kan"
+        "plantName": "",
+        "type": "",
+        "familyName": "",
+        "plantImage": "",
+        "backgroundImage": "1c084df7-cea8-4cd1-bc77-e8f5b25ac545.jpeg",
+        "note": "",
+        "careInfo": {
+          "Watering": "",
+          "Light": "",
+          "Temperature": "",
+          "Poisoning": ""
         },
-        "email": "sundous.kn@gmail.com",
-        "password": "123",
-        "stars": 0,
-        "userImage": "/images/user-placeholder-image.svg",
-        "plants": [
-            {
-                "id": 0,
-                "plantName": "",
-                "type": "",
-                "familyName": "",
-                "plantImage": "",
-                "backgroundImage": "1c084df7-cea8-4cd1-bc77-e8f5b25ac545.jpeg",
-                "note": "",
-                "careInfo": {
-                    "Watering": "",
-                    "Light": "",
-                    "Temperature": "",
-                    "Poisoning": ""
-                },
-                "position": {
-                    "x": 0,
-                    "y": 0
-                },
-                "birthday": "",
-                "awards": [
-                    {
-                        "type": "",
-                        "totalStars": 0,
-                        "imagesrc": "",
-                        "win": false
-                    }
-                ]
-            }
-        ],
-        "posts": [],
-        "followers": [],
-        "following": [],
-        "savedPosts": []
-    }
+        "position": {
+          "x": 0,
+          "y": 0
+        },
+        "birthday": "",
+        "awards": {
+          "type": "",
+          "totalStars": 0,
+          "imagesrc": "",
+          "win": false
+        }
+      }
+    ],
+    "posts": [],
+    "followers": [],
+    "following": [],
+    "savedPosts": []
+  }
 ]
