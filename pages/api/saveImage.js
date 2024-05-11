@@ -44,6 +44,7 @@ export default function handler(req, res) {
           Light: "",
           Temperature: "",
           Poisoning: "",
+          careLevel: "",
         },
         position: {
           x: 0,

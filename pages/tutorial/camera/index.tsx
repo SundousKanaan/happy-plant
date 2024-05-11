@@ -1,3 +1,4 @@
+// CameraPage.tsx
 import React, { useEffect, useState } from "react";
 import CameraComponent from "@/src/components/CameraComponent/CameraComponent";
 import Button from "@/src/components/Button/Button";
@@ -5,21 +6,18 @@ import cs from "classnames";
 import $ from "./Camera.module.scss";
 import { useStepper } from "@/src/hooks/useStepper";
 import useCamera from "@/src/hooks/useCamera";
+import { useDialog } from "@/src/contexts/dialogContext/dialogContext";
 
 const CameraPage = () => {
   const { setPreviousStep } = useStepper();
   const { getSavedBackgroundImage, savedBackgroundImage } = useCamera();
-  const [closeDialog, setCloseDialog] = useState<boolean>(false);
-  console.log({ closeDialog });
+  const { closeDialog } = useDialog();
 
   useEffect(() => {
     setPreviousStep("/tutorial");
     getSavedBackgroundImage();
   });
 
-  const handleCloseDialog = () => {
-    setCloseDialog(true);
-  };
   const handleSaveImage = async () => {
     if (!savedBackgroundImage) return;
     const saveImage = async (dataImg: Object) => {
@@ -35,11 +33,11 @@ const CameraPage = () => {
       return response.json();
     };
     const res = await saveImage({ dataImg: savedBackgroundImage });
-    console.log(res);
   };
+
   return (
     <section>
-      <CameraComponent openReview={closeDialog}>
+      <CameraComponent>
         <div className={$.dialogContent}>
           <div className={$.backgroundReview}>
             <div
@@ -51,12 +49,9 @@ const CameraPage = () => {
           </div>
 
           <div className={$.dialogButtons}>
+            {/* close dialog button */}
             <div className={cs($.dialogButton, $.shotButton)}>
-              <Button
-                text="Nieuw schot"
-                color="brown"
-                onClick={handleCloseDialog}
-              />
+              <Button text="Nieuw schot" color="brown" onClick={closeDialog} />
             </div>
             <div className={cs($.dialogButton, $.useButton)}>
               <Button text="Gebruik" color="green" onClick={handleSaveImage} />

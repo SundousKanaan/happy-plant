@@ -16,6 +16,7 @@ export type PlantType = {
     Light: string;
     Temperature: string;
     Poisoning: string;
+    careLevel: string;
   };
   position: {
     x: number;

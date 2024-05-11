@@ -22,7 +22,8 @@
           "Watering": "",
           "Light": "",
           "Temperature": "",
-          "Poisoning": ""
+          "Poisoning": "",
+          "careLevel": ""
         },
         "position": {
           "x": 0,

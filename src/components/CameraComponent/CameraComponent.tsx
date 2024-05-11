@@ -1,5 +1,5 @@
 // CameraComponent.tsx
-import React, { Children, useEffect, useState } from "react";
+import React, { useEffect } from "react";
 import useCamera from "@/src/hooks/useCamera";
 import $ from "./CameraComponent.module.scss";
 import Button from "@/src/components/Button/Button";
@@ -7,30 +7,29 @@ import cs from "classnames";
 import Dialog from "../Dialog/Dialog";
 import { useRouter } from "next/router";
 import { useStepper } from "@/src/hooks/useStepper";
+import { useDialog } from "@/src/contexts/dialogContext/dialogContext";
 
 interface CameraComponentProps {
   plantCheck?: boolean;
   children?: React.ReactNode;
-  openReview: boolean;
 }
 
 const CameraComponent: React.FC<CameraComponentProps> = ({
   plantCheck = false,
   children,
-  openReview = true,
 }) => {
   const router = useRouter();
   const { savedpreviousStep, getSavedpreviousStep } = useStepper();
-
   const { captureImage, takeBackgroundImage, videoRef } = useCamera();
+  const { openDialog, closeDialog, isOpen } = useDialog();
+
   useEffect(() => {
     captureImage();
   }, [captureImage]);
 
   const takeAshot = async () => {
     await takeBackgroundImage();
-    openReview = true;
-    console.log({ openReview });
+    openDialog();
   };
 
   const goBack = () => {
@@ -70,15 +69,10 @@ const CameraComponent: React.FC<CameraComponentProps> = ({
           )}
         </div>
       </div>
-      {/* {openReview && ( */}
-      <Dialog
-        isOpen
-        onClose={() => console.log({ openReview })}
-        title="Image Review"
-      >
+
+      <Dialog isOpen={isOpen} onClose={closeDialog} title="Image Review">
         {children}
       </Dialog>
-      {/* )} */}
     </>
   );
 };
