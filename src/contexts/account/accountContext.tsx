@@ -6,7 +6,7 @@ import React, {
   useState,
 } from "react";
 import { useRouter } from "next/router";
-import dataBase from "@/data/BasisData.json";
+import dataBase from "@/data/database.json";
 import { AccountType } from "@/ts/types";
 
 interface AccountContextType {

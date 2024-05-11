@@ -23,7 +23,7 @@ export default function handler(req, res) {
       }
     });
     // read all users
-    const allUsersPath = path.join(process.cwd(), "data/BasisData.json");
+    const allUsersPath = path.join(process.cwd(), "data/database.json");
     const allUsers = JSON.parse(fs.readFileSync(allUsersPath));
     // find the user with id
     const userIndex = allUsers.findIndex((user) => user.id === id);

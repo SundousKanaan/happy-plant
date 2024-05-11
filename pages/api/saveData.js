@@ -7,7 +7,7 @@ export default function handler(req, res) {
     const data = req.body;
     const dataStr = JSON.stringify(data, null, 4);
 
-    const filePath = path.join(process.cwd(), "data/BasisData.json");
+    const filePath = path.join(process.cwd(), "data/database.json");
 
     fs.writeFile(filePath, dataStr, (err) => {
       if (err) {
