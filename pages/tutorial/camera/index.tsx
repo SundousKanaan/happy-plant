@@ -49,7 +49,6 @@ const CameraPage = () => {
           </div>
 
           <div className={$.dialogButtons}>
-            {/* close dialog button */}
             <div className={cs($.dialogButton, $.shotButton)}>
               <Button text="Nieuw schot" color="brown" onClick={closeDialog} />
             </div>

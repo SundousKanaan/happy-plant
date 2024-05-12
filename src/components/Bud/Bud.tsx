@@ -1,5 +1,6 @@
 import React from "react";
 import Image from "next/image";
+import cs from "classnames";
 import $ from "./Bud.module.scss";
 
 interface BudProps {
@@ -21,7 +22,9 @@ export const Bud: React.FC<BudProps> = ({ type }) => {
   return (
     <Image
       src={imageSrc}
-      className={$.BudImage}
+      className={cs($.BudImage, {
+        [$.logo]: type === "login",
+      })}
       layout="fill"
       alt="Bud the assistent"
     />
