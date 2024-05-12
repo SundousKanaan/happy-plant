@@ -24,8 +24,9 @@ const CameraComponent: React.FC<CameraComponentProps> = ({
   const { openDialog, closeDialog, isOpen } = useDialog();
 
   useEffect(() => {
+    getSavedpreviousStep();
     captureImage();
-  }, [captureImage]);
+  }, []);
 
   const takeAshot = async () => {
     await takeBackgroundImage();
@@ -33,7 +34,6 @@ const CameraComponent: React.FC<CameraComponentProps> = ({
   };
 
   const goBack = () => {
-    getSavedpreviousStep();
     if (!savedpreviousStep) return;
     router.push(savedpreviousStep);
   };
