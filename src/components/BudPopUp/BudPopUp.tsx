@@ -2,6 +2,7 @@ import React from "react";
 import { Bud } from "../Bud/Bud";
 import cs from "classnames";
 import $ from "./BudPopUp.module.scss";
+import Button from "@/src/components/Button/Button";
 
 interface BudPopUpProps {
   isOpen?: boolean;
@@ -38,6 +39,14 @@ const BudPopUp: React.FC<BudPopUpProps> = ({
         <>
           <h2 className={$.title}>{title}</h2>
           {/* TODO: add back button */}
+          <div className={$.backButton}>
+            <Button
+              icon="Xsignal"
+              color="transparent"
+              onClick={() => console.log("back")}
+            />
+          </div>
+
           <div
             className={cs($.pageContent, {
               [$.white]: backgroundColor === "white",

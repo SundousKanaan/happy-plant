@@ -46,6 +46,10 @@
   width: 100%;
   text-align: center;
   align-self: center;
+
+  -webkit-text-stroke-width: 3px;
+  -webkit-text-stroke-color: var(--white);
+  paint-order: stroke fill;
 }
 
 .pageContent {
@@ -60,6 +64,11 @@
   &.brown {
     background-color: var(-tertiary-brown);
   }
+}
+
+.backButton {
+  grid-area: 2/10/3/11;
+  align-self: center;
 }
 
 .buttonsContainer {
