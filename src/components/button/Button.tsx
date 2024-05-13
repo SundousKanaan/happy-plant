@@ -45,7 +45,7 @@ const Button: React.FC<ButtonProps> = ({
             alt="button icon"
           />
         </div>
-        {text && <p className={$.buttonText}>{text}</p>}
+        {text && <p className={cs($.buttonText, $.minMargin)}>{text}</p>}
       </button>
     );
   } else {

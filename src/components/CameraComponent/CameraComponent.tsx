@@ -12,11 +12,13 @@ import { useDialog } from "@/src/contexts/dialogContext/dialogContext";
 interface CameraComponentProps {
   plantCheck?: boolean;
   children?: React.ReactNode;
+  text: string;
 }
 
 const CameraComponent: React.FC<CameraComponentProps> = ({
   plantCheck = false,
   children,
+  text,
 }) => {
   const router = useRouter();
   const { savedpreviousStep, getSavedpreviousStep } = useStepper();
@@ -43,9 +45,7 @@ const CameraComponent: React.FC<CameraComponentProps> = ({
       <div className={$.streamContainer}>
         <video ref={videoRef} autoPlay playsInline className={$.video} />
         <div className={$.noteContainer}>
-          <p className={$.noteText}>
-            Maak een foto van het kamer waar je jouw plant wil verzorgen
-          </p>
+          <p className={$.noteText}>{text}</p>
         </div>
         <div className={$.buttonsContainer}>
           <div className={cs($.button, $.X)}>

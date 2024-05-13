@@ -1,20 +1,26 @@
-// CameraPage.tsx
 import React, { useEffect, useState } from "react";
 import CameraComponent from "@/src/components/CameraComponent/CameraComponent";
 import Button from "@/src/components/Button/Button";
 import cs from "classnames";
-import $ from "./Camera.module.scss";
 import { useStepper } from "@/src/hooks/useStepper";
 import useCamera from "@/src/hooks/useCamera";
 import { useDialog } from "@/src/contexts/dialogContext/dialogContext";
+import BudPopUp from "@/src/components/BudPopUp/BudPopUp";
+import texts from "@/ts/texts";
+import $ from "./Camera.module.scss";
+import { useRouter } from "next/router";
 
 const CameraPage = () => {
-  const { setPreviousStep } = useStepper();
+  const router = useRouter();
+  const { setPreviousStep, savedpreviousStep, getSavedpreviousStep } =
+    useStepper();
   const { getSavedBackgroundImage, savedBackgroundImage } = useCamera();
   const { closeDialog } = useDialog();
+  const [popUpIsOpen, setPopUpIsOpen] = useState(true);
 
   useEffect(() => {
     setPreviousStep("/tutorial");
+    getSavedpreviousStep();
     getSavedBackgroundImage();
   });
 
@@ -35,9 +41,28 @@ const CameraPage = () => {
     const res = await saveImage({ dataImg: savedBackgroundImage });
   };
 
+  const handleBackAction = () => {
+    if (!savedpreviousStep) return;
+    router.push(savedpreviousStep);
+  };
+
   return (
-    <section>
-      <CameraComponent>
+    <>
+      <BudPopUp isOpen={popUpIsOpen} pupUpType="pupUp" backgroundColor="white">
+        <p className={$.text}>{texts.cameraNote_1}</p>
+        <p className={$.text}>{texts.cameraNote_2}</p>
+        <div className={$.buttons}>
+          <Button text="Terug" color="brown" onClick={handleBackAction} />
+
+          <Button
+            text="Doorgaan"
+            color="green"
+            onClick={() => setPopUpIsOpen(false)}
+          />
+        </div>
+      </BudPopUp>
+
+      <CameraComponent text={texts.backgroundShotNote}>
         <div className={$.dialogContent}>
           <div className={$.backgroundReview}>
             <div
@@ -58,7 +83,7 @@ const CameraPage = () => {
           </div>
         </div>
       </CameraComponent>
-    </section>
+    </>
   );
 };
 

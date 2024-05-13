@@ -16,16 +16,20 @@ interface BudPopUpProps {
 const BudPopUp: React.FC<BudPopUpProps> = ({
   children,
   buttonsChildren,
-  isOpen = true,
+  isOpen,
   pupUpType,
   title,
   backgroundColor,
 }) => {
   return (
     <section
-      className={cs($.container, {
-        [$.pageStyle]: pupUpType === "page" && title,
-      })}
+      className={cs(
+        $.container,
+        {
+          [$.pageStyle]: pupUpType === "page" && title,
+        },
+        { [$.visible]: isOpen }
+      )}
     >
       {pupUpType === "pupUp" && (
         <>
@@ -35,10 +39,10 @@ const BudPopUp: React.FC<BudPopUpProps> = ({
           </div>
         </>
       )}
+
       {pupUpType === "page" && (
         <>
           <h2 className={$.title}>{title}</h2>
-          {/* TODO: add back button */}
           <div className={$.backButton}>
             <Button
               icon="Xsignal"
