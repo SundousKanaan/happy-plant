@@ -24,8 +24,11 @@
   object-fit: contain;
 }
 
+.bgImage {
+  border-radius: var(--paper-border-radius);
+}
+
 .iconText {
-  max-width: 80px;
   line-height: 0.8rem;
   margin: 0;
   text-align: center;
@@ -45,5 +48,9 @@
     margin: 0;
     -webkit-text-stroke-width: 0;
     line-height: normal;
+  }
+
+  &.minMargin {
+    margin-top: -0.5rem;
   }
 }

@@ -42,6 +42,7 @@
   display: flex;
   flex-direction: column;
   justify-content: space-between;
+  gap: 0.5rem;
   list-style: none;
 
   .icon {
@@ -53,6 +54,9 @@
     background-color: transparent;
     border: none;
     padding: 0;
+  }
+
+  .selected {
     filter: var(--dropshadow) var(--dropshadow);
   }
 }
@@ -60,8 +64,9 @@
 .actionButtons {
   grid-area: 6/6/7/10;
   justify-self: end;
+  align-self: end;
   width: 90%;
-  height: 100%;
+  height: initial;
   display: flex;
   justify-content: space-between;
   align-items: center;
@@ -84,10 +89,11 @@
 
   color: white;
   cursor: pointer;
+  visibility: hidden;
 }
 
-.invisible {
-  visibility: hidden;
+.visible {
+  visibility: visible;
 }
 
 .budCloud {

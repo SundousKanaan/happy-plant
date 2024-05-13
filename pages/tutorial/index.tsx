@@ -8,16 +8,16 @@ import { BudCloud } from "@/src/components/BudCloud/BudCloud";
 import Button from "@/src/components/Button/Button";
 import cs from "classnames";
 import { PlantType } from "@/ts/types";
-import database from "@/data/database.json";
+import texts from "@/ts/texts";
 
 const Tutorial = () => {
   const router = useRouter();
   const [tutorialStep, setTutorialStep] = useState(0);
   const [isBudCloudOpen, setIsBudCloudOpen] = useState(true);
-  const [cloudText, setCloudText] = useState("");
+  const [cloudText, setCloudText] = useState(0);
   const [bg, setBg] = useState("");
-
-  // console.log(tutorialPlant?.backgroundImage);
+  const storedStep =
+    typeof window !== "undefined" && localStorage.getItem("tutorialStep");
 
   const database: {
     [key: string]: { plants: PlantType[] };
@@ -31,16 +31,23 @@ const Tutorial = () => {
     );
     if (tutorialPlant) {
       setBg(`/images/camera/${tutorialPlant.backgroundImage}`);
+      setTutorialStep(1);
     }
   }, [setBg, database]);
-  console.log(bg);
+
+  useEffect(() => {
+    localStorage.setItem("tutorialStep", tutorialStep.toString());
+  }, [tutorialStep]);
+
+  console.log({ tutorialStep });
 
   const handleCloudText = () => {
-    setCloudText("Laat ons eerst jouw zorglocatie kiezen!");
+    setCloudText(tutorialStep);
   };
 
   useEffect(() => {
     handleCloudText();
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
   const handleCameraClick = () => {
@@ -71,7 +78,7 @@ const Tutorial = () => {
       <div className={$.sittingsContainer}>
         <Icon icon="settings" />
       </div>
-      {tutorialStep === 0 && (
+      {(tutorialStep === 0 || tutorialStep === 1) && (
         <>
           <ul className={$.iconsList}>
             <li className={$.icon}>
@@ -81,12 +88,34 @@ const Tutorial = () => {
             </li>
             <li className={$.icon}>
               <button className={$.iconButton}>
-                <Icon icon="camera" text="Slaapkamer" />
+                <Icon bg="bedroom" text="Slaapkamer" />
               </button>
             </li>
             <li className={$.icon}>
               <button className={$.iconButton}>
-                <Icon icon="camera" text="Woonkamer" />
+                <Icon bg="livingroom" text="Woonkamer" />
+              </button>
+            </li>
+          </ul>
+        </>
+      )}
+
+      {tutorialStep === 2 && (
+        <>
+          <ul className={$.iconsList}>
+            <li className={$.icon}>
+              <button className={$.iconButton} onClick={handleCameraClick}>
+                <Icon icon="flower" text="Bloemen" />
+              </button>
+            </li>
+            <li className={$.icon}>
+              <button className={$.iconButton}>
+                <Icon icon="Leafyplant" text="Bladplanten" />
+              </button>
+            </li>
+            <li className={$.icon}>
+              <button className={$.iconButton}>
+                <Icon icon="succulent" text="Vetplanten" />
               </button>
             </li>
           </ul>
@@ -94,13 +123,15 @@ const Tutorial = () => {
       )}
 
       <div className={$.budCloud}>
-        <BudCloud type="happy" text={cloudText} isOpen={isBudCloudOpen} />
+        <BudCloud
+          type="happy"
+          text={texts.budCloud()[cloudText]}
+          isOpen={isBudCloudOpen}
+        />
       </div>
 
       <div className={$.actionButtons}>
-        <div
-          className={cs($.backButton, { [$.invisible]: tutorialStep === 0 })}
-        >
+        <div className={cs($.backButton, { [$.visible]: tutorialStep === 2 })}>
           <Button
             text="Terug"
             color="brown"
