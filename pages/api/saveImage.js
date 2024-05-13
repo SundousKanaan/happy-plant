@@ -6,7 +6,7 @@ import { v4 as uuidv4 } from "uuid";
 
 export default function handler(req, res) {
   if (req.method === "POST") {
-    const { dataImg, id } = req.body;
+    const { dataImg, userId, plantId } = req.body;
 
     const backgroundImage = uuidv4();
 
@@ -26,13 +26,27 @@ export default function handler(req, res) {
     const allUsersPath = path.join(process.cwd(), "data/database.json");
     const allUsers = JSON.parse(fs.readFileSync(allUsersPath));
     // find the user with id
-    const userIndex = allUsers.findIndex((user) => user.id === id);
+    const userIndex = allUsers.findIndex((user) => user.id === userId);
     const user = allUsers[userIndex];
-    // update the user with the file name
-    user["plants"] = [
-      ...user["plants"],
-      {
-        id: id,
+
+    // find the plant with plantId
+    const plantIndex = user.plants.findIndex((plant) => plant.id === plantId);
+
+    console.log({ plantIndex });
+    if (plantIndex !== -1) {
+      // Delete the old image
+      const oldBackgroundImage = user.plants[plantIndex].backgroundImage;
+      const oldImagePath = path.join(
+        process.cwd(),
+        `public/images/camera/${oldBackgroundImage}`
+      );
+      fs.unlinkSync(oldImagePath);
+
+      user.plants[plantIndex].backgroundImage = `${backgroundImage}.jpeg`;
+    } else {
+      // update the user with the file name
+      user.plants.push({
+        id: plantId,
         plantName: "",
         type: "",
         familyName: "",
@@ -57,10 +71,10 @@ export default function handler(req, res) {
           imagesrc: "",
           win: false,
         },
-      },
-    ];
-
+      });
+    }
     allUsers[userIndex] = user;
+
     fs.writeFileSync(allUsersPath, JSON.stringify(allUsers, null, 4));
 
     res.status(200).json({

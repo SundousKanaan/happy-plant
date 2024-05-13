@@ -23,12 +23,6 @@ export type PlantType = {
     y: number;
   };
   birthday: string;
-  awards: {
-    type: string;
-    totalStars: number;
-    imagesrc: string;
-    win: boolean;
-  };
 };
 
 export type PlantPosition = {
@@ -63,4 +57,10 @@ export type AccountType = {
   followers: Follower[];
   following: Following[];
   savedPosts: Post[];
+  awards: {
+    type: string;
+    totalStars: number;
+    imagesrc: string;
+    win: boolean;
+  };
 };

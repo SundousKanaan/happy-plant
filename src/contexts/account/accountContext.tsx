@@ -95,6 +95,12 @@ export const AccountProvider: React.FC<{ children: React.ReactNode }> = ({
         followers: [],
         following: [],
         savedPosts: [],
+        awards: {
+          type: "",
+          totalStars: 0,
+          imagesrc: "",
+          win: false,
+        },
       };
 
       // Typedefinitie voor de gebruikersarray toevoegen

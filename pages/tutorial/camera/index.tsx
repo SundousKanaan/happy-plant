@@ -26,9 +26,13 @@ const CameraPage = () => {
 
   const handleSaveImage = async () => {
     if (!savedBackgroundImage) return;
+    const user = localStorage.getItem("account");
+    const plantId = 0;
+
     const saveImage = async (dataImg: Object) => {
-      const id = 0;
-      const dataStr = JSON.stringify({ ...dataImg, id });
+      const userId = user && JSON.parse(user).id;
+      const dataStr = JSON.stringify({ ...dataImg, userId, plantId });
+
       const response = await fetch("/api/saveImage", {
         method: "POST",
         headers: {
@@ -38,7 +42,14 @@ const CameraPage = () => {
       });
       return response.json();
     };
-    const res = await saveImage({ dataImg: savedBackgroundImage });
+    const res = await saveImage({
+      dataImg: savedBackgroundImage,
+      userId: 0,
+      plantId: 0,
+    });
+
+    if (!savedpreviousStep) return;
+    router.push(savedpreviousStep);
   };
 
   const handleBackAction = () => {

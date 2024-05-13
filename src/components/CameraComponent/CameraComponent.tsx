@@ -28,6 +28,7 @@ const CameraComponent: React.FC<CameraComponentProps> = ({
   useEffect(() => {
     getSavedpreviousStep();
     captureImage();
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
   const takeAshot = async () => {

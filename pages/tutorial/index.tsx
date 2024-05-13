@@ -7,13 +7,33 @@ import { useRouter } from "next/router";
 import { BudCloud } from "@/src/components/BudCloud/BudCloud";
 import Button from "@/src/components/Button/Button";
 import cs from "classnames";
+import { PlantType } from "@/ts/types";
+import database from "@/data/database.json";
 
 const Tutorial = () => {
   const router = useRouter();
   const [tutorialStep, setTutorialStep] = useState(0);
   const [isBudCloudOpen, setIsBudCloudOpen] = useState(true);
   const [cloudText, setCloudText] = useState("");
-  const bg = "/images/test.svg";
+  const [bg, setBg] = useState("");
+
+  // console.log(tutorialPlant?.backgroundImage);
+
+  const database: {
+    [key: string]: { plants: PlantType[] };
+  } = require("@/data/database.json");
+  useEffect(() => {
+    const user =
+      typeof window !== "undefined" && localStorage.getItem("account");
+    const userId = user && JSON.parse(user).id;
+    const tutorialPlant: PlantType | undefined = database[userId]?.plants.find(
+      (plant) => plant.id === 0
+    );
+    if (tutorialPlant) {
+      setBg(`/images/camera/${tutorialPlant.backgroundImage}`);
+    }
+  }, [setBg, database]);
+  console.log(bg);
 
   const handleCloudText = () => {
     setCloudText("Laat ons eerst jouw zorglocatie kiezen!");
@@ -32,7 +52,9 @@ const Tutorial = () => {
   return (
     <section className={$.container}>
       <div className={$.bgContainer}>
-        <Image src={bg} alt="background" layout="fill" className={$.bg} />
+        {bg !== "" && (
+          <Image src={bg} alt="background" layout="fill" className={$.bg} />
+        )}
       </div>
       <div className={$.userContainer}>
         <User />
