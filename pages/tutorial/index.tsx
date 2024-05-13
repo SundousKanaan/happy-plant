@@ -53,7 +53,16 @@ const Tutorial = () => {
     <section className={$.container}>
       <div className={$.bgContainer}>
         {bg !== "" && (
-          <Image src={bg} alt="background" layout="fill" className={$.bg} />
+          <Image
+            src={bg}
+            alt="background"
+            layout="fill"
+            className={$.bg}
+            style={{
+              objectFit: "cover",
+              objectPosition: "bottom",
+            }}
+          />
         )}
       </div>
       <div className={$.userContainer}>
