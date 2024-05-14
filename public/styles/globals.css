@@ -54,6 +54,11 @@ input:focus-visible {
   outline: none;
 }
 
+button {
+  color: var(--secondary-brown);
+  cursor: pointer;
+}
+
 /* input[type="email"]:valid {
   background-color: var(--primary-half-green);
 } */

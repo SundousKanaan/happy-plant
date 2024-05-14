@@ -32,7 +32,6 @@
 .green {
   background-color: var(--primary-green);
   -webkit-text-stroke-color: var(--white);
-  color: var(--secondary-brown);
 }
 
 .brown {
@@ -45,6 +44,7 @@
   background-color: transparent;
   box-shadow: none;
   border-radius: unset;
+  -webkit-text-stroke-color: var(--white);
 }
 
 .disabled {
