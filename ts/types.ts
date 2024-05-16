@@ -6,6 +6,7 @@ export type UserName = {
 export type PlantType = {
   backgroundImage: string;
   id: number;
+  databaseId: number;
   plantName: string;
   type: string;
   familyName: string;

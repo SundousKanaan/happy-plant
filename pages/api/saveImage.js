@@ -1,6 +1,5 @@
 // pages/api/saveData.js
 import fs from "fs";
-import { type } from "os";
 import path from "path";
 import { v4 as uuidv4 } from "uuid";
 
@@ -65,12 +64,6 @@ export default function handler(req, res) {
           y: 0,
         },
         birthday: "",
-        awards: {
-          type: "",
-          totalStars: 0,
-          imagesrc: "",
-          win: false,
-        },
       });
     }
     allUsers[userIndex] = user;

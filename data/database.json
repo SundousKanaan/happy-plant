@@ -1,24 +1,47 @@
 [
-  {
-    "id": 0,
-    "userName": {
-      "firstName": "Sundous",
-      "lastName": "Kan"
-    },
-    "email": "sundous.kn@gmail.com",
-    "password": "123",
-    "stars": 0,
-    "userImage": "/images/user-placeholder-image.svg",
-    "plants": [],
-    "posts": [],
-    "followers": [],
-    "following": [],
-    "savedPosts": [],
-    "awards": {
-      "type": "",
-      "totalStars": 0,
-      "imagesrc": "",
-      "win": false
+    {
+        "id": 0,
+        "userName": {
+            "firstName": "Sundous",
+            "lastName": "Kan"
+        },
+        "email": "sundous.kn@gmail.com",
+        "password": "123",
+        "stars": 0,
+        "userImage": "/images/user-placeholder-image.svg",
+        "plants": [
+            {
+                "id": 0,
+                "databaseId": 1,
+                "plantName": "Camelia",
+                "type": "Bloeiende plant",
+                "familyName": "Theaceae",
+                "plantImage": "",
+                "backgroundImage": "240b8683-72f8-4eb9-9490-2cf9a950b9ea.jpeg",
+                "note": "",
+                "careInfo": {
+                    "Watering": "een keer per week",
+                    "Light": "indirect zonlicht",
+                    "Temperature": "15-20°C",
+                    "Poisoning": "",
+                    "careLevel": "Makkelijk"
+                },
+                "position": {
+                    "x": 0,
+                    "y": 0
+                },
+                "birthday": ""
+            }
+        ],
+        "posts": [],
+        "followers": [],
+        "following": [],
+        "savedPosts": [],
+        "awards": {
+            "type": "",
+            "totalStars": 0,
+            "imagesrc": "",
+            "win": false
+        }
     }
-  }
 ]

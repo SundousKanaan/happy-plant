@@ -2,6 +2,8 @@
   {
     "id": 1,
     "name": "Camelia",
+    "family": "Theaceae",
+    "type": "Bloeiende plant",
     "description": "De Camelia is een prachtige bloem die verkrijgbaar is in veel kleuren.",
     "icon": "Camellia",
     "careLevel": "Makkelijk",
@@ -45,6 +47,8 @@
   {
     "id": 2,
     "name": "Hortensia",
+    "family": "Hydrangeaceae",
+    "type": "Bloeiende plant",
     "description": "De Hortensia is een prachtige bloem die verkrijgbaar is in veel kleuren.",
     "icon": "Hortensia",
     "level of care": "Makkelijk",
@@ -99,6 +103,8 @@
   {
     "id": 3,
     "name": "Tulp",
+    "family": "Liliaceae",
+    "type": "Bloeiende plant",
     "description": "De Tulp is een prachtige bloem die verkrijgbaar is in veel kleuren.",
     "icon": "Tulip",
     "level of care": "gemiddeld",
@@ -153,6 +159,8 @@
   {
     "id": 4,
     "name": "Zonnebloem",
+    "family": "Asteraceae",
+    "type": "Bloeiende plant",
     "description": "De Zonnebloem is een prachtige bloem die verkrijgbaar is in veel kleuren.",
     "icon": "Sunflower",
     "level of care": "gemiddeld",
@@ -207,6 +215,8 @@
   {
     "id": 5,
     "name": "Lotus",
+    "family": "Nelumbonaceae",
+    "type": "Bloeiende plant",
     "description": "De Lotus is een prachtige bloem die verkrijgbaar is in veel kleuren.",
     "icon": "Lotus",
     "level of care": "gemiddeld",
@@ -237,6 +247,8 @@
   {
     "id": 6,
     "name": "Sneeuwklokje",
+    "family": "Amaryllidaceae",
+    "type": "Bloeiende plant",
     "description": "Het sneeuwklokje is een prachtige bloem die in de vroege lente bloeit en vaak wordt geassocieerd met het einde van de winter.",
     "icon": "Snowdrop",
     "water": "twee keer per week",

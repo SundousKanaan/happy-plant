@@ -1,3 +1,5 @@
+import { BudCloud } from "@/src/components/BudCloud/BudCloud";
+
 const texts = {
   cameraNote_1:
     "Laten we een foto maken van de plek waar je jouw plant wilt verzorgen.",
@@ -12,8 +14,8 @@ const texts = {
     "Wat een prachtige plek om je plant te verzorgen",
     "Kies je eerste plant!",
     `Je schattige plant heet "${plantName}" en heeft gedeeltelijke zon (max 3 tot 4 uur) nodig! Trek je plant en kijk waar hij het beste staat`,
-    "Deze plek is Slecht voor je plant.",
     "Deze plek is Goed voor je plant.",
+    "Deze plek is Slecht voor je plant.",
     "Laten we jouw plant nu voor het eerst keer water geven!",
     "Je zaden beginnen te groeien, gefeliciteerd! Morgen moeten we weer water geven.",
   ],

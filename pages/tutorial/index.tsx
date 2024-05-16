@@ -1,4 +1,4 @@
-import React, { useRef, useEffect, useState } from "react";
+import React, { useRef, useEffect, useState, use } from "react";
 import $ from "./Tutorial.module.scss";
 import Image from "next/image";
 import { User } from "@/src/components/User/User";
@@ -11,6 +11,7 @@ import { PlantType } from "@/ts/types";
 import texts from "@/ts/texts";
 import plantsDatabase from "@/data/plantsDatabase.json";
 import Draggable from "react-draggable";
+import { useAccount } from "@/src/contexts/account/accountContext";
 
 import Stap1 from "./stap1/stap1";
 import Stap2 from "./stap2/stap2";
@@ -18,8 +19,11 @@ import Stap3 from "./stap3/stap3";
 
 const Tutorial = () => {
   const router = useRouter();
-  const [tutorialStep, setTutorialStep] = useState(0);
-  const [isBudCloudOpen, setIsBudCloudOpen] = useState(true);
+  const { account } = useAccount();
+  const userId = account?.id;
+
+  const [tutorialStap, setTutorialStap] = useState(1);
+  // const [isBudCloudOpen, setIsBudCloudOpen] = useState(true);
   const [cloudText, setCloudText] = useState(0);
   const [bg, setBg] = useState("");
   const [openOptionsList, setOpenOptionsList] = useState(false);
@@ -28,62 +32,134 @@ const Tutorial = () => {
   const [chosenPlant, setChosenPlant] = useState<string | undefined>();
   const [checkingResult, setCheckingResult] = useState<number>();
   const [isDragging, setIsDragging] = useState(false);
-  const [nextButtonDisabled, setNextButtonDisabled] = useState<boolean>(
-    tutorialStep === 2 || tutorialStep === 3
-  );
+  const [nextButtonDisabled, setNextButtonDisabled] = useState<boolean>();
+  const [plantPosition, setPlantPosition] = useState({ x: 0, y: 0 });
 
   const database: {
     [key: string]: { plants: PlantType[] };
   } = require("@/data/database.json");
 
   const handleBackButton = () => {
-    setTutorialStep(tutorialStep - 1);
+    setTutorialStap(tutorialStap - 1);
     setCheckingResult(undefined);
     setIsDragging(false);
   };
 
-  useEffect(() => {
-    const user =
-      typeof window !== "undefined" && localStorage.getItem("account");
-    const userId = user && JSON.parse(user).id;
-    const tutorialPlant: PlantType | undefined = database[userId]?.plants.find(
-      (plant) => plant.id === 0
-    );
-    if (tutorialPlant) {
-      setBg(`/images/camera/${tutorialPlant.backgroundImage}`);
+  const handelNextButton = () => {
+    setTutorialStap(tutorialStap + 1);
+
+    if (cloudText === 3) {
+      setCloudText(6);
     }
-  }, [setBg, database]);
+  };
+
+  const handleRoomSelect = (room: string) => {
+    setBg(`/images/camera/${room}.jpg`);
+  };
+
+  useEffect(() => {
+    const storedBg = localStorage.getItem("backgroundImage");
+
+    if (storedBg) {
+      setBg(storedBg);
+    }
+  }, [setBg, setTutorialStap]);
+
+  const handleCloudText = (stap: number) => {
+    setCloudText(stap);
+    setTutorialStap(stap);
+  };
 
   useEffect(() => {
     // Controleer of localStorage beschikbaar is in de browseromgeving
     if (typeof window !== "undefined") {
       // Haal het huidige opgeslagen stapnummer op uit localStorage
-      const savedStep = localStorage.getItem("tutorialStep");
+      const savedStap = localStorage.getItem("tutorialStap");
+
       // Als er een opgeslagen stap is, gebruik deze, anders gebruik de huidige stap
-      const initialStep = savedStep ? parseInt(savedStep, 10) : tutorialStep;
-      if (initialStep !== tutorialStep) {
-        handleCloudText(initialStep);
+      const initialStap = savedStap ? parseInt(savedStap, 10) : tutorialStap;
+
+      if (initialStap !== tutorialStap) {
+        handleCloudText(initialStap);
       }
     }
   });
 
-  useEffect(() => {
-    // Wanneer de tutorialStep verandert, sla het nieuwe stapnummer op in localStorage
-    localStorage.setItem("tutorialStep", tutorialStep.toString());
-  }, [tutorialStep]);
+  // const updateSelectedBgInDatabase = async (bg: string) => {
+  //   if (userId === undefined) return;
+  //   const userPlants = database[userId].plants;
+
+  //   const tutorialPlantIndex = userPlants.findIndex((plant) => plant.id === 0);
+  //   if (tutorialPlantIndex !== -1) {
+  //     console.log("Tutorial plant found", bg);
+
+  //     userPlants[tutorialPlantIndex].backgroundImage = bg;
+  //   } else {
+  //     console.log("No tutorial plant found");
+  //     userPlants.push({
+  //       id: 0,
+  //       plantName: "",
+  //       type: "",
+  //       familyName: "",
+  //       plantImage: "",
+  //       backgroundImage: `${bg}`,
+  //       note: "",
+  //       careInfo: {
+  //         Watering: "",
+  //         Light: "",
+  //         Temperature: "",
+  //         Poisoning: "",
+  //         careLevel: "",
+  //       },
+  //       position: {
+  //         x: 0,
+  //         y: 0,
+  //       },
+  //       birthday: "",
+  //     });
+  //     const updatedData = JSON.stringify(database, null, 2);
+
+  //     const saveData = async (updatedData: string) => {
+  //       console.log({ updatedData });
+
+  //       const response = await fetch("/api/saveData", {
+  //         method: "POST",
+  //         headers: {
+  //           "Content-Type": "application/json",
+  //         },
+  //         body: updatedData,
+  //       });
+  //     };
+
+  //     await saveData(updatedData);
+  //   }
+  // };
+
+  // useEffect(() => {
+  //   if (bg) {
+  //     updateSelectedBgInDatabase(bg);
+  //   }
+  // }, [bg]);
 
   useEffect(() => {
-    handleCloudText(tutorialStep);
-  }, [tutorialStep]);
+    // Wanneer de tutorialStap verandert, sla het nieuwe stapnummer op in localStorage
+    localStorage.setItem("tutorialStap", tutorialStap.toString());
+    if (tutorialStap === 2 || tutorialStap === 3) {
+      setNextButtonDisabled(true);
+    } else {
+      setNextButtonDisabled(false);
+    }
 
-  const handleCloudText = (step: number) => {
-    setCloudText(step);
-    setTutorialStep(step);
-  };
+    console.log({ tutorialStap });
+  }, [tutorialStap]);
+
+  useEffect(() => {
+    handleCloudText(tutorialStap);
+  }, [tutorialStap, plantPosition]);
 
   const handleCameraClick = () => {
     router.push("/tutorial/camera");
-    setIsBudCloudOpen(false);
+    // setIsBudCloudOpen(false);
   };
 
   const handelOpenOptionsList = () => {
@@ -114,9 +190,40 @@ const Tutorial = () => {
     }
   };
 
-  const goToStap3 = (id: number, plantName: string) => {
-    setTutorialStep(3);
-    setChosenPlant(plantName);
+  const goToStap3 = (plant: any) => {
+    setChosenPlant(plant.name);
+
+    // update de database met de nieuwe plant data van de plant met id 0
+    if (userId === undefined) return;
+    const userPlants = database[userId].plants;
+    const tutorialPlantIndex = userPlants.findIndex((plant) => plant.id === 0);
+    if (tutorialPlantIndex !== -1) {
+      userPlants[tutorialPlantIndex].databaseId = plant.id;
+      userPlants[tutorialPlantIndex].plantName = plant.name;
+      userPlants[tutorialPlantIndex].familyName = plant.family;
+      userPlants[tutorialPlantIndex].type = plant.type;
+      userPlants[tutorialPlantIndex].careInfo.Watering = plant.water;
+      userPlants[tutorialPlantIndex].careInfo.Light = plant.light;
+      userPlants[tutorialPlantIndex].careInfo.Temperature = plant.temperature;
+      userPlants[tutorialPlantIndex].careInfo.Poisoning = plant.toxicityto;
+      userPlants[tutorialPlantIndex].careInfo.careLevel = plant.careLevel;
+      userPlants[tutorialPlantIndex].position = plantPosition;
+
+      const updatedData = JSON.stringify(database, null, 2);
+
+      const saveData = async (updatedData: string) => {
+        const response = await fetch("/api/saveData", {
+          method: "POST",
+          headers: {
+            "Content-Type": "application/json",
+          },
+          body: updatedData,
+        });
+      };
+
+      saveData(updatedData);
+    }
+    setTutorialStap(3);
   };
 
   const [windowSize, setWindowSize] = useState({ width: 0, height: 0 });
@@ -143,7 +250,6 @@ const Tutorial = () => {
 
   const handelDrag = (e: any, data: any) => {
     setIsDragging(true);
-    console.log(data.x, data.y);
     BackgroundCheck.init({
       targets: ".braggableElement",
       images: ".backgroundPhoto",
@@ -151,6 +257,7 @@ const Tutorial = () => {
       darkFunction: darkFunction,
     });
 
+    setPlantPosition({ x: data.x, y: data.y });
     BackgroundCheck.refresh();
   };
 
@@ -160,6 +267,7 @@ const Tutorial = () => {
 
     setCheckingResult(Number(percentage));
     setNextButtonDisabled(false);
+    setCloudText(4);
   };
 
   const darkFunction = (mean: any) => {
@@ -167,14 +275,7 @@ const Tutorial = () => {
     const percentage = (Darkness * 100).toFixed(0);
     setCheckingResult(Number(percentage));
     setNextButtonDisabled(true);
-  };
-
-  const handleRoomSelect = (room: string) => {
-    if (room === "livingroom") {
-      setBg("/images/livingroom.jpg");
-    } else if (room === "bedroom") {
-      setBg("/images/bedroom.jpg");
-    }
+    setCloudText(5);
   };
 
   return (
@@ -200,7 +301,7 @@ const Tutorial = () => {
         <Icon icon="settings" />
       </div>
 
-      {tutorialStep < 2 && (
+      {tutorialStap === 1 && (
         <div className={$.stap1}>
           <Stap1
             handleCameraClick={handleCameraClick}
@@ -209,7 +310,7 @@ const Tutorial = () => {
         </div>
       )}
 
-      {tutorialStep === 2 && (
+      {tutorialStap === 2 && (
         <>
           <div className={$.stap2}>
             <Stap2
@@ -244,7 +345,7 @@ const Tutorial = () => {
                         icon={plant.icon}
                         text={plant.name}
                         color="transparent"
-                        onClick={() => goToStap3(plant.id, plant.name)}
+                        onClick={() => goToStap3(plant)}
                       />
                     </li>
                   ))}
@@ -255,7 +356,7 @@ const Tutorial = () => {
         </>
       )}
 
-      {tutorialStep >= 3 && (
+      {tutorialStap === 3 && (
         <Draggable
           axis="both"
           defaultPosition={defaultPosition}
@@ -282,18 +383,33 @@ const Tutorial = () => {
         </Draggable>
       )}
 
-      <div className={cs($.budCloud, $.hide)}>
+      {tutorialStap === 4 && (
+        // get the plant position from the database
+        <div
+          className={$.stap4}
+          style={{
+            position: "absolute",
+            top: plantPosition.y,
+            left: plantPosition.x,
+          }}
+        >
+          <Stap3 />
+        </div>
+      )}
+
+      {/* $.hide */}
+      <span className={cs($.budCloud)}>
         <BudCloud
           type="happy"
           text={texts.budCloud(chosenPlant)[cloudText]}
-          isOpen={isBudCloudOpen}
+          isOpen
         />
-      </div>
+      </span>
 
       <div className={$.actionButtons}>
         <div
           className={cs($.backButton, {
-            [$.visible]: tutorialStep > 1,
+            [$.visible]: tutorialStap > 1,
           })}
         >
           <Button text="Terug" color="brown" onClick={handleBackButton} />
@@ -303,7 +419,7 @@ const Tutorial = () => {
           <Button
             text="Volgende"
             color="green"
-            onClick={() => setTutorialStep(tutorialStep + 1)}
+            onClick={handelNextButton}
             disabled={nextButtonDisabled}
           />
         </div>
