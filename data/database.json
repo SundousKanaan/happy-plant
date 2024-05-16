@@ -1,79 +1,24 @@
 [
-    {
-        "id": 0,
-        "userName": {
-            "firstName": "Sundous",
-            "lastName": "Kan"
-        },
-        "email": "sundous.kn@gmail.com",
-        "password": "123",
-        "stars": 0,
-        "userImage": "/images/user-placeholder-image.svg",
-        "plants": [
-            {
-                "id": 1,
-                "plantName": "",
-                "type": "",
-                "familyName": "",
-                "plantImage": "",
-                "backgroundImage": "9115643d-d394-4251-9784-da96a0dc4688.jpeg",
-                "note": "",
-                "careInfo": {
-                    "Watering": "",
-                    "Light": "",
-                    "Temperature": "",
-                    "Poisoning": "",
-                    "careLevel": ""
-                },
-                "position": {
-                    "x": 0,
-                    "y": 0
-                },
-                "birthday": "",
-                "awards": {
-                    "type": "",
-                    "totalStars": 0,
-                    "imagesrc": "",
-                    "win": false
-                }
-            },
-            {
-                "id": 0,
-                "plantName": "",
-                "type": "",
-                "familyName": "",
-                "plantImage": "",
-                "backgroundImage": "7df3ada6-4dee-4699-ad80-bdbb9c5f9c7d.jpeg",
-                "note": "",
-                "careInfo": {
-                    "Watering": "",
-                    "Light": "",
-                    "Temperature": "",
-                    "Poisoning": "",
-                    "careLevel": ""
-                },
-                "position": {
-                    "x": 0,
-                    "y": 0
-                },
-                "birthday": "",
-                "awards": {
-                    "type": "",
-                    "totalStars": 0,
-                    "imagesrc": "",
-                    "win": false
-                }
-            }
-        ],
-        "posts": [],
-        "followers": [],
-        "following": [],
-        "savedPosts": [],
-        "awards": {
-            "type": "",
-            "totalStars": 0,
-            "imagesrc": "",
-            "win": false
-        }
+  {
+    "id": 0,
+    "userName": {
+      "firstName": "Sundous",
+      "lastName": "Kan"
+    },
+    "email": "sundous.kn@gmail.com",
+    "password": "123",
+    "stars": 0,
+    "userImage": "/images/user-placeholder-image.svg",
+    "plants": [],
+    "posts": [],
+    "followers": [],
+    "following": [],
+    "savedPosts": [],
+    "awards": {
+      "type": "",
+      "totalStars": 0,
+      "imagesrc": "",
+      "win": false
     }
+  }
 ]

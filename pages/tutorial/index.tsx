@@ -10,8 +10,11 @@ import cs from "classnames";
 import { PlantType } from "@/ts/types";
 import texts from "@/ts/texts";
 import plantsDatabase from "@/data/plantsDatabase.json";
+import Draggable from "react-draggable";
+
 import Stap1 from "./stap1/stap1";
 import Stap2 from "./stap2/stap2";
+import Stap3 from "./stap3/stap3";
 
 const Tutorial = () => {
   const router = useRouter();
@@ -23,10 +26,21 @@ const Tutorial = () => {
   const [disableToTop, setDisableToTop] = useState(true);
   const [disableToBottom, setDisableToBottom] = useState(false);
   const [chosenPlant, setChosenPlant] = useState<string | undefined>();
+  const [checkingResult, setCheckingResult] = useState<number>();
+  const [isDragging, setIsDragging] = useState(false);
+  const [nextButtonDisabled, setNextButtonDisabled] = useState<boolean>(
+    tutorialStep === 2 || tutorialStep === 3
+  );
 
   const database: {
     [key: string]: { plants: PlantType[] };
   } = require("@/data/database.json");
+
+  const handleBackButton = () => {
+    setTutorialStep(tutorialStep - 1);
+    setCheckingResult(undefined);
+    setIsDragging(false);
+  };
 
   useEffect(() => {
     const user =
@@ -47,16 +61,25 @@ const Tutorial = () => {
       const savedStep = localStorage.getItem("tutorialStep");
       // Als er een opgeslagen stap is, gebruik deze, anders gebruik de huidige stap
       const initialStep = savedStep ? parseInt(savedStep, 10) : tutorialStep;
-      setTutorialStep(initialStep);
+      if (initialStep !== tutorialStep) {
+        handleCloudText(initialStep);
+      }
     }
-    // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, []);
+  });
 
   useEffect(() => {
     // Wanneer de tutorialStep verandert, sla het nieuwe stapnummer op in localStorage
     localStorage.setItem("tutorialStep", tutorialStep.toString());
-    setCloudText(tutorialStep);
   }, [tutorialStep]);
+
+  useEffect(() => {
+    handleCloudText(tutorialStep);
+  }, [tutorialStep]);
+
+  const handleCloudText = (step: number) => {
+    setCloudText(step);
+    setTutorialStep(step);
+  };
 
   const handleCameraClick = () => {
     router.push("/tutorial/camera");
@@ -96,6 +119,64 @@ const Tutorial = () => {
     setChosenPlant(plantName);
   };
 
+  const [windowSize, setWindowSize] = useState({ width: 0, height: 0 });
+
+  const BackgroundCheck = require("../api/background-check.js");
+
+  const handleResize = () => {
+    setWindowSize({ width: window.innerWidth, height: window.innerHeight });
+  };
+
+  useEffect(() => {
+    handleResize();
+
+    window.addEventListener("resize", handleResize);
+    handleResize();
+
+    return () => window.removeEventListener("resize", handleResize);
+  }, []);
+
+  const defaultPosition = {
+    x: (windowSize.width - parseFloat("160px")) / 2,
+    y: (windowSize.height - parseFloat("160px")) / 2,
+  };
+
+  const handelDrag = (e: any, data: any) => {
+    setIsDragging(true);
+    console.log(data.x, data.y);
+    BackgroundCheck.init({
+      targets: ".braggableElement",
+      images: ".backgroundPhoto",
+      lightFunction: lightFunction,
+      darkFunction: darkFunction,
+    });
+
+    BackgroundCheck.refresh();
+  };
+
+  const lightFunction = (mean: any) => {
+    let Lighting = mean.toFixed(2);
+    const percentage = (Lighting * 100).toFixed(0);
+
+    setCheckingResult(Number(percentage));
+    setNextButtonDisabled(false);
+  };
+
+  const darkFunction = (mean: any) => {
+    let Darkness = mean.toFixed(2);
+    const percentage = (Darkness * 100).toFixed(0);
+    setCheckingResult(Number(percentage));
+    setNextButtonDisabled(true);
+  };
+
+  const handleRoomSelect = (room: string) => {
+    if (room === "livingroom") {
+      setBg("/images/livingroom.jpg");
+    } else if (room === "bedroom") {
+      setBg("/images/bedroom.jpg");
+    }
+  };
+
   return (
     <section className={$.container}>
       <div className={$.bgContainer}>
@@ -104,7 +185,7 @@ const Tutorial = () => {
             src={bg}
             alt="background"
             layout="fill"
-            className={$.bg}
+            className={cs("backgroundPhoto", $.bg)}
             style={{
               objectFit: "cover",
               objectPosition: "bottom",
@@ -121,7 +202,10 @@ const Tutorial = () => {
 
       {tutorialStep < 2 && (
         <div className={$.stap1}>
-          <Stap1 handleCameraClick={handleCameraClick} />
+          <Stap1
+            handleCameraClick={handleCameraClick}
+            onRoomSelect={handleRoomSelect}
+          />
         </div>
       )}
 
@@ -171,9 +255,34 @@ const Tutorial = () => {
         </>
       )}
 
-      {tutorialStep === 3 && <div className={$.stap3}>test</div>}
+      {tutorialStep >= 3 && (
+        <Draggable
+          axis="both"
+          defaultPosition={defaultPosition}
+          handle=".braggableElement"
+          onDrag={handelDrag}
+        >
+          <div
+            className={cs("braggableElement", $.stap3, {
+              [$.stopMoving]: isDragging,
+            })}
+          >
+            {checkingResult && isDragging && (
+              <div
+                className={cs($.procent, {
+                  [$.good]: checkingResult >= 50,
+                  [$.bad]: checkingResult < 50,
+                })}
+              >
+                {checkingResult}%
+              </div>
+            )}
+            <Stap3 />
+          </div>
+        </Draggable>
+      )}
 
-      <div className={$.budCloud}>
+      <div className={cs($.budCloud, $.hide)}>
         <BudCloud
           type="happy"
           text={texts.budCloud(chosenPlant)[cloudText]}
@@ -187,11 +296,7 @@ const Tutorial = () => {
             [$.visible]: tutorialStep > 1,
           })}
         >
-          <Button
-            text="Terug"
-            color="brown"
-            onClick={() => setTutorialStep(tutorialStep - 1)}
-          />
+          <Button text="Terug" color="brown" onClick={handleBackButton} />
         </div>
 
         <div className={$.nextButton}>
@@ -199,7 +304,7 @@ const Tutorial = () => {
             text="Volgende"
             color="green"
             onClick={() => setTutorialStep(tutorialStep + 1)}
-            disabled={tutorialStep === 2}
+            disabled={nextButtonDisabled}
           />
         </div>
       </div>
