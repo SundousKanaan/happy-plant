@@ -1,10 +1,4 @@
-import React, {
-  createContext,
-  use,
-  useContext,
-  useEffect,
-  useState,
-} from "react";
+import React, { createContext, useContext, useEffect, useState } from "react";
 import { useRouter } from "next/router";
 import dataBase from "@/data/database.json";
 import { AccountType } from "@/ts/types";

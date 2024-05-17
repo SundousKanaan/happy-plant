@@ -18,30 +18,37 @@ import Stap2 from "./stap2/stap2";
 import Stap3 from "./stap3/stap3";
 
 const Tutorial = () => {
+  // variabels
   const router = useRouter();
   const { account } = useAccount();
   const userId = account?.id;
 
   const [tutorialStap, setTutorialStap] = useState(1);
-  // const [isBudCloudOpen, setIsBudCloudOpen] = useState(true);
+  const [nextButtonDisabled, setNextButtonDisabled] = useState<boolean>();
   const [cloudText, setCloudText] = useState(0);
   const [bg, setBg] = useState("");
   const [openOptionsList, setOpenOptionsList] = useState(false);
   const [disableToTop, setDisableToTop] = useState(true);
   const [disableToBottom, setDisableToBottom] = useState(false);
+  const listContainerRef = useRef<HTMLUListElement>(null);
   const [chosenPlant, setChosenPlant] = useState<string | undefined>();
-  const [checkingResult, setCheckingResult] = useState<number>();
+  const [windowSize, setWindowSize] = useState({ width: 0, height: 0 });
   const [isDragging, setIsDragging] = useState(false);
-  const [nextButtonDisabled, setNextButtonDisabled] = useState<boolean>();
+  const [plantPositionCheck, setPlantPositionCheck] = useState<number>();
   const [plantPosition, setPlantPosition] = useState({ x: 0, y: 0 });
 
   const database: {
     [key: string]: { plants: PlantType[] };
   } = require("@/data/database.json");
+  const BackgroundCheck = require("../api/background-check.js");
+
+  // ==================================
+  // main functions
+  // ==================================
 
   const handleBackButton = () => {
     setTutorialStap(tutorialStap - 1);
-    setCheckingResult(undefined);
+    setPlantPositionCheck(undefined);
     setIsDragging(false);
   };
 
@@ -51,98 +58,70 @@ const Tutorial = () => {
     if (cloudText === 3) {
       setCloudText(6);
     }
-  };
 
-  const handleRoomSelect = (room: string) => {
-    setBg(`/images/camera/${room}.jpg`);
-  };
+    if (tutorialStap + 1 === 4) {
+      if (userId === undefined) return;
+      const userPlants = database[userId].plants;
+      const tutorialPlantIndex = userPlants.findIndex(
+        (plant) => plant.id === 0
+      );
 
-  useEffect(() => {
-    const storedBg = localStorage.getItem("backgroundImage");
+      if (tutorialPlantIndex !== -1) {
+        userPlants[tutorialPlantIndex].position = plantPosition;
+        const updatedData = JSON.stringify(database, null, 2);
 
-    if (storedBg) {
-      setBg(storedBg);
+        const saveData = async (updatedData: string) => {
+          try {
+            const response = await fetch("/api/saveData", {
+              method: "POST",
+              headers: {
+                "Content-Type": "application/json",
+              },
+              body: updatedData,
+            });
+
+            if (!response.ok) {
+              throw new Error("Failed to save data");
+            }
+
+            return response;
+          } catch (error: any) {
+            console.error("Error saving data:", error.message);
+            return { error: error.message };
+          }
+        };
+        saveData(updatedData);
+      }
     }
-  }, [setBg, setTutorialStap]);
+  };
 
   const handleCloudText = (stap: number) => {
     setCloudText(stap);
     setTutorialStap(stap);
   };
 
-  useEffect(() => {
-    // Controleer of localStorage beschikbaar is in de browseromgeving
-    if (typeof window !== "undefined") {
-      // Haal het huidige opgeslagen stapnummer op uit localStorage
-      const savedStap = localStorage.getItem("tutorialStap");
-
-      // Als er een opgeslagen stap is, gebruik deze, anders gebruik de huidige stap
-      const initialStap = savedStap ? parseInt(savedStap, 10) : tutorialStap;
-
-      if (initialStap !== tutorialStap) {
-        handleCloudText(initialStap);
-      }
-    }
-  });
-
-  // const updateSelectedBgInDatabase = async (bg: string) => {
-  //   if (userId === undefined) return;
-  //   const userPlants = database[userId].plants;
-
-  //   const tutorialPlantIndex = userPlants.findIndex((plant) => plant.id === 0);
-  //   if (tutorialPlantIndex !== -1) {
-  //     console.log("Tutorial plant found", bg);
-
-  //     userPlants[tutorialPlantIndex].backgroundImage = bg;
-  //   } else {
-  //     console.log("No tutorial plant found");
-  //     userPlants.push({
-  //       id: 0,
-  //       plantName: "",
-  //       type: "",
-  //       familyName: "",
-  //       plantImage: "",
-  //       backgroundImage: `${bg}`,
-  //       note: "",
-  //       careInfo: {
-  //         Watering: "",
-  //         Light: "",
-  //         Temperature: "",
-  //         Poisoning: "",
-  //         careLevel: "",
-  //       },
-  //       position: {
-  //         x: 0,
-  //         y: 0,
-  //       },
-  //       birthday: "",
-  //     });
-  //     const updatedData = JSON.stringify(database, null, 2);
-
-  //     const saveData = async (updatedData: string) => {
-  //       console.log({ updatedData });
-
-  //       const response = await fetch("/api/saveData", {
-  //         method: "POST",
-  //         headers: {
-  //           "Content-Type": "application/json",
-  //         },
-  //         body: updatedData,
-  //       });
-  //     };
-
-  //     await saveData(updatedData);
-  //   }
-  // };
+  // ==================================
+  // tutorialStap update
+  // ==================================
 
   // useEffect(() => {
-  //   if (bg) {
-  //     updateSelectedBgInDatabase(bg);
+  //   // Check if localStorage is available in the browser environment
+  //   if (typeof window !== "undefined") {
+  //     // Retrieve the currently saved step number from localStorage
+  //     const savedStap = localStorage.getItem("tutorialStap");
+
+  //     // If there is a saved step, use it, otherwise use the current step
+  //     const initialStap = savedStap ? parseInt(savedStap, 10) : tutorialStap;
+
+  //     if (initialStap !== tutorialStap) {
+  //       setTutorialStap(initialStap);
+  //       handleCloudText(initialStap);
+  //     }
   //   }
-  // }, [bg]);
+  // }, [tutorialStap]);
 
   useEffect(() => {
-    // Wanneer de tutorialStap verandert, sla het nieuwe stapnummer op in localStorage
+    // When the tutorialStep changes, save the new step number to localStorage
     localStorage.setItem("tutorialStap", tutorialStap.toString());
     if (tutorialStap === 2 || tutorialStap === 3) {
       setNextButtonDisabled(true);
@@ -155,12 +134,31 @@ const Tutorial = () => {
 
   useEffect(() => {
     handleCloudText(tutorialStap);
-  }, [tutorialStap, plantPosition]);
+  }, [tutorialStap]);
+
+  // ==================================
+  // stap 1 functions => background select
+  // ==================================
+
+  const handleRoomSelect = (room: string) => {
+    setBg(`/images/camera/${room}.jpg`);
+  };
 
   const handleCameraClick = () => {
     router.push("/tutorial/camera");
-    // setIsBudCloudOpen(false);
   };
+
+  useEffect(() => {
+    const storedBg = localStorage.getItem("backgroundImage");
+
+    if (storedBg) {
+      setBg(storedBg);
+    }
+  }, []);
+
+  // ==================================
+  // stap 2 functions => plant select
+  // ==================================
 
   const handelOpenOptionsList = () => {
     if (openOptionsList) {
@@ -170,7 +168,6 @@ const Tutorial = () => {
     }
   };
 
-  const listContainerRef = useRef<HTMLUListElement>(null);
   const scrollToTop = () => {
     if (listContainerRef.current) {
       listContainerRef.current.scrollTop = 0;
@@ -190,10 +187,10 @@ const Tutorial = () => {
     }
   };
 
-  const goToStap3 = (plant: any) => {
+  const selectPlant = (plant: any) => {
     setChosenPlant(plant.name);
 
-    // update de database met de nieuwe plant data van de plant met id 0
+    // update the database with the new plant data of the plant with id 0
     if (userId === undefined) return;
     const userPlants = database[userId].plants;
     const tutorialPlantIndex = userPlants.findIndex((plant) => plant.id === 0);
@@ -207,31 +204,74 @@ const Tutorial = () => {
       userPlants[tutorialPlantIndex].careInfo.Temperature = plant.temperature;
       userPlants[tutorialPlantIndex].careInfo.Poisoning = plant.toxicityto;
       userPlants[tutorialPlantIndex].careInfo.careLevel = plant.careLevel;
-      userPlants[tutorialPlantIndex].position = plantPosition;
+      userPlants[tutorialPlantIndex].position.x = 0;
+      userPlants[tutorialPlantIndex].position.y = 0;
 
       const updatedData = JSON.stringify(database, null, 2);
 
       const saveData = async (updatedData: string) => {
-        const response = await fetch("/api/saveData", {
-          method: "POST",
-          headers: {
-            "Content-Type": "application/json",
-          },
-          body: updatedData,
-        });
+        try {
+          const response = await fetch("/api/saveData", {
+            method: "POST",
+            headers: {
+              "Content-Type": "application/json",
+            },
+            body: updatedData,
+          });
+
+          if (!response.ok) {
+            throw new Error("Failed to save data");
+          }
+
+          return response;
+        } catch (error: any) {
+          console.error("Error saving data:", error.message);
+          return { error: error.message };
+        }
       };
 
       saveData(updatedData);
     }
+
     setTutorialStap(3);
   };
 
-  const [windowSize, setWindowSize] = useState({ width: 0, height: 0 });
-
-  const BackgroundCheck = require("../api/background-check.js");
+  // ==================================
+  // stap 3 functions => plant position
+  // ==================================
 
   const handleResize = () => {
     setWindowSize({ width: window.innerWidth, height: window.innerHeight });
+  };
+
+  const handelDrag = (e: any, data: any) => {
+    setIsDragging(true);
+    BackgroundCheck.init({
+      targets: ".braggableElement",
+      images: ".backgroundPhoto",
+      lightFunction: lightFunction,
+      darkFunction: darkFunction,
+    });
+
+    setPlantPosition({ x: data.x, y: data.y });
+    BackgroundCheck.refresh();
+  };
+  const lightFunction = (mean: any) => {
+    let Lighting = mean.toFixed(2);
+    const percentage = (Lighting * 100).toFixed(0);
+    console.log(percentage);
+
+    setPlantPositionCheck(Number(percentage));
+    setNextButtonDisabled(false);
+    setCloudText(4);
+  };
+
+  const darkFunction = (mean: any) => {
+    let Darkness = mean.toFixed(2);
+    const percentage = (Darkness * 100).toFixed(0);
+    setPlantPositionCheck(Number(percentage));
+    setNextButtonDisabled(true);
+    setCloudText(5);
   };
 
   useEffect(() => {
@@ -248,58 +288,34 @@ const Tutorial = () => {
     y: (windowSize.height - parseFloat("160px")) / 2,
   };
 
-  const handelDrag = (e: any, data: any) => {
-    setIsDragging(true);
-    BackgroundCheck.init({
-      targets: ".braggableElement",
-      images: ".backgroundPhoto",
-      lightFunction: lightFunction,
-      darkFunction: darkFunction,
-    });
-
-    setPlantPosition({ x: data.x, y: data.y });
-    BackgroundCheck.refresh();
-  };
-
-  const lightFunction = (mean: any) => {
-    let Lighting = mean.toFixed(2);
-    const percentage = (Lighting * 100).toFixed(0);
-
-    setCheckingResult(Number(percentage));
-    setNextButtonDisabled(false);
-    setCloudText(4);
-  };
-
-  const darkFunction = (mean: any) => {
-    let Darkness = mean.toFixed(2);
-    const percentage = (Darkness * 100).toFixed(0);
-    setCheckingResult(Number(percentage));
-    setNextButtonDisabled(true);
-    setCloudText(5);
-  };
+  // ==================================
+  // stap 4 functions => plant watering
+  // ==================================
 
   return (
     <section className={$.container}>
-      <div className={$.bgContainer}>
-        {bg !== "" && (
-          <Image
-            src={bg}
-            alt="background"
-            layout="fill"
-            className={cs("backgroundPhoto", $.bg)}
-            style={{
-              objectFit: "cover",
-              objectPosition: "bottom",
-            }}
-          />
-        )}
-      </div>
-      <div className={$.userContainer}>
-        <User />
-      </div>
-      <div className={$.sittingsContainer}>
-        <Icon icon="settings" />
-      </div>
+      <>
+        <div className={$.bgContainer}>
+          {bg !== "" && (
+            <Image
+              src={bg}
+              alt="background"
+              layout="fill"
+              className={cs("backgroundPhoto", $.bg)}
+              style={{
+                objectFit: "cover",
+                objectPosition: "bottom",
+              }}
+            />
+          )}
+        </div>
+        <div className={$.userContainer}>
+          <User />
+        </div>
+        <div className={$.sittingsContainer}>
+          <Icon icon="settings" />
+        </div>
+      </>
 
       {tutorialStap === 1 && (
         <div className={$.stap1}>
@@ -345,7 +361,7 @@ const Tutorial = () => {
                         icon={plant.icon}
                         text={plant.name}
                         color="transparent"
-                        onClick={() => goToStap3(plant)}
+                        onClick={() => selectPlant(plant)}
                       />
                     </li>
                   ))}
@@ -368,14 +384,14 @@ const Tutorial = () => {
               [$.stopMoving]: isDragging,
             })}
           >
-            {checkingResult && isDragging && (
+            {plantPositionCheck && isDragging && (
               <div
                 className={cs($.procent, {
-                  [$.good]: checkingResult >= 50,
-                  [$.bad]: checkingResult < 50,
+                  [$.good]: plantPositionCheck >= 50,
+                  [$.bad]: plantPositionCheck < 50,
                 })}
               >
-                {checkingResult}%
+                {plantPositionCheck}%
               </div>
             )}
             <Stap3 />
@@ -383,47 +399,36 @@ const Tutorial = () => {
         </Draggable>
       )}
 
-      {tutorialStap === 4 && (
-        // get the plant position from the database
-        <div
-          className={$.stap4}
-          style={{
-            position: "absolute",
-            top: plantPosition.y,
-            left: plantPosition.x,
-          }}
-        >
-          <Stap3 />
-        </div>
-      )}
+      {tutorialStap === 4 && <div className={$.stap4}>test</div>}
 
-      {/* $.hide */}
-      <span className={cs($.budCloud)}>
-        <BudCloud
-          type="happy"
-          text={texts.budCloud(chosenPlant)[cloudText]}
-          isOpen
-        />
-      </span>
-
-      <div className={$.actionButtons}>
-        <div
-          className={cs($.backButton, {
-            [$.visible]: tutorialStap > 1,
-          })}
-        >
-          <Button text="Terug" color="brown" onClick={handleBackButton} />
-        </div>
-
-        <div className={$.nextButton}>
-          <Button
-            text="Volgende"
-            color="green"
-            onClick={handelNextButton}
-            disabled={nextButtonDisabled}
+      <>
+        <span className={cs($.budCloud)}>
+          <BudCloud
+            type="happy"
+            text={texts.budCloud(chosenPlant)[cloudText]}
+            isOpen
           />
+        </span>
+
+        <div className={$.actionButtons}>
+          <div
+            className={cs($.backButton, {
+              [$.visible]: tutorialStap > 1,
+            })}
+          >
+            <Button text="Terug" color="brown" onClick={handleBackButton} />
+          </div>
+
+          <div className={$.nextButton}>
+            <Button
+              text="Volgende"
+              color="green"
+              onClick={handelNextButton}
+              disabled={nextButtonDisabled}
+            />
+          </div>
         </div>
-      </div>
+      </>
     </section>
   );
 };

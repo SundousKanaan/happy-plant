@@ -9,7 +9,7 @@ interface stapProps {
 }
 
 const Stap1: React.FC<stapProps> = ({ handleCameraClick, onRoomSelect }) => {
-  const [selectedRoom, setSelectedRoom] = React.useState("livingroom");
+  const [selectedRoom, setSelectedRoom] = React.useState("");
   const handleRoomClick = (room: string) => {
     onRoomSelect(room);
     if (room === "livingroom") {
@@ -18,10 +18,16 @@ const Stap1: React.FC<stapProps> = ({ handleCameraClick, onRoomSelect }) => {
       setSelectedRoom("bedroom");
     }
   };
+
+  const handleCamera = () => {
+    handleCameraClick();
+    setSelectedRoom("");
+  };
+
   return (
     <ul className={$.iconsList}>
       <li className={$.icon}>
-        <button className={$.iconButton} onClick={handleCameraClick}>
+        <button className={$.iconButton} onClick={handleCamera}>
           <Icon icon="camera" text="Mijn kamer" />
         </button>
       </li>

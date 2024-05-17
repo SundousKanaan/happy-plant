@@ -153,8 +153,7 @@
   height: 100%;
 }
 
-.stap3,
-.stap4 {
+.stap3 {
   width: 9rem;
   aspect-ratio: 1;
   z-index: 1;
@@ -190,6 +189,10 @@
       color: var(--secondary-green);
     }
   }
+}
+
+.stap4 {
+  position: absolute;
 }
 
 @keyframes moving {

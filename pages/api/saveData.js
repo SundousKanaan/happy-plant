@@ -15,8 +15,8 @@ export default function handler(req, res) {
         res.status(500).json({ message: "Failed to write to file" });
         return;
       }
-      res.status(200).json({ message: "Data saved successfully" });
     });
+    res.status(200).json({ message: "Data saved successfully" });
   } else {
     res.setHeader("Allow", ["POST"]);
     res.status(405).end(`Method ${req.method} Not Allowed`);

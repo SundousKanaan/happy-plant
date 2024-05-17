@@ -12,8 +12,7 @@ const Stap3: React.FC<stapProps> = ({}) => {
         src="/images/icons/pot-default.svg"
         alt="stap3"
         className={$.potImage}
-        width={100}
-        height={100}
+        layout="fill"
       />
     </>
   );

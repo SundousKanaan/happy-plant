@@ -4,13 +4,13 @@ export type UserName = {
 };
 
 export type PlantType = {
-  backgroundImage: string;
   id: number;
   databaseId: number;
   plantName: string;
   type: string;
   familyName: string;
   plantImage: string;
+  backgroundImage: string;
   note: string;
   careInfo: {
     Watering: string;
@@ -46,22 +46,24 @@ export type Following = {
   userId: number;
 };
 
+export type Award = {
+  type: string;
+  totalStars: number;
+  imagesrc: string;
+  win: boolean;
+};
+
 export type AccountType = {
   id: number;
-  stars: number;
   userName: UserName;
   email: string;
   password: string;
+  stars: number;
   userImage: string;
   plants: PlantType[];
   posts: Post[];
   followers: Follower[];
   following: Following[];
   savedPosts: Post[];
-  awards: {
-    type: string;
-    totalStars: number;
-    imagesrc: string;
-    win: boolean;
-  };
+  awards: Award;
 };
