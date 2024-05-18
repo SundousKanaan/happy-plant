@@ -1,0 +1,41 @@
+.stap4 {
+  width: 9rem;
+  aspect-ratio: 1;
+  z-index: 1;
+  position: absolute;
+}
+
+.potImage {
+  width: 100%;
+  height: 100%;
+  object-fit: contain;
+  object-position: bottom;
+  position: absolute;
+}
+
+.fakePLant {
+  width: 0.8rem;
+  height: 6rem;
+  background-color: var(--secondary-green);
+  border-radius: 5rem;
+
+  position: absolute;
+  left: calc(50% - 0.8rem / 2);
+  top: -30%;
+
+  transform-origin: bottom;
+  transform: scaleY(0);
+}
+
+.grow {
+  animation: grow 2s ease-in-out forwards;
+}
+
+@keyframes grow {
+  0% {
+    transform: scaleY(0);
+  }
+  100% {
+    transform: scaleY(1);
+  }
+}

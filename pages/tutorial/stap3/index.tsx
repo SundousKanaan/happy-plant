@@ -5,10 +5,16 @@ import cs from "classnames";
 import $ from "./stap3.module.scss";
 import Draggable from "react-draggable";
 import { useStapper } from "@/src/contexts/tutorialStapper/tutorialStapper";
+import { useAccount } from "@/src/contexts/account/accountContext";
+import { PlantType } from "@/ts/types";
 
 interface stapProps {}
 
 const Stap3: React.FC<stapProps> = ({}) => {
+  const { account } = useAccount();
+  const database: {
+    [key: string]: { plants: PlantType[] };
+  } = require("@/data/database.json");
   const BackgroundCheck = require("@/pages/api/background-check.js");
   const { handleDisableNextButton } = useStapper();
   const [windowSize, setWindowSize] = useState({ width: 0, height: 0 });
@@ -29,7 +35,7 @@ const Stap3: React.FC<stapProps> = ({}) => {
       darkFunction: darkFunction,
     });
 
-    setPlantPosition({ x: data.x.toFixed(0), y: data.y.toFixed(0) });
+    setPlantPosition({ x: data.x, y: data.y.toFixed(0) });
     BackgroundCheck.refresh();
   };
   const lightFunction = (mean: any) => {
@@ -40,18 +46,20 @@ const Stap3: React.FC<stapProps> = ({}) => {
     setPlantPositionCheck(Number(percentage));
     handleDisableNextButton(false);
 
-    // setCloudText(4);
+    const userId = account?.id;
+    if (userId === undefined) return;
+    const userPlants = database[userId].plants;
+    const tutorialPlantIndex = userPlants.findIndex((plant) => plant.id === 0);
+    if (tutorialPlantIndex !== -1) {
+      userPlants[tutorialPlantIndex].position = plantPosition;
+    }
   };
 
   const darkFunction = (mean: any) => {
-    console.log("darkFunction");
-
     let Darkness = mean.toFixed(2);
     const percentage = (Darkness * 100).toFixed(0);
     setPlantPositionCheck(Number(percentage));
     handleDisableNextButton(true);
-
-    // setCloudText(5);
   };
 
   useEffect(() => {
