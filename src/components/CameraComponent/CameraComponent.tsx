@@ -21,12 +21,11 @@ const CameraComponent: React.FC<CameraComponentProps> = ({
   text,
 }) => {
   const router = useRouter();
-  const { savedpreviousStap, getSavedpreviousStap } = useStapper();
+  const { handleCustomStap } = useStapper();
   const { captureImage, takeBackgroundImage, videoRef } = useCamera();
   const { openDialog, closeDialog, isOpen } = useDialog();
 
   useEffect(() => {
-    getSavedpreviousStap();
     captureImage();
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
@@ -37,8 +36,7 @@ const CameraComponent: React.FC<CameraComponentProps> = ({
   };
 
   const goBack = () => {
-    if (!savedpreviousStap) return;
-    router.push(savedpreviousStap);
+    handleCustomStap(1);
   };
 
   return (

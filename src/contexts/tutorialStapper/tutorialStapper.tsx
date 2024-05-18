@@ -18,23 +18,15 @@ export const StapperProvider = ({
   const [disabledNextButton, setDisabledNextButton] = useState<boolean>(false);
 
   const handleNexttStap = (stap: number) => {
-    if (stap) {
-      setTutorialStap(stap);
-    } else {
-      setTutorialStap(tutorialStap + 1);
-    }
+    setTutorialStap(tutorialStap + 1);
   };
 
-  const handlePreviousStap = (stap: number) => {
-    if (stap) {
-      setTutorialStap(stap);
-    } else {
-      setTutorialStap(tutorialStap - 1);
-    }
+  const handlePreviousStap = () => {
+    setTutorialStap(tutorialStap - 1);
   };
 
-  const getSavedpreviousStap = () => {
-    setSavedPreviousStap(localStorage.getItem("previousStap") ?? "");
+  const handleCustomStap = (stap: number) => {
+    setTutorialStap(stap);
   };
 
   useEffect(() => {
@@ -46,6 +38,10 @@ export const StapperProvider = ({
       router.push(`/tutorial/stap${tutorialStap}`);
     }
   }, [tutorialStap]);
+
+  const handleDisableNextButton = (value: boolean) => {
+    setDisabledNextButton(value);
+  };
 
   useEffect(() => {
     if (tutorialStap === 2 || tutorialStap === 3) {
@@ -61,8 +57,9 @@ export const StapperProvider = ({
     disabledNextButton,
     handleNexttStap,
     handlePreviousStap,
-    getSavedpreviousStap,
     setDisabledNextButton,
+    handleCustomStap,
+    handleDisableNextButton,
   };
 
   return (

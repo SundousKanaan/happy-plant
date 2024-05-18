@@ -10,6 +10,7 @@ interface stapProps {}
 
 const Stap3: React.FC<stapProps> = ({}) => {
   const BackgroundCheck = require("@/pages/api/background-check.js");
+  const { handleDisableNextButton } = useStapper();
   const [windowSize, setWindowSize] = useState({ width: 0, height: 0 });
   const [isDragging, setIsDragging] = useState(false);
   const [plantPosition, setPlantPosition] = useState({ x: 0, y: 0 });
@@ -28,7 +29,7 @@ const Stap3: React.FC<stapProps> = ({}) => {
       darkFunction: darkFunction,
     });
 
-    setPlantPosition({ x: data.x, y: data.y });
+    setPlantPosition({ x: data.x.toFixed(0), y: data.y.toFixed(0) });
     BackgroundCheck.refresh();
   };
   const lightFunction = (mean: any) => {
@@ -37,25 +38,35 @@ const Stap3: React.FC<stapProps> = ({}) => {
     console.log(percentage);
 
     setPlantPositionCheck(Number(percentage));
+    handleDisableNextButton(false);
 
     // setCloudText(4);
   };
 
   const darkFunction = (mean: any) => {
+    console.log("darkFunction");
+
     let Darkness = mean.toFixed(2);
     const percentage = (Darkness * 100).toFixed(0);
     setPlantPositionCheck(Number(percentage));
+    handleDisableNextButton(true);
+
     // setCloudText(5);
   };
 
   useEffect(() => {
     handleResize();
+    console.log({ plantPositionCheck });
 
     window.addEventListener("resize", handleResize);
     handleResize();
 
     return () => window.removeEventListener("resize", handleResize);
   }, []);
+
+  useEffect(() => {
+    localStorage.setItem("plantPosition", JSON.stringify(plantPosition));
+  }, [plantPosition]);
 
   const defaultPosition = {
     x: (windowSize.width - 144) / 2, // De breedte van het Draggable element is 160px

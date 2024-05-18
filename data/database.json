@@ -12,25 +12,25 @@
         "plants": [
             {
                 "id": 0,
-                "plantName": "Tulp",
+                "plantName": "Hortensia",
                 "type": "Bloeiende plant",
-                "familyName": "Liliaceae",
+                "familyName": "Hydrangeaceae",
                 "plantImage": "",
-                "backgroundImage": "efad5a5b-ea80-49b0-960b-78cf6b433fb9.jpeg",
+                "backgroundImage": "f4424c7a-f7f0-4a7c-a4e8-1ca24fe56b9f.jpeg",
                 "note": "",
                 "careInfo": {
-                    "Watering": "een keer per week",
-                    "Light": "direct zonlicht",
+                    "Watering": "twee keer per week",
+                    "Light": "indirect zonlicht",
                     "Temperature": "15-20°C",
                     "Poisoning": "",
-                    "careLevel": "gemiddeld"
+                    "careLevel": "Makkelijk"
                 },
                 "position": {
                     "x": 0,
                     "y": 0
                 },
                 "birthday": "",
-                "databaseId": 3
+                "databaseId": 2
             }
         ],
         "posts": [],

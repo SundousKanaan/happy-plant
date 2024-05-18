@@ -12,7 +12,7 @@ import { useRouter } from "next/router";
 
 const CameraPage = () => {
   const router = useRouter();
-  const { handleNexttStap, handlePreviousStap } = useStapper();
+  const { handleCustomStap } = useStapper();
   const { getSavedBackgroundImage, savedBackgroundImage } = useCamera();
   const { closeDialog } = useDialog();
   const [popUpIsOpen, setPopUpIsOpen] = useState(true);
@@ -45,11 +45,11 @@ const CameraPage = () => {
       plantId: 0,
     });
 
-    handleNexttStap(1);
+    handleCustomStap(1);
   };
 
   const handleBackAction = () => {
-    handlePreviousStap(1);
+    handleCustomStap(1);
   };
 
   return (
