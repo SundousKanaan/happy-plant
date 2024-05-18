@@ -12,15 +12,15 @@
         "plants": [
             {
                 "id": 0,
-                "plantName": "Lotus",
+                "plantName": "Tulp",
                 "type": "Bloeiende plant",
-                "familyName": "Nelumbonaceae",
+                "familyName": "Liliaceae",
                 "plantImage": "",
-                "backgroundImage": "579b9ef3-8605-4846-bf1b-dbceb5d2fa35.jpeg",
+                "backgroundImage": "efad5a5b-ea80-49b0-960b-78cf6b433fb9.jpeg",
                 "note": "",
                 "careInfo": {
                     "Watering": "een keer per week",
-                    "Light": "indirect zonlicht",
+                    "Light": "direct zonlicht",
                     "Temperature": "15-20°C",
                     "Poisoning": "",
                     "careLevel": "gemiddeld"
@@ -30,7 +30,7 @@
                     "y": 0
                 },
                 "birthday": "",
-                "databaseId": 5
+                "databaseId": 3
             }
         ],
         "posts": [],

@@ -6,7 +6,7 @@ import Button from "@/src/components/Button/Button";
 import cs from "classnames";
 import Dialog from "../Dialog/Dialog";
 import { useRouter } from "next/router";
-import { useStepper } from "@/src/hooks/useStepper";
+import { useStapper } from "@/src/contexts/tutorialStapper/tutorialStapper";
 import { useDialog } from "@/src/contexts/dialogContext/dialogContext";
 
 interface CameraComponentProps {
@@ -21,12 +21,12 @@ const CameraComponent: React.FC<CameraComponentProps> = ({
   text,
 }) => {
   const router = useRouter();
-  const { savedpreviousStep, getSavedpreviousStep } = useStepper();
+  const { savedpreviousStap, getSavedpreviousStap } = useStapper();
   const { captureImage, takeBackgroundImage, videoRef } = useCamera();
   const { openDialog, closeDialog, isOpen } = useDialog();
 
   useEffect(() => {
-    getSavedpreviousStep();
+    getSavedpreviousStap();
     captureImage();
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
@@ -37,8 +37,8 @@ const CameraComponent: React.FC<CameraComponentProps> = ({
   };
 
   const goBack = () => {
-    if (!savedpreviousStep) return;
-    router.push(savedpreviousStep);
+    if (!savedpreviousStap) return;
+    router.push(savedpreviousStap);
   };
 
   return (

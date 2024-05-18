@@ -2,7 +2,7 @@ import React, { useEffect, useState } from "react";
 import CameraComponent from "@/src/components/CameraComponent/CameraComponent";
 import Button from "@/src/components/Button/Button";
 import cs from "classnames";
-import { useStepper } from "@/src/hooks/useStepper";
+import { useStapper } from "@/src/contexts/tutorialStapper/tutorialStapper";
 import useCamera from "@/src/hooks/useCamera";
 import { useDialog } from "@/src/contexts/dialogContext/dialogContext";
 import BudPopUp from "@/src/components/BudPopUp/BudPopUp";
@@ -12,15 +12,12 @@ import { useRouter } from "next/router";
 
 const CameraPage = () => {
   const router = useRouter();
-  const { setPreviousStep, savedpreviousStep, getSavedpreviousStep } =
-    useStepper();
+  const { handleNexttStap, handlePreviousStap } = useStapper();
   const { getSavedBackgroundImage, savedBackgroundImage } = useCamera();
   const { closeDialog } = useDialog();
   const [popUpIsOpen, setPopUpIsOpen] = useState(true);
 
   useEffect(() => {
-    setPreviousStep("/tutorial");
-    getSavedpreviousStep();
     getSavedBackgroundImage();
   });
 
@@ -48,13 +45,11 @@ const CameraPage = () => {
       plantId: 0,
     });
 
-    if (!savedpreviousStep) return;
-    router.push(savedpreviousStep);
+    handleNexttStap(1);
   };
 
   const handleBackAction = () => {
-    if (!savedpreviousStep) return;
-    router.push(savedpreviousStep);
+    handlePreviousStap(1);
   };
 
   return (
