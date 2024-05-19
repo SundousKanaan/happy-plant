@@ -26,7 +26,9 @@ const Stap4: React.FC<stapProps> = ({}) => {
       <div
         className={$.stap4}
         style={{
-          transform: `translateX(${savedPlantPosition.x}px) translateY(${savedPlantPosition.y}px)`,
+          position: "absolute",
+          top: savedPlantPosition.y,
+          left: savedPlantPosition.x,
         }}
       >
         <div className={$.fakePLant}></div>

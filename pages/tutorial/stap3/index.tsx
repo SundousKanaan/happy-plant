@@ -35,7 +35,7 @@ const Stap3: React.FC<stapProps> = ({}) => {
       darkFunction: darkFunction,
     });
 
-    setPlantPosition({ x: data.x, y: data.y.toFixed(0) });
+    setPlantPosition({ x: data.x, y: data.y });
     BackgroundCheck.refresh();
   };
   const lightFunction = (mean: any) => {

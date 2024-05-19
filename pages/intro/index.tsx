@@ -12,7 +12,7 @@ const IntroPage = () => {
     if (step === 1) {
       setStep(2);
     } else {
-      router.push("/tutorial");
+      router.push("/tutorial/stap1");
     }
   };
   return (

@@ -13,31 +13,25 @@ export const StapperProvider = ({
   children: React.ReactNode;
 }) => {
   const router = useRouter();
-  const [tutorialStap, setTutorialStap] = useState(0);
+  const [tutorialStap, setTutorialStap] = useState(1);
   const [savedpreviousStap, setSavedPreviousStap] = useState<string>("");
   const [disabledNextButton, setDisabledNextButton] = useState<boolean>(false);
 
   const handleNexttStap = (stap: number) => {
     setTutorialStap(tutorialStap + 1);
+    router.push(`/tutorial/stap${tutorialStap + 1}`);
   };
 
   const handlePreviousStap = () => {
     setTutorialStap(tutorialStap - 1);
+    router.push(`/tutorial/stap${tutorialStap - 1}`);
   };
 
   const handleCustomStap = (stap: number) => {
     setTutorialStap(stap);
   };
 
-  useEffect(() => {
-    console.log("context", { tutorialStap });
-
-    if (tutorialStap === 0) {
-      router.push(`/tutorial/stap${tutorialStap + 1}`);
-    } else {
-      router.push(`/tutorial/stap${tutorialStap}`);
-    }
-  }, [tutorialStap]);
+  // useEffect(() => {}, [tutorialStap]);
 
   const handleDisableNextButton = (value: boolean) => {
     setDisabledNextButton(value);
