@@ -34,16 +34,17 @@
   min-height: fit-content;
   max-height: 65%;
 
-  padding: 5% 5% 5% 15%;
+  padding: 5% 5% 4% 15%;
   background-color: white;
   border-radius: var(--half-paper-border-radius);
 }
 
 .image {
-  grid-area: 2/2/3/4;
+  grid-area: 2/1/3/4;
   position: relative;
   align-self: center;
-  height: 90%;
+  height: 100%;
+  transform: translateX(10%);
 }
 
 .title {

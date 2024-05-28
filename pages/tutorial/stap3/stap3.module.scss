@@ -1,25 +1,24 @@
 .stap3 {
-  width: 9rem;
+  width: 8rem;
   aspect-ratio: 1;
   z-index: 1;
   position: fixed;
-  top: calc(50% - 9rem / 2);
-  left: calc(50% - 9rem / 2);
-  // animation: moving 2s infinite ease-in-out;
+  top: calc(50% - 8rem / 2);
+  left: calc(50% - 8rem / 2);
 
-  .stopMoving {
-    animation: none;
+  &.notMoving {
+    animation: drageffect 5s infinite ease-in-out;
   }
 
   .procent {
-    width: 3.5rem;
+    width: 3rem;
     aspect-ratio: 1;
     background-color: var(--white);
     display: grid;
     place-items: center;
     position: absolute;
     top: -70%;
-    left: calc(50% - 4rem / 2);
+    left: calc(50% - 3.5rem / 2);
     border-radius: 50%;
     border-width: 0.5rem;
     border-style: solid;
@@ -38,14 +37,15 @@
   }
 }
 
-@keyframes moving {
+@keyframes drageffect {
   0% {
     transform: translateX(0);
   }
   25% {
     transform: translateX(2rem);
   }
-  50% {
+  45%,
+  55% {
     transform: translateX(0);
   }
   75% {

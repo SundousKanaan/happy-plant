@@ -29,19 +29,19 @@ const Stap3: React.FC<stapProps> = ({}) => {
   const handelDrag = (e: any, data: any) => {
     setIsDragging(true);
     BackgroundCheck.init({
-      targets: ".braggableElement",
+      targets: ".draggableElement",
       images: ".backgroundPhoto",
       lightFunction: lightFunction,
       darkFunction: darkFunction,
     });
 
     setPlantPosition({ x: data.x, y: data.y });
+
     BackgroundCheck.refresh();
   };
   const lightFunction = (mean: any) => {
     let Lighting = mean.toFixed(2);
     const percentage = (Lighting * 100).toFixed(0);
-    console.log(percentage);
 
     setPlantPositionCheck(Number(percentage));
     handleDisableNextButton(false);
@@ -83,10 +83,10 @@ const Stap3: React.FC<stapProps> = ({}) => {
 
   return (
     <TutorialLayout>
-      <Draggable axis="both" handle=".braggableElement" onDrag={handelDrag}>
+      <Draggable axis="both" handle=".draggableElement" onDrag={handelDrag}>
         <div
-          className={cs("braggableElement", $.stap3, {
-            [$.stopMoving]: isDragging,
+          className={cs("draggableElement", $.stap3, {
+            [$.notMoving]: !isDragging,
           })}
         >
           {plantPositionCheck && isDragging && (

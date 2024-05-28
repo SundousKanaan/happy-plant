@@ -56,10 +56,11 @@ const Stap2: React.FC<stapProps> = () => {
     const tutorialPlantIndex = userPlants.findIndex((plant) => plant.id === 0);
     if (tutorialPlantIndex !== -1) {
       userPlants[tutorialPlantIndex].databaseId = plant.id;
-      userPlants[tutorialPlantIndex].plantName = plant.name;
-      userPlants[tutorialPlantIndex].familyName = plant.family;
+      userPlants[tutorialPlantIndex].familyName = plant.name;
       userPlants[tutorialPlantIndex].type = plant.type;
       userPlants[tutorialPlantIndex].careInfo.Watering = plant.water;
+      userPlants[tutorialPlantIndex].careInfo.amountOfWater =
+        plant.amountOfWater;
       userPlants[tutorialPlantIndex].careInfo.Light = plant.light;
       userPlants[tutorialPlantIndex].careInfo.Temperature = plant.temperature;
       userPlants[tutorialPlantIndex].careInfo.Poisoning = plant.toxicityto;

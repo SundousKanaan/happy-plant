@@ -1,7 +1,10 @@
 .stap4 {
-  width: 9rem;
+  width: 8rem;
   aspect-ratio: 1;
   z-index: 1;
+  position: fixed;
+  top: calc(50% - 8rem / 2);
+  left: calc(50% - 8rem / 2);
 }
 
 .potImage {
@@ -37,4 +40,99 @@
   100% {
     transform: scaleY(1);
   }
+}
+
+.waterIcon {
+  z-index: 10;
+  grid-area: 4/9/5/10;
+  height: 70%;
+  align-self: center;
+
+  &.toDrag {
+    animation: drageffect 2s infinite;
+  }
+
+  &.dragging {
+    background-color: rgba(255, 0, 0, 0.096);
+  }
+
+  &.waterIconCopy {
+    width: 7rem;
+    position: absolute;
+    top: -4rem;
+    right: -5.5rem;
+    animation: wateringEffect 1s 1 linear both;
+
+    &::before {
+      content: "";
+      position: absolute;
+      width: 5%;
+      aspect-ratio: 1/1.5;
+      background-color: rgb(0, 247, 255);
+      border-radius: 50% 50% 50% 50% / 60% 60% 40% 40%;
+      opacity: 0;
+      animation: watering 0.1s 1s 20 linear;
+    }
+
+    &.stopWatering {
+      animation: wateringEffect 0s 1 linear reverse;
+      &::before {
+        display: none;
+      }
+    }
+  }
+}
+
+@keyframes drageffect {
+  0% {
+    transform: translateX(0);
+  }
+  50% {
+    transform: translateX(-0.7rem);
+  }
+  100% {
+    transform: translateX(0);
+  }
+}
+
+@keyframes wateringEffect {
+  0% {
+    transform: rotate(0);
+  }
+  // from 60% to 100% the watering can will rotate 45 degrees
+  60% {
+    transform: rotate(-45deg);
+  }
+  100% {
+    transform: rotate(-45deg);
+  }
+}
+
+@keyframes watering {
+  0% {
+    opacity: 100%;
+    transform: rotate(145deg) translateX(0px) translateY(-20px);
+  }
+  100% {
+    opacity: 100%;
+    transform: rotate(45deg) translateX(-15px) translateY(25px);
+  }
+}
+
+.text {
+  text-align: center;
+  margin-bottom: 10px;
+}
+
+.greenText {
+  color: var(--secondary-green);
+}
+
+.popUpButtons {
+  width: 100%;
+  height: 3rem;
+  margin-top: 1.5rem;
+  display: flex;
+  justify-content: space-around;
+  gap: 5rem;
 }

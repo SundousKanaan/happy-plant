@@ -37,10 +37,6 @@ const TutorialLayout: React.FC<TutorialLayoutProps> = ({ children }) => {
   };
 
   useEffect(() => {
-    console.log({ tutorialStap });
-  }, [tutorialStap]);
-
-  useEffect(() => {
     const storedBg = localStorage.getItem("backgroundImage");
 
     if (storedBg) {

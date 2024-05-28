@@ -12,23 +12,23 @@ export type PlantType = {
   plantImage: string;
   backgroundImage: string;
   note: string;
-  careInfo: {
-    Watering: string;
-    Light: string;
-    Temperature: string;
-    Poisoning: string;
-    careLevel: string;
-  };
-  position: {
-    x: number;
-    y: number;
-  };
+  careInfo: careInfo;
+  position: PlantPosition;
   birthday: string;
 };
 
 export type PlantPosition = {
-  x: string;
-  y: string;
+  x: number;
+  y: number;
+};
+
+export type careInfo = {
+  Watering: string;
+  amountOfWater: string;
+  Light: string;
+  Temperature: string;
+  Poisoning: string;
+  careLevel: string;
 };
 
 export type Post = {

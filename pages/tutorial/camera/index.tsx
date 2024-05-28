@@ -43,6 +43,7 @@ const CameraPage = () => {
       dataImg: savedBackgroundImage,
       userId: 0,
       plantId: 0,
+      plantType: "digital",
     });
 
     handleCustomStap(1);

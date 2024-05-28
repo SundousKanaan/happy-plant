@@ -1,0 +1,235 @@
+.container {
+  width: 100vw;
+  height: 100vh;
+  display: grid;
+  grid-template-columns: 2rem 15rem 1fr 10rem 5rem 2rem;
+  grid-template-rows: 1rem 6rem 1fr 1rem;
+}
+
+.pageTitle {
+  grid-area: 2/3/3/4;
+  justify-self: center;
+  font-family: var(--primary-font);
+  font-size: 20px;
+  -webkit-text-stroke-width: 4px;
+  -webkit-text-stroke-color: var(--white);
+  paint-order: stroke fill;
+}
+
+.monthTitle {
+  grid-area: 2/4/3/5;
+  width: 100%;
+  height: 2rem;
+  background-color: var(--tertiary-brown);
+  border-radius: 5rem;
+  box-shadow: var(--button-box-shadow);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin-top: 1.5rem;
+
+  transform: translateY(-20%);
+
+  .monthName {
+    margin: 0;
+    width: fit-content;
+    height: fit-content;
+    color: var(--white);
+    font-weight: 300;
+    font-size: 14px;
+  }
+}
+
+.xSignal {
+  grid-area: 2/5/3/6;
+  width: 5rem;
+  aspect-ratio: 1;
+  justify-self: end;
+}
+
+.viewButtons {
+  grid-area: 2/2/3/3;
+  width: 80%;
+  aspect-ratio: 1/0.4;
+  position: relative;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.columnsView,
+.gridView {
+  width: 5rem;
+  height: 85%;
+}
+
+.checkbox {
+  width: 4rem;
+  height: 1.5rem;
+  background-color: var(--primary-beige);
+  border: solid 2px var(--secondary-brown);
+  border-radius: 5rem;
+  position: relative;
+  transform: translateY(-20%);
+}
+.checkbox::before {
+  content: "";
+  --size: 1.3rem;
+  width: var(--size);
+  height: var(--size);
+  background-color: var(--secondary-brown);
+  border-radius: 50%;
+  position: absolute;
+  right: 5%;
+  top: calc(50% - var(--size) / 2);
+}
+
+.checkbox.checked::before {
+  left: 5%;
+}
+
+.input {
+  position: relative;
+  display: none;
+}
+
+.gridContainer {
+  grid-area: 3/2/3/6;
+  width: 90%;
+  justify-self: center;
+  background-color: var(--white);
+  display: flex;
+  flex-direction: column;
+
+  border: solid 1px var(--secondary-brown);
+  border-radius: 1rem;
+  overflow: hidden;
+}
+
+.filterButtons {
+  grid-area: 2/3/3/5;
+  justify-self: end;
+  align-self: end;
+
+  margin: 0;
+  padding: 0;
+  list-style: none;
+  width: fit-content;
+  height: fit-content;
+  display: flex;
+  position: relative;
+}
+
+.filterItem {
+  width: fit-content;
+  height: fit-content;
+
+  &:first-of-type {
+    transform: translateX(30px);
+  }
+
+  &:nth-of-type(2) {
+    transform: translateX(15px);
+  }
+
+  &.selectedFilter {
+    z-index: 1;
+  }
+}
+
+.filterButton {
+  width: 7rem;
+  aspect-ratio: 1/0.2;
+  border: solid 3px var(--tertiary-brown);
+  border-bottom: 0;
+  border-radius: 1rem 1rem 0 0;
+  background-color: var(--primary-beige);
+  font-size: 14px;
+  font-family: var(--secondary-font);
+  font-weight: var(--font-semibold);
+
+  .selectedFilter & {
+    background-color: var(--tertiary-brown);
+    color: var(--white);
+    font-weight: var(--font-bold);
+  }
+}
+
+.daysCells {
+  width: 100%;
+  display: grid;
+  grid-template-columns: repeat(7, calc(100% / 7));
+  border-radius: 1rem 1rem 0 0;
+
+  margin: 0;
+  padding: 0;
+  list-style: none;
+  text-align: center;
+
+  .dayItem {
+    width: 100%;
+    height: fit-content;
+    background-color: var(--primary-beige);
+
+    border: solid 1px var(--tertiary-brown);
+    border-top: none;
+    border-right: none;
+
+    &:first-of-type {
+      border-left: none;
+    }
+  }
+}
+
+.datesCells {
+  width: 100%;
+  height: 100%;
+  display: grid;
+  grid-template-columns: repeat(7, calc(100% / 7));
+  margin: 0;
+  padding: 0;
+  list-style: none;
+
+  .dateItem {
+    width: 99.5%;
+    border: solid 0.5px var(--tertiary-brown);
+    border-top: none;
+
+    border-right: none;
+    &:last-of-type {
+      width: 99%;
+      border-right: solid 0.5px var(--tertiary-brown);
+    }
+
+    &:nth-of-type(7n + 1) {
+      border-left: none;
+    }
+  }
+
+  .dateNumber {
+    margin: 0;
+    padding: 0.5rem 0 0 0.5rem;
+    font-family: var(--primary-font);
+    font-size: 14px;
+  }
+}
+
+.nextMonthButton {
+  grid-area: 3/5/4/7;
+  justify-self: end;
+  align-self: center;
+  width: 5rem;
+  height: 3.5rem;
+  transform: rotate(90deg);
+  filter: drop-shadow(0 0 2px var(--light-black));
+}
+
+.backMonthButton {
+  grid-area: 3/1/4/3;
+  justify-self: start;
+  align-self: center;
+  width: 5rem;
+  height: 3.5rem;
+  transform: rotate(-90deg);
+  filter: drop-shadow(0 0 2px var(--light-black));
+}

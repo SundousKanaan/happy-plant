@@ -5,7 +5,7 @@ import { v4 as uuidv4 } from "uuid";
 
 export default function handler(req, res) {
   if (req.method === "POST") {
-    const { dataImg, userId, plantId } = req.body;
+    const { dataImg, userId, plantId, plantType } = req.body;
 
     const backgroundImage = uuidv4();
 
@@ -47,7 +47,7 @@ export default function handler(req, res) {
       user.plants.push({
         id: plantId,
         plantName: "",
-        type: "",
+        type: plantType,
         familyName: "",
         plantImage: "",
         backgroundImage: `${backgroundImage}.jpeg`,

@@ -1,0 +1,48 @@
+.container {
+  width: 90%;
+  height: 1.5rem;
+  border-radius: 5rem;
+  border: none;
+  padding: 2%;
+  background-color: inherit;
+  background-color: var(--secondary-beige);
+  display: flex;
+  align-items: center;
+  justify-content: space-around;
+  position: relative;
+
+  &.currentDay {
+    background-color: var(--primary-beige);
+  }
+
+  &.careDone::after {
+    content: "";
+    width: 1.5rem;
+    height: 1.5rem;
+    background-color: transparent;
+    position: absolute;
+    right: -5%;
+    bottom: -40%;
+    background-image: url("/images/icons/Correctsign.svg");
+    background-size: contain;
+    background-repeat: no-repeat;
+    background-position: center;
+  }
+}
+
+.plantTypeIcon {
+  height: 90%;
+  aspect-ratio: 1;
+  position: relative;
+}
+
+.careTypeIcon {
+  height: 100%;
+  aspect-ratio: 1;
+  position: relative;
+}
+
+.text {
+  font-family: var(--secondary-font);
+  font-weight: var(--font-bold);
+}

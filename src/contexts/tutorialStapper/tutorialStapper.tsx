@@ -17,7 +17,7 @@ export const StapperProvider = ({
   const [savedpreviousStap, setSavedPreviousStap] = useState<string>("");
   const [disabledNextButton, setDisabledNextButton] = useState<boolean>(false);
 
-  const handleNexttStap = (stap: number) => {
+  const handleNexttStap = () => {
     setTutorialStap(tutorialStap + 1);
     router.push(`/tutorial/stap${tutorialStap + 1}`);
   };
@@ -31,8 +31,6 @@ export const StapperProvider = ({
     setTutorialStap(stap);
   };
 
-  // useEffect(() => {}, [tutorialStap]);
-
   const handleDisableNextButton = (value: boolean) => {
     setDisabledNextButton(value);
   };
@@ -43,6 +41,8 @@ export const StapperProvider = ({
     } else {
       setDisabledNextButton(false);
     }
+
+    console.log("--tutorialStapper:", tutorialStap);
   }, [tutorialStap]);
 
   const value = {
