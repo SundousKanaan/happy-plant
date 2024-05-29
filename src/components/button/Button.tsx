@@ -10,6 +10,8 @@ interface ButtonProps {
   color: "green" | "brown" | "white" | "transparent";
   disabled?: boolean;
   icon?: string;
+  rowDirection?: boolean;
+  minpadding?: boolean;
 }
 
 const Button: React.FC<ButtonProps> = ({
@@ -18,6 +20,8 @@ const Button: React.FC<ButtonProps> = ({
   color,
   disabled = false,
   icon,
+  rowDirection = false,
+  minpadding,
 }) => {
   let imageSrc = `/images/icons/${icon}.svg`;
   if (icon) {
@@ -32,7 +36,9 @@ const Button: React.FC<ButtonProps> = ({
             [$.transparent]: color === "transparent",
           },
           { [$.disabled]: disabled },
-          { [$.withIcon]: icon }
+          { [$.withIcon]: icon },
+          { [$.rowDirection]: rowDirection },
+          { [$.minpadding]: minpadding }
         )}
         disabled={disabled}
         onClick={onClick}
@@ -59,12 +65,13 @@ const Button: React.FC<ButtonProps> = ({
             [$.white]: color === "white",
             [$.transparent]: color === "transparent",
           },
-          { [$.disabled]: disabled }
+          { [$.disabled]: disabled },
+          { [$.minpadding]: minpadding }
         )}
         disabled={disabled}
         onClick={onClick}
       >
-        {text && <p className={$.buttonText}>{text}</p>}
+        {text && <p className={cs($.buttonText)}>{text}</p>}
       </button>
     );
   }

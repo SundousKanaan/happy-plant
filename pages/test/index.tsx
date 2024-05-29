@@ -1,11 +1,11 @@
 import React from "react";
-import BudPopUp from "@/src/components/BudPopUp/BudPopUp";
+import PopUp from "@/src/components/PopUp/PopUp";
 import Button from "@/src/components/Button/Button";
 
 const Index = () => {
   return (
     <>
-      <BudPopUp
+      <PopUp
         isOpen={true}
         pupUpType="page"
         title="Example Title"
@@ -34,7 +34,7 @@ const Index = () => {
         }
       >
         <p>This is the content of the PopUp.</p>
-      </BudPopUp>
+      </PopUp>
     </>
   );
 };

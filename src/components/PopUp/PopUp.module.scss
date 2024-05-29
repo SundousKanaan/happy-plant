@@ -10,11 +10,16 @@
   z-index: 1000;
 
   grid-template-columns: 2rem 5rem repeat(7, 1fr) 5rem 2rem;
-  grid-template-rows: 1rem 1fr 1rem;
+  grid-template-rows: 1rem 1fr 0.5rem;
   gap: 0.7rem;
 
   &.pageStyle {
-    grid-template-rows: 1rem 4rem 1fr 1rem;
+    grid-template-columns: 2rem 5rem repeat(7, 1fr) 5rem 2rem;
+
+    grid-template-rows: 1rem 2rem 1fr 1rem;
+    // gap: 0.5rem;
+    column-gap: 0rem;
+    row-gap: 0.5rem;
   }
 }
 
@@ -60,15 +65,16 @@
 
 .pageContent {
   grid-area: 3/3/3/10;
+  justify-self: center;
   border-radius: var(--paper-border-radius);
-  padding: 1rem;
+  padding: 0.7rem;
 
   &.white {
     background-color: var(--white);
   }
 
   &.brown {
-    background-color: var(-tertiary-brown);
+    background-color: var(--tertiary-brown);
   }
 }
 

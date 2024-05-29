@@ -1,5 +1,6 @@
 .button {
   width: 100%;
+  height: 100%;
   padding: 1rem 2.5rem;
 
   font-family: var(--primary-font);
@@ -26,6 +27,15 @@
   &.withIcon {
     height: fit-content;
     padding: 0.6rem 1rem;
+  }
+
+  &.rowDirection {
+    padding: 0.6rem 1rem;
+    flex-direction: row;
+  }
+
+  &.minpadding {
+    padding: 0.4rem 1rem;
   }
 }
 
@@ -58,6 +68,12 @@
 
 .minMargin {
   margin-top: -0.8rem;
+}
+
+.withIcon .buttonText {
+  font-size: 12px;
+  text-align: start;
+  margin: 0;
 }
 
 .iconContainer {

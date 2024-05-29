@@ -1,48 +1,48 @@
 [
-  {
-    "id": 0,
-    "userName": {
-      "firstName": "Sundous",
-      "lastName": "Kan"
-    },
-    "email": "sundous.kn@hva.nl",
-    "password": "123",
-    "stars": 0,
-    "userImage": "/images/user-placeholder-image.svg",
-    "plants": [
-      {
+    {
         "id": 0,
-        "plantName": "Ellie",
-        "type": "digital",
-        "familyName": "Camelia",
-        "plantImage": "",
-        "backgroundImage": "42b4eff6-6807-4067-a88e-7f05f1b38e8d.jpeg",
-        "note": "",
-        "careInfo": {
-          "Watering": "een keer per week",
-          "amountOfWater": "7ml",
-          "Light": "indirect zonlicht",
-          "Temperature": "15-20°C",
-          "Poisoning": "",
-          "careLevel": "Makkelijk"
+        "userName": {
+            "firstName": "Sundous",
+            "lastName": "Kan"
         },
-        "position": {
-          "x": 0,
-          "y": 0
-        },
-        "birthday": "",
-        "databaseId": 1
-      }
-    ],
-    "posts": [],
-    "followers": [],
-    "following": [],
-    "savedPosts": [],
-    "awards": {
-      "type": "",
-      "totalStars": 0,
-      "imagesrc": "",
-      "win": false
+        "email": "sundous.kn@hva.nl",
+        "password": "123",
+        "stars": 0,
+        "userImage": "/images/user-placeholder-image.svg",
+        "plants": [
+            {
+                "id": 0,
+                "plantName": "Ellie",
+                "type": "Bloeiende plant",
+                "familyName": "Camelia",
+                "plantImage": "",
+                "backgroundImage": "42b4eff6-6807-4067-a88e-7f05f1b38e8d.jpeg",
+                "note": "",
+                "careInfo": {
+                    "Watering": "een keer per week",
+                    "amountOfWater": "7ml",
+                    "Light": "indirect zonlicht",
+                    "Temperature": "15-20°C",
+                    "Poisoning": "",
+                    "careLevel": "Makkelijk"
+                },
+                "position": {
+                    "x": 0,
+                    "y": 0
+                },
+                "birthday": "",
+                "databaseId": 1
+            }
+        ],
+        "posts": [],
+        "followers": [],
+        "following": [],
+        "savedPosts": [],
+        "awards": {
+            "type": "",
+            "totalStars": 0,
+            "imagesrc": "",
+            "win": false
+        }
     }
-  }
 ]

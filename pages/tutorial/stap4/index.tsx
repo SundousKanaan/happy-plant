@@ -3,7 +3,7 @@ import Image from "next/image";
 import TutorialLayout from "@/src/layouts/tutorialLayout";
 import cs from "classnames";
 import { PlantPosition, PlantType, careInfo } from "@/ts/types";
-import BudPopUp from "@/src/components/BudPopUp/BudPopUp";
+import PopUp from "@/src/components/PopUp/PopUp";
 import Button from "@/src/components/Button/Button";
 import { useAccount } from "@/src/contexts/account/accountContext";
 import { useStapper } from "@/src/contexts/tutorialStapper/tutorialStapper";
@@ -63,6 +63,13 @@ const Stap4: React.FC<stapProps> = ({}) => {
     setShowAward(false);
   };
 
+  // met click knop W wordt setShowAward(true)
+  const handleKeyDown = (e: any) => {
+    if (e.key === "w") {
+      setShowAward(true);
+    }
+  };
+
   return (
     <TutorialLayout>
       {showAward && (
@@ -73,7 +80,7 @@ const Stap4: React.FC<stapProps> = ({}) => {
         />
       )}
 
-      <BudPopUp isOpen={popUpIsOpen} pupUpType="pupUp" backgroundColor="white">
+      <PopUp isOpen={popUpIsOpen} pupUpType="budPopup" backgroundColor="white">
         <p className={$.text}>
           Je plant heeft{" "}
           <span className={$.greenText}>
@@ -97,7 +104,7 @@ const Stap4: React.FC<stapProps> = ({}) => {
             onClick={() => setPopUpIsOpen(false)}
           />
         </div>
-      </BudPopUp>
+      </PopUp>
 
       <div
         className={$.stap4}

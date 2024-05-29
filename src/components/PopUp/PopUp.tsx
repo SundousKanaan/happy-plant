@@ -1,19 +1,19 @@
 import React from "react";
 import { Bud } from "../Bud/Bud";
 import cs from "classnames";
-import $ from "./BudPopUp.module.scss";
+import $ from "./PopUp.module.scss";
 import Button from "@/src/components/Button/Button";
 
-interface BudPopUpProps {
+interface PopUpProps {
   isOpen?: boolean;
   children?: React.ReactNode;
   buttonsChildren?: React.ReactNode;
-  pupUpType: "pupUp" | "page" | "addPlant";
+  pupUpType: "budPopup" | "page" | "addPlant";
   title?: string;
   backgroundColor?: "white" | "brown";
 }
 
-const BudPopUp: React.FC<BudPopUpProps> = ({
+const PopUp: React.FC<PopUpProps> = ({
   children,
   buttonsChildren,
   isOpen,
@@ -31,7 +31,7 @@ const BudPopUp: React.FC<BudPopUpProps> = ({
         { [$.visible]: isOpen }
       )}
     >
-      {pupUpType === "pupUp" && (
+      {pupUpType === "budPopup" && (
         <>
           <div className={$.pupUpContent}>{children}</div>
           <div className={$.image}>
@@ -66,4 +66,4 @@ const BudPopUp: React.FC<BudPopUpProps> = ({
   );
 };
 
-export default BudPopUp;
+export default PopUp;

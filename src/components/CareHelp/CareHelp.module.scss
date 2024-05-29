@@ -1,0 +1,117 @@
+.container {
+  width: 100%;
+  height: 100%;
+
+  display: grid;
+  grid-template-columns: 0.4fr 1fr;
+  gap: 0.5rem;
+}
+
+.buttonsContainer {
+  grid-area: 1/1/2/2;
+  display: flex;
+  flex-direction: column;
+  gap: 0.3rem;
+}
+
+.buttonItem {
+  width: 100%;
+  height: fit-content;
+}
+
+.note {
+  font-size: 0.6rem;
+  text-align: center;
+  color: var(--white);
+  position: relative;
+
+  &::after,
+  &::before {
+    content: "";
+    display: block;
+    width: 15%;
+    height: 3px;
+    background-color: var(--white);
+    position: absolute;
+    top: calc(50% - 3px / 2);
+  }
+
+  &::after {
+    right: 0;
+  }
+}
+
+.searchVield {
+  width: 100%;
+  height: 1.5rem;
+  border-radius: var(--paper-border-radius);
+  position: relative;
+}
+
+.search {
+  width: 100%;
+  height: 100%;
+  border: none;
+  background-color: var(--white);
+  border-radius: var(--paper-border-radius);
+
+  font-family: var(--secondary-font);
+  font-size: 12px;
+  text-indent: 5%;
+  color: var(--secondary-brown);
+
+  position: absolute;
+  top: 0;
+
+  &::placeholder {
+    color: var(--secondary-brown);
+    opacity: 50%;
+  }
+}
+
+.mainFilters {
+  list-style: none;
+  margin: 0;
+  padding-top: 0.2rem;
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(40%, 1fr));
+  gap: 0.3rem;
+}
+
+.filterItem {
+  width: 100%;
+  height: 2rem;
+}
+
+.reviewContainer {
+  grid-area: 1/2/2/3;
+  background-color: var(--white);
+  border-radius: var(--paper-border-radius);
+  height: 20.5rem;
+  overflow: hidden;
+}
+
+.info {
+  height: 100%;
+  padding: 1rem 0.5rem;
+  overflow-y: auto;
+  overflow-x: hidden;
+  scrollbar-color: var(--secondary-brown) transparent;
+  scrollbar-width: 1rem;
+}
+
+.infoTitle {
+  font-size: 0.9rem;
+  font-family: var(--primary-font);
+  color: var(--secondary-brown);
+  margin-bottom: 0.5rem;
+}
+
+.infoItem {
+  font-size: 0.8rem;
+  color: var(--secondary-brown);
+}
+
+.infoList {
+  padding-left: 1rem;
+}

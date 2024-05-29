@@ -5,7 +5,7 @@ import cs from "classnames";
 import { useStapper } from "@/src/contexts/tutorialStapper/tutorialStapper";
 import useCamera from "@/src/hooks/useCamera";
 import { useDialog } from "@/src/contexts/dialogContext/dialogContext";
-import BudPopUp from "@/src/components/BudPopUp/BudPopUp";
+import PopUp from "@/src/components/PopUp/PopUp";
 import texts from "@/ts/texts";
 import $ from "./Camera.module.scss";
 import { useRouter } from "next/router";
@@ -55,7 +55,7 @@ const CameraPage = () => {
 
   return (
     <>
-      <BudPopUp isOpen={popUpIsOpen} pupUpType="pupUp" backgroundColor="white">
+      <PopUp isOpen={popUpIsOpen} pupUpType="budPopup" backgroundColor="white">
         <p className={$.text}>{texts.cameraNote_1}</p>
         <p className={$.text}>{texts.cameraNote_2}</p>
         <div className={$.buttons}>
@@ -67,7 +67,7 @@ const CameraPage = () => {
             onClick={() => setPopUpIsOpen(false)}
           />
         </div>
-      </BudPopUp>
+      </PopUp>
 
       <CameraComponent text={texts.backgroundShotNote}>
         <div className={$.dialogContent}>
