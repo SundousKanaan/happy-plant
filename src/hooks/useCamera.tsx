@@ -35,6 +35,7 @@ const UseCamera = () => {
       }
     }
   };
+
   const getSavedBackgroundImage = () => {
     setSavedBackgroundImage(localStorage.getItem("backgroundImage"));
   };

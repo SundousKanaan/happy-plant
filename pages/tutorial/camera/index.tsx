@@ -9,17 +9,39 @@ import PopUp from "@/src/components/PopUp/PopUp";
 import texts from "@/ts/texts";
 import $ from "./Camera.module.scss";
 import { useRouter } from "next/router";
+import Dialog from "@/src/components/Dialog/Dialog";
 
 const CameraPage = () => {
-  const router = useRouter();
   const { handleCustomStap } = useStapper();
-  const { getSavedBackgroundImage, savedBackgroundImage } = useCamera();
-  const { closeDialog } = useDialog();
+  const { openDialog, closeDialog, isOpen } = useDialog();
+  const {
+    getSavedBackgroundImage,
+    savedBackgroundImage,
+    captureImage,
+    takeBackgroundImage,
+    videoRef,
+  } = useCamera();
   const [popUpIsOpen, setPopUpIsOpen] = useState(true);
 
   useEffect(() => {
     getSavedBackgroundImage();
   });
+
+  const takeAshot = async () => {
+    console.log("takeAshot");
+
+    await takeBackgroundImage();
+    openDialog();
+  };
+
+  useEffect(() => {
+    captureImage();
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, []);
+
+  const goBack = () => {
+    handleCustomStap(1);
+  };
 
   const handleSaveImage = async () => {
     if (!savedBackgroundImage) return;
@@ -69,7 +91,7 @@ const CameraPage = () => {
         </div>
       </PopUp>
 
-      <CameraComponent text={texts.backgroundShotNote}>
+      <Dialog isOpen={isOpen} onClose={closeDialog} title="Image Review">
         <div className={$.dialogContent}>
           <div className={$.backgroundReview}>
             <div
@@ -89,7 +111,13 @@ const CameraPage = () => {
             </div>
           </div>
         </div>
-      </CameraComponent>
+      </Dialog>
+      <CameraComponent
+        text={texts.backgroundShotNote}
+        cameraButton={takeAshot}
+        videoRef={videoRef}
+        goBack={goBack}
+      />
     </>
   );
 };

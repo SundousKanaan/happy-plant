@@ -1,8 +1,27 @@
-import React from "react";
+import React, { use, useEffect } from "react";
 import $ from "./CareHelp.module.scss";
 import Button from "@/src/components/Button/Button";
+import { useRouter } from "next/router";
 
-const CareHelp = () => {
+interface CareHelpProps {
+  currentPath?: string | undefined;
+  openCareHelp?: boolean;
+}
+
+const CareHelp: React.FC<CareHelpProps> = ({
+  currentPath,
+  openCareHelp = false,
+}) => {
+  const router = useRouter();
+  useEffect(() => {
+    if (currentPath) localStorage.setItem("currentPath", currentPath);
+    if (openCareHelp) {
+      localStorage.setItem("openCareHelp", "true");
+    } else {
+      localStorage.setItem("openCareHelp", "false");
+    }
+  });
+
   return (
     <div className={$.container}>
       <section className={$.buttonsContainer}>
@@ -11,7 +30,7 @@ const CareHelp = () => {
             color="green"
             icon="camera"
             text="Maak een foto en ontdek het probleem"
-            onClick={() => console.log("camera")}
+            onClick={() => router.push("/careHelp/camera")}
             rowDirection
             minpadding
           />

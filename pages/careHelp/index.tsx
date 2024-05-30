@@ -13,7 +13,7 @@ const index = () => {
         title="ZorgHulp"
         backgroundColor="brown"
       >
-        <CareHelp />
+        <CareHelp currentPath="/careHelp" />
       </PopUP>
     </>
   );

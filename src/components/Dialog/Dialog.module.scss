@@ -26,6 +26,10 @@
 
   margin: 0;
   height: 10%;
+
+  &.withoutTitle {
+    display: none;
+  }
 }
 
 .content {
@@ -34,4 +38,10 @@
   background-color: white;
   border-radius: var(--paper-border-radius);
   padding: 0.6rem;
+
+  &.withoutTitle {
+    width: 70%;
+    height: 90%;
+    padding: 0;
+  }
 }

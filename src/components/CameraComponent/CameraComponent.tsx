@@ -11,33 +11,29 @@ import { useDialog } from "@/src/contexts/dialogContext/dialogContext";
 
 interface CameraComponentProps {
   plantCheck?: boolean;
+  correctsignDisabled?: boolean;
+  cameraButtonDisabled?: boolean;
   children?: React.ReactNode;
   text: string;
+  cameraButton?: () => void;
+  videoRef: React.RefObject<HTMLVideoElement>;
+  goBack?: () => void;
+  handleCorrectsignClick?: () => void;
 }
 
 const CameraComponent: React.FC<CameraComponentProps> = ({
   plantCheck = false,
   children,
   text,
+  correctsignDisabled = true,
+  cameraButtonDisabled = false,
+  cameraButton,
+  videoRef,
+  goBack,
+  handleCorrectsignClick,
 }) => {
   const router = useRouter();
   const { handleCustomStap } = useStapper();
-  const { captureImage, takeBackgroundImage, videoRef } = useCamera();
-  const { openDialog, closeDialog, isOpen } = useDialog();
-
-  useEffect(() => {
-    captureImage();
-    // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, []);
-
-  const takeAshot = async () => {
-    await takeBackgroundImage();
-    openDialog();
-  };
-
-  const goBack = () => {
-    handleCustomStap(1);
-  };
 
   return (
     <>
@@ -54,7 +50,8 @@ const CameraComponent: React.FC<CameraComponentProps> = ({
             <Button
               icon="cameraButton"
               color="transparent"
-              onClick={takeAshot}
+              onClick={cameraButton}
+              disabled={cameraButtonDisabled}
             />
           </div>
           {plantCheck && (
@@ -62,16 +59,13 @@ const CameraComponent: React.FC<CameraComponentProps> = ({
               <Button
                 icon="correctsign"
                 color="transparent"
-                onClick={() => console.log("correctsign")}
+                onClick={handleCorrectsignClick}
+                disabled={correctsignDisabled}
               />
             </div>
           )}
         </div>
       </div>
-
-      <Dialog isOpen={isOpen} onClose={closeDialog} title="Image Review">
-        {children}
-      </Dialog>
     </>
   );
 };

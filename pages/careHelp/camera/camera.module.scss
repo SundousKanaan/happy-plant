@@ -1,0 +1,216 @@
+.photosList {
+  width: 3.5rem;
+  height: 50%;
+  position: absolute;
+  top: calc(50% - 50% / 2);
+  right: 17%;
+  z-index: 2;
+
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+
+  list-style: none;
+  padding: 0;
+}
+
+.photoItem {
+  width: 90%;
+  aspect-ratio: 1;
+  border-radius: var(--border-radius);
+  border: dashed 4px var(--secondary-brown);
+  position: relative;
+
+  &::after {
+    content: "";
+    width: 1.5rem;
+    height: 1.5rem;
+
+    background-image: url("/images/icons/Xsignal.svg");
+    background-size: cover;
+    background-position: center;
+    background-repeat: no-repeat;
+    position: absolute;
+    top: -20%;
+    right: -20%;
+  }
+}
+
+.photoButton {
+  width: 100%;
+  height: 100%;
+  padding: 0;
+  border: none;
+  background-color: transparent;
+  overflow: hidden;
+  border-radius: var(--border-radius);
+}
+
+.photo {
+  object-fit: cover;
+  object-position: center;
+  transform: rotateY(180deg);
+}
+
+.dialogContent {
+  width: 100%;
+  height: 100%;
+
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  align-items: center;
+  gap: 1rem;
+}
+
+.inhoud {
+  width: 100%;
+  height: 100%;
+  border-radius: var(--paper-border-radius);
+  background-color: var(--primary-beige);
+
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.diseaseName {
+  width: 100%;
+  font-family: var(--primary-font);
+  font-weight: var(--font-normal);
+  font-size: 1rem;
+  margin: 1rem 0 0.5rem 0;
+  text-align: center;
+}
+
+.infoContainer {
+  width: 95%;
+  height: 95%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.filterButtons {
+  margin: 0;
+  padding: 0;
+  list-style: none;
+  width: fit-content;
+  height: fit-content;
+  display: flex;
+  position: relative;
+  transform: translateX(-6px);
+}
+
+.filterItem {
+  width: fit-content;
+  height: fit-content;
+
+  &:first-of-type {
+    transform: translateX(30px);
+  }
+
+  &:nth-of-type(2) {
+    transform: translateX(15px);
+  }
+
+  &.selectedFilter {
+    z-index: 1;
+  }
+}
+
+.filterButton {
+  width: 8rem;
+  height: 2rem;
+  border: solid 3px var(--tertiary-brown);
+  border-bottom: 0;
+  border-radius: 1rem 1rem 0 0;
+  background-color: var(--primary-beige);
+  font-size: 12px;
+  font-family: var(--secondary-font);
+  font-weight: var(--font-semibold);
+
+  .selectedFilter & {
+    background-color: var(--tertiary-brown);
+    color: var(--white);
+    font-weight: var(--font-bold);
+  }
+}
+
+.info {
+  width: 99.5%;
+  height: calc(100% - 4rem);
+  background-color: var(--white);
+  border-radius: var(--paper-border-radius);
+  border: solid 3px var(--tertiary-brown);
+  padding: 0.5rem;
+  overflow: hidden;
+  display: flex;
+  gap: 0.5rem;
+}
+
+.photoBlock {
+  width: 30%;
+  height: 60%;
+  position: relative;
+  border-radius: var(--paper-border-radius);
+  overflow: hidden;
+}
+
+.diseasePhoto {
+  width: 100%;
+  height: auto;
+  position: relative;
+  object-fit: cover;
+  object-position: center;
+}
+
+.infoTitle {
+  font-size: 0.9rem;
+  font-weight: var(--font-bold);
+  margin: 0;
+  margin-bottom: 0.2rem;
+}
+
+.subInfoTitle {
+  margin: 0;
+  font-size: 12px;
+}
+
+.infoTexts {
+  width: 70%;
+  height: 15rem;
+  padding-right: 1rem;
+  overflow-y: auto;
+  scrollbar-color: var(--secondary-brown) transparent;
+}
+
+.text {
+  font-size: 12px;
+  margin: 0.5rem;
+
+  &:first-of-type {
+    margin-top: 0;
+  }
+
+  &:last-of-type {
+    margin-bottom: 1rem;
+  }
+
+  &.step {
+    margin: 0 0.5rem;
+  }
+}
+
+.DialogButtonsContainer {
+  width: 100%;
+  height: 15%;
+  margin: 0;
+  display: flex;
+  justify-content: space-around;
+}
+
+.DialogButton {
+  width: 35%;
+  height: 100%;
+}

@@ -92,12 +92,11 @@
 }
 
 .info {
-  height: 100%;
+  height: inherit;
   padding: 1rem 0.5rem;
   overflow-y: auto;
   overflow-x: hidden;
   scrollbar-color: var(--secondary-brown) transparent;
-  scrollbar-width: 1rem;
 }
 
 .infoTitle {
