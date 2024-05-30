@@ -12,6 +12,7 @@ interface ButtonProps {
   icon?: string;
   rowDirection?: boolean;
   minpadding?: boolean;
+  textSize?: string;
 }
 
 const Button: React.FC<ButtonProps> = ({
@@ -22,6 +23,7 @@ const Button: React.FC<ButtonProps> = ({
   icon,
   rowDirection = false,
   minpadding,
+  textSize,
 }) => {
   let imageSrc = `/images/icons/${icon}.svg`;
   if (icon) {
@@ -51,7 +53,14 @@ const Button: React.FC<ButtonProps> = ({
             alt="button icon"
           />
         </div>
-        {text && <p className={cs($.buttonText, $.minMargin)}>{text}</p>}
+        {text && (
+          <p
+            className={cs($.buttonText, $.minMargin)}
+            style={{ fontSize: `${textSize}` }}
+          >
+            {text}
+          </p>
+        )}
       </button>
     );
   } else {
@@ -71,7 +80,11 @@ const Button: React.FC<ButtonProps> = ({
         disabled={disabled}
         onClick={onClick}
       >
-        {text && <p className={cs($.buttonText)}>{text}</p>}
+        {text && (
+          <p className={cs($.buttonText)} style={{ fontSize: `${textSize}` }}>
+            {text}
+          </p>
+        )}
       </button>
     );
   }

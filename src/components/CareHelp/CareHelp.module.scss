@@ -67,6 +67,10 @@
     color: var(--secondary-brown);
     opacity: 50%;
   }
+
+  &::-webkit-search-cancel-button {
+    display: none;
+  }
 }
 
 .mainFilters {
@@ -83,17 +87,22 @@
   height: 2rem;
 }
 
+.test {
+  color: red;
+}
 .reviewContainer {
   grid-area: 1/2/2/3;
   background-color: var(--white);
   border-radius: var(--paper-border-radius);
+  width: 100%;
   height: 20.5rem;
   overflow: hidden;
 }
 
 .info {
+  width: 31rem;
   height: inherit;
-  padding: 1rem 0.5rem;
+  padding: 1rem 2%;
   overflow-y: auto;
   overflow-x: hidden;
   scrollbar-color: var(--secondary-brown) transparent;
@@ -106,11 +115,33 @@
   margin-bottom: 0.5rem;
 }
 
+.subInfoTitle {
+  font-size: 0.8rem;
+}
+
 .infoItem {
   font-size: 0.8rem;
   color: var(--secondary-brown);
 }
 
 .infoList {
+  width: 90%;
   padding-left: 1rem;
+}
+
+.ziekteBlock {
+  width: 95%;
+  margin: 0.5rem 0 1rem 0;
+}
+
+.colorGreen {
+  color: var(--secondary-green);
+}
+
+.marginTop {
+  margin-top: 0.25rem;
+}
+
+.list {
+  padding-left: 2rem;
 }

@@ -15,35 +15,27 @@
     "toxicityto": "",
     "airPurifying": "ja",
     "petFriendly": "ja",
-    "diseases": {
-      "possibleDiseases": ["Bladluizen", "Meeldauw"],
-      "analysis": {
-        "Bladluizen": "Bladluizen zijn kleine, sapzuigende insecten die zich voeden met plantensappen. Controleer de bladeren op de aanwezigheid van kleine, groene of zwarte insecten en de aanwezigheid van kleverige afscheidingen op de bladeren.",
-        "Meeldauw": "Meeldauw is een schimmelziekte die wordt gekenmerkt door witte poederachtige groei op bladeren en stengels. Zoek naar witte, pluizige groei op de boven- en onderkant van bladeren."
+    "diseases": [
+      {
+        "name": "Bladluizen",
+        "analysis": "Bladluizen zijn kleine, sapzuigende insecten die zich voeden met plantensappen. Controleer de bladeren op de aanwezigheid van kleine, groene of zwarte insecten en de aanwezigheid van kleverige afscheidingen op de bladeren.",
+        "treatmentStaps": [
+          "Verwijder de bladluizen met een sterke waterstraal of een vochtige doek.",
+          "Spray de plant met insecticide voor bladluizen. Herhaal de behandeling indien nodig."
+        ],
+        "treatmentToolsImagesPerStap": ["wetCloth", "spray"]
       },
-      "treatmentStaps": {
-        "Bladluizen": {
-          "1": "Verwijder de bladluizen met een sterke waterstraal of een vochtige doek.",
-          "2": "Spray de plant met insecticide voor bladluizen. Herhaal de behandeling indien nodig."
-        },
-        "Meeldauw": {
-          "1": "Verwijder geïnfecteerde delen.",
-          "2": "Behandel de plant met fungicide voor meeldauw.",
-          "3": "Zorg voor een goede luchtcirculatie rond de plant. Vermijd overmatig water geven."
-        }
-      },
-      "treatmentToolsImagesPerStap": {
-        "Bladluizen": {
-          "1": "wetCloth",
-          "2": "spray"
-        },
-        "Meeldauw": {
-          "1": "pruningscissors",
-          "2": "spray",
-          "3": "none"
-        }
+      {
+        "name": "Meeldauw",
+        "analysis": "Meeldauw is een schimmelziekte die wordt gekenmerkt door witte poederachtige groei op bladeren en stengels. Zoek naar witte, pluizige groei op de boven- en onderkant van bladeren.",
+        "treatmentStaps": [
+          "Verwijder geïnfecteerde delen.",
+          "Behandel de plant met fungicide voor meeldauw.",
+          "Zorg voor een goede luchtcirculatie rond de plant. Vermijd overmatig water geven."
+        ],
+        "treatmentToolsImagesPerStap": ["pruningscissors", "spray"]
       }
-    }
+    ]
   },
   {
     "id": 2,
@@ -61,46 +53,37 @@
     "toxicityto": "",
     "airPurifying": "ja",
     "petFriendly": "ja",
-    "diseases": {
-      "possibleDiseases": ["Bladluizen", "Meeldauw", "Roest"],
-      "analysis": {
-        "Bladluizen": "Bladluizen zijn kleine, sapzuigende insecten die zich voeden met plantensappen. Controleer de bladeren op de aanwezigheid van kleine, groene of zwarte insecten en de aanwezigheid van kleverige afscheidingen op de bladeren.",
-        "Meeldauw": "Meeldauw is een schimmelziekte die wordt gekenmerkt door witte poederachtige groei op bladeren en stengels. Zoek naar witte, pluizige groei op de boven- en onderkant van bladeren.",
-        "Roest": "Roest is een schimmelziekte die wordt gekenmerkt door oranje-bruine vlekken op bladeren. Controleer op oranje-bruine vlekken op de boven- en onderkant van bladeren."
+    "diseases": [
+      {
+        "name": "Bladluizen",
+        "analysis": "Bladluizen zijn kleine, sapzuigende insecten die zich voeden met plantensappen. Controleer de bladeren op de aanwezigheid van kleine, groene of zwarte insecten en de aanwezigheid van kleverige afscheidingen op de bladeren.",
+        "treatmentStaps": [
+          "Verwijder de bladluizen met een sterke waterstraal of een vochtige doek.",
+          "Spray de plant met insecticide voor bladluizen. Herhaal de behandeling indien nodig."
+        ],
+        "treatmentToolsImagesPerStap": ["wetCloth", "spray"]
       },
-      "treatmentStaps": {
-        "Bladluizen": {
-          "1": "Verwijder de bladluizen met een sterke waterstraal of een vochtige doek.",
-          "2": "Spray de plant met insecticide voor bladluizen. Herhaal de behandeling indien nodig."
-        },
-        "Meeldauw": {
-          "1": "Verwijder geïnfecteerde delen.",
-          "2": "Behandel de plant met fungicide voor meeldauw.",
-          "3": "Zorg voor een goede luchtcirculatie rond de plant. Vermijd overmatig water geven."
-        },
-        "Roest": {
-          "1": "Verwijder geïnfecteerde delen.",
-          "2": "Behandel de plant met fungicide voor roest.",
-          "3": "Zorg voor een goede luchtcirculatie rond de plant. Vermijd overmatig water geven."
-        }
+      {
+        "name": "Meeldauw",
+        "analysis": "Meeldauw is een schimmelziekte die wordt gekenmerkt door witte poederachtige groei op bladeren en stengels. Zoek naar witte, pluizige groei op de boven- en onderkant van bladeren.",
+        "treatmentStaps": [
+          "Verwijder geïnfecteerde delen.",
+          "Behandel de plant met fungicide voor meeldauw.",
+          "Zorg voor een goede luchtcirculatie rond de plant. Vermijd overmatig water geven."
+        ],
+        "treatmentToolsImagesPerStap": ["pruningscissors", "spray"]
       },
-      "treatmentToolsImagesPerStap": {
-        "Bladluizen": {
-          "1": "wetCloth",
-          "2": "spray"
-        },
-        "Meeldauw": {
-          "1": "pruningscissors",
-          "2": "spray",
-          "3": "none"
-        },
-        "Roest": {
-          "1": "pruningscissors",
-          "2": "spray",
-          "3": "none"
-        }
+      {
+        "name": "Roest",
+        "analysis": "Roest is een schimmelziekte die wordt gekenmerkt door oranje-bruine vlekken op bladeren. Controleer op oranje-bruine vlekken op de boven- en onderkant van bladeren.",
+        "treatmentStaps": [
+          "Verwijder geïnfecteerde delen.",
+          "Behandel de plant met fungicide voor roest.",
+          "Zorg voor een goede luchtcirculatie rond de plant. Vermijd overmatig water geven."
+        ],
+        "treatmentToolsImagesPerStap": ["pruningscissors", "spray"]
       }
-    }
+    ]
   },
   {
     "id": 3,
@@ -118,46 +101,37 @@
     "toxicityto": "",
     "airPurifying": "ja",
     "petFriendly": "ja",
-    "diseases": {
-      "possibleDiseases": ["Bladluizen", "Tulpenvuur", "Botrytis"],
-      "analysis": {
-        "Bladluizen": "Bladluizen zijn kleine, sapzuigende insecten die zich voeden met plantensappen. Controleer de bladeren op de aanwezigheid van kleine, groene of zwarte insecten en de aanwezigheid van kleverige afscheidingen op de bladeren.",
-        "Tulpenvuur": "Tulpenvuur is een schimmelziekte die wordt gekenmerkt door verwelkende en verkleurde bladeren, verdorde bloemstelen en zwarte sporen op de plant. Controleer op verwelking van bladeren en zwarte sporen op plantendelen.",
-        "Botrytis": "Botrytis is een schimmelziekte die wordt gekenmerkt door bruine vlekken op bladeren en bloemen en een donzige schimmelgroei. Controleer op bruine vlekken en schimmelgroei op plantendelen."
+    "diseases": [
+      {
+        "name": "Bladluizen",
+        "analysis": "Bladluizen zijn kleine, sapzuigende insecten die zich voeden met plantensappen. Controleer de bladeren op de aanwezigheid van kleine, groene of zwarte insecten en de aanwezigheid van kleverige afscheidingen op de bladeren.",
+        "treatmentStaps": [
+          "Verwijder de bladluizen met een sterke waterstraal of een vochtige doek.",
+          "Spray de plant met insecticide voor bladluizen. Herhaal de behandeling indien nodig."
+        ],
+        "treatmentToolsImagesPerStap": ["wetCloth", "spray"]
       },
-      "treatmentStaps": {
-        "Bladluizen": {
-          "1": "Verwijder de bladluizen met een sterke waterstraal of een vochtige doek.",
-          "2": "Spray de plant met insecticide voor bladluizen. Herhaal de behandeling indien nodig."
-        },
-        "Tulpenvuur": {
-          "1": "Verwijder geïnfecteerde delen.",
-          "2": "Behandel de plant met fungicide voor tulpenvuur.",
-          "3": "Zorg voor een goede luchtcirculatie rond de plant. Vermijd overmatig water geven."
-        },
-        "Botrytis": {
-          "1": "Verwijder geïnfecteerde delen.",
-          "2": "Behandel de plant met fungicide voor botrytis.",
-          "3": "Zorg voor een goede luchtcirculatie rond de plant. Vermijd overmatig water geven."
-        }
+      {
+        "name": "Tulpenvuur",
+        "analysis": "Tulpenvuur is een schimmelziekte die wordt gekenmerkt door verwelkende en verkleurde bladeren, verdorde bloemstelen en zwarte sporen op de plant. Controleer op verwelking van bladeren en zwarte sporen op plantendelen.",
+        "treatmentStaps": [
+          "Verwijder geïnfecteerde delen.",
+          "Behandel de plant met fungicide voor tulpenvuur.",
+          "Zorg voor een goede luchtcirculatie rond de plant. Vermijd overmatig water geven."
+        ],
+        "treatmentToolsImagesPerStap": ["pruningscissors", "spray"]
       },
-      "treatmentToolsImagesPerStap": {
-        "Bladluizen": {
-          "1": "wetCloth",
-          "2": "spray"
-        },
-        "Tulpenvuur": {
-          "1": "pruningscissors",
-          "2": "spray",
-          "3": "none"
-        },
-        "Botrytis": {
-          "1": "pruningscissors",
-          "2": "spray",
-          "3": "none"
-        }
+      {
+        "name": "Botrytis",
+        "analysis": "Botrytis is een schimmelziekte die wordt gekenmerkt door bruine vlekken op bladeren en bloemen en een donzige schimmelgroei. Controleer op bruine vlekken en schimmelgroei op plantendelen.",
+        "treatmentStaps": [
+          "Verwijder geïnfecteerde delen.",
+          "Behandel de plant met fungicide voor botrytis.",
+          "Zorg voor een goede luchtcirculatie rond de plant. Vermijd overmatig water geven."
+        ],
+        "treatmentToolsImagesPerStap": ["pruningscissors", "spray"]
       }
-    }
+    ]
   },
   {
     "id": 4,
@@ -175,46 +149,37 @@
     "toxicityto": "",
     "airPurifying": "ja",
     "petFriendly": "ja",
-    "diseases": {
-      "possibleDiseases": ["Bladluizen", "Meeldauw", "Wortelrot"],
-      "analysis": {
-        "Bladluizen": "Bladluizen zijn kleine, sapzuigende insecten die zich voeden met plantensappen. Controleer de bladeren op de aanwezigheid van kleine, groene of zwarte insecten en de aanwezigheid van kleverige afscheidingen op de bladeren.",
-        "Meeldauw": "Meeldauw is een schimmelziekte die wordt gekenmerkt door witte poederachtige groei op bladeren en stengels. Zoek naar witte, pluizige groei op de boven- en onderkant van bladeren.",
-        "Wortelrot": "Wortelrot is een schimmelziekte die wordt gekenmerkt door bruine, rotte wortels en gele bladeren. Controleer op bruine, rotte wortels en vergeelde bladeren."
+    "diseases": [
+      {
+        "name": "Bladluizen",
+        "analysis": "Bladluizen zijn kleine, sapzuigende insecten die zich voeden met plantensappen. Controleer de bladeren op de aanwezigheid van kleine, groene of zwarte insecten en de aanwezigheid van kleverige afscheidingen op de bladeren.",
+        "treatmentStaps": [
+          "Verwijder de bladluizen met een sterke waterstraal of een vochtige doek.",
+          "Spray de plant met insecticide voor bladluizen. Herhaal de behandeling indien nodig."
+        ],
+        "treatmentToolsImagesPerStap": ["wetCloth", "spray"]
       },
-      "treatmentStaps": {
-        "Bladluizen": {
-          "1": "Verwijder de bladluizen met een sterke waterstraal of een vochtige doek.",
-          "2": "Spray de plant met insecticide voor bladluizen. Herhaal de behandeling indien nodig."
-        },
-        "Meeldauw": {
-          "1": "Verwijder geïnfecteerde delen.",
-          "2": "Behandel de plant met fungicide voor meeldauw.",
-          "3": "Zorg voor een goede luchtcirculatie rond de plant. Vermijd overmatig water geven."
-        },
-        "Wortelrot": {
-          "1": "Verwijder aangetaste delen",
-          "2": "Behandel de plant met fungicide voor wortelrot.",
-          "3": "Zorg voor een goede luchtcirculatie rond de plant. Vermijd overmatig water geven."
-        }
+      {
+        "name": "Meeldauw",
+        "analysis": "Meeldauw is een schimmelziekte die wordt gekenmerkt door witte poederachtige groei op bladeren en stengels. Zoek naar witte, pluizige groei op de boven- en onderkant van bladeren.",
+        "treatmentStaps": [
+          "Verwijder geïnfecteerde delen.",
+          "Behandel de plant met fungicide voor meeldauw.",
+          "Zorg voor een goede luchtcirculatie rond de plant. Vermijd overmatig water geven."
+        ],
+        "treatmentToolsImagesPerStap": ["pruningscissors", "spray"]
       },
-      "treatmentToolsImagesPerStap": {
-        "Bladluizen": {
-          "1": "wetCloth",
-          "2": "spray"
-        },
-        "Meeldauw": {
-          "1": "pruningscissors",
-          "2": "spray",
-          "3": "none"
-        },
-        "Wortelrot": {
-          "1": "pruningscissors",
-          "2": "spray",
-          "3": "none"
-        }
+      {
+        "name": "Wortelrot",
+        "analysis": "Wortelrot is een schimmelziekte die wordt gekenmerkt door bruine, rotte wortels en gele bladeren. Controleer op bruine, rotte wortels en vergeelde bladeren.",
+        "treatmentStaps": [
+          "Verwijder aangetaste delen",
+          "Behandel de plant met fungicide voor wortelrot.",
+          "Zorg voor een goede luchtcirculatie rond de plant. Vermijd overmatig water geven."
+        ],
+        "treatmentToolsImagesPerStap": ["pruningscissors", "spray"]
       }
-    }
+    ]
   },
   {
     "id": 5,
@@ -263,32 +228,25 @@
     "toxicity": "licht giftig",
     "airPurifying": "ja",
     "petFriendly": "ja",
-    "diseases": {
-      "possibleDiseases": ["Wortelrot", "Bladvlekkenziekte"],
-      "analysis": {
-        "Wortelrot": "Wortelrot is een schimmelziekte die wordt gekenmerkt door bruine, rotte wortels en gele bladeren. Controleer op bruine, rotte wortels en vergeelde bladeren.",
-        "Bladvlekkenziekte": "Bladvlekkenziekte wordt gekenmerkt door donkere vlekken op de bladeren, wat kan leiden tot bladval en een verminderde gezondheid van de plant. Inspecteer de bladeren op donkere vlekken en verwijder indien nodig aangetaste delen."
+    "diseases": [
+      {
+        "name": "Bladvlekkenziekte",
+        "analysis": "Bladvlekkenziekte wordt gekenmerkt door donkere vlekken op de bladeren, wat kan leiden tot bladval en een verminderde gezondheid van de plant. Inspecteer de bladeren op donkere vlekken en verwijder indien nodig aangetaste delen.",
+        "treatmentStaps": [
+          "Verwijder geïnfecteerde delen.",
+          "Behandel de plant met fungicide voor bladvlekkenziekte."
+        ],
+        "treatmentToolsImagesPerStap": ["pruningscissors", "spray"]
       },
-      "treatmentStaps": {
-        "Wortelrot": {
-          "1": "Verwijder aangetaste delen.",
-          "2": "Behandel de plant met fungicide voor wortelrot."
-        },
-        "Bladvlekkenziekte": {
-          "1": "Verwijder geïnfecteerde delen.",
-          "2": "Behandel de plant met fungicide voor bladvlekkenziekte."
-        }
-      },
-      "treatmentToolsImagesPerStap": {
-        "Wortelrot": {
-          "1": "pruningscissors",
-          "2": "spray"
-        },
-        "Bladvlekkenziekte": {
-          "1": "pruningscissors",
-          "2": "spray"
-        }
+      {
+        "name": "Wortelrot",
+        "analysis": "Wortelrot is een schimmelziekte die wordt gekenmerkt door bruine, rotte wortels en gele bladeren. Controleer op bruine, rotte wortels en vergeelde bladeren.",
+        "treatmentStaps": [
+          "Verwijder aangetaste delen.",
+          "Behandel de plant met fungicide voor wortelrot."
+        ],
+        "treatmentToolsImagesPerStap": ["pruningscissors", "spray"]
       }
-    }
+    ]
   }
 ]

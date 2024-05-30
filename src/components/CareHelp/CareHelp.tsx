@@ -1,18 +1,45 @@
-import React, { use, useEffect } from "react";
+import React, { use, useEffect, useState } from "react";
 import $ from "./CareHelp.module.scss";
 import Button from "@/src/components/Button/Button";
 import { useRouter } from "next/router";
+import cs from "classnames";
+import plantsDataBase from "@/data/plantsDatabase.json";
 
 interface CareHelpProps {
   currentPath?: string | undefined;
   openCareHelp?: boolean;
 }
 
+const filterItems = [
+  "Tips",
+  "Hele plant",
+  "Bladeren",
+  "Bloem",
+  "Stam",
+  "Wortels",
+  "Plagen",
+  "Fruit",
+];
+
 const CareHelp: React.FC<CareHelpProps> = ({
   currentPath,
   openCareHelp = false,
 }) => {
   const router = useRouter();
+  const [searchValue, setSearchValue] = useState<string>("");
+  const [plantIndex, setPlantIndex] = useState<number>(-1);
+  const [careInfo, setCareInfo] = useState<any>([]);
+
+  useEffect(() => {
+    setCareInfo(plantsDataBase[plantIndex]?.diseases);
+    console.log("careInfo", careInfo);
+  }, [plantIndex]);
+
+  // const careInfo = plantsDataBase[plantIndex].diseases;
+
+  const [searching, setSearching] = useState<boolean>(false);
+  const [loading, setLoading] = useState<boolean>(false);
+
   useEffect(() => {
     if (currentPath) localStorage.setItem("currentPath", currentPath);
     if (openCareHelp) {
@@ -21,6 +48,35 @@ const CareHelp: React.FC<CareHelpProps> = ({
       localStorage.setItem("openCareHelp", "false");
     }
   });
+
+  const searchPlants = (e: React.ChangeEvent<HTMLInputElement>) => {
+    setSearching(true);
+    const searchValue = e.target.value;
+    if (searchValue === "") {
+      setSearching(false);
+      setLoading(false);
+      setSearchValue("");
+    }
+    setSearchValue(searchValue);
+    const valueDataIndex = plantsDataBase.findIndex(
+      (plant) => plant.name === searchValue
+    );
+
+    // Zoek de plant in de database op basis van de ingevoerde naam
+    const plantIndex = plantsDataBase.findIndex(
+      (plant) => plant.name === searchValue
+    );
+
+    setPlantIndex(plantIndex);
+
+    if (valueDataIndex === -1) {
+      console.log("loading");
+      setLoading(true);
+    } else {
+      console.log("not loading");
+      setLoading(false);
+    }
+  };
 
   return (
     <div className={$.container}>
@@ -40,9 +96,10 @@ const CareHelp: React.FC<CareHelpProps> = ({
             color="white"
             icon="house"
             text="Kies uit je echte planten"
-            onClick={() => console.log("house")}
+            onClick={() => console.log("echt plant kiezen")}
             rowDirection
             minpadding
+            disabled
           />
         </div>
         <p className={$.note}>Of informatie bladeren</p>
@@ -52,104 +109,106 @@ const CareHelp: React.FC<CareHelpProps> = ({
             name="search"
             placeholder="Het plant naam of type ..."
             className={$.search}
+            onChange={searchPlants}
           />
         </label>
 
         <ul className={$.mainFilters}>
-          <li className={$.filterItem}>
-            <Button
-              color="white"
-              text="Tips"
-              onClick={() => console.log("Ziekten en plagen")}
-              minpadding
-            />
-          </li>
-          <li className={$.filterItem}>
-            <Button
-              color="white"
-              text="Tips"
-              onClick={() => console.log("Ziekten en plagen")}
-              minpadding
-            />
-          </li>
-          <li className={$.filterItem}>
-            <Button
-              color="white"
-              text="Tips"
-              onClick={() => console.log("Ziekten en plagen")}
-              minpadding
-            />
-          </li>
-          <li className={$.filterItem}>
-            <Button
-              color="white"
-              text="Tips"
-              onClick={() => console.log("Ziekten en plagen")}
-              minpadding
-            />
-          </li>
-          <li className={$.filterItem}>
-            <Button
-              color="white"
-              text="Tips"
-              onClick={() => console.log("Ziekten en plagen")}
-              minpadding
-            />
-          </li>
-          <li className={$.filterItem}>
-            <Button
-              color="white"
-              text="Tips"
-              onClick={() => console.log("Ziekten en plagen")}
-              minpadding
-            />
-          </li>
-          <li className={$.filterItem}>
-            <Button
-              color="white"
-              text="Tips"
-              onClick={() => console.log("Ziekten en plagen")}
-              minpadding
-            />
-          </li>
-          <li className={$.filterItem}>
-            <Button
-              color="white"
-              text="Tips"
-              onClick={() => console.log("Ziekten en plagen")}
-              minpadding
-            />
-          </li>
+          {filterItems.map((item, index) => (
+            <li className={$.filterItem} key={index}>
+              <Button
+                color="white"
+                text={item}
+                // TODO: make database for filters
+                onClick={() => console.log("filter")}
+                minpadding
+                textSize=".65rem"
+              />
+            </li>
+          ))}
         </ul>
       </section>
       <section className={$.reviewContainer}>
         <div className={$.info}>
-          <h3 className={$.infoTitle}>Wat kun je hier vinden?</h3>
-          <p className={$.infoItem}>
-            Hier kunt u hulp krijgen met betrekking tot:
-          </p>
-          <ol className={$.infoList}>
-            <li className={$.infoItem}>
-              Identificeer het probleem waar uw plant last van heeft en hoe u
-              deze kunt behandelen door er een foto van te maken.
-            </li>
-            <li className={$.infoItem}>
-              Identificeer de problemen die uw plant kunnen beïnvloeden, hoe u
-              ze kunt vermijden en behandelen.
-            </li>
-            <li className={$.infoItem}>
-              Identificeer veelvoorkomende problemen die planten aantasten, hoe
-              u ze kunt vermijden en behandelen.
-            </li>
-          </ol>
-          <p className={$.infoItem}>
-            Hier kunt u hulp krijgen met betrekking tot: Identificeer het
-            probleem waar uw plant last van heeft en hoe u deze kunt behandelen
-            door er een foto van te maken. Identificeer de problemen die uw
-            plant kunnen beïnvloeden, hoe u ze kunt vermijden en behandelen.
-            Identificeer veelvoorkomende problemen die planten aantasten, hoe u
-            ze kunt vermijden en behandelen.
-          </p>
+          {!searching && (
+            <>
+              <h3 className={$.infoTitle}>Wat kun je hier vinden?</h3>
+              <p className={$.infoItem}>
+                Hier kunt u hulp krijgen met betrekking tot:
+              </p>
+              <ol className={$.infoList}>
+                <li className={$.infoItem}>
+                  Identificeer het probleem waar uw plant last van heeft en hoe
+                  u deze kunt behandelen door er een foto van te maken.
+                </li>
+                <li className={$.infoItem}>
+                  Identificeer de problemen die uw plant kunnen beïnvloeden, hoe
+                  u ze kunt vermijden en behandelen.
+                </li>
+                <li className={$.infoItem}>
+                  Identificeer veelvoorkomende problemen die planten aantasten,
+                  hoe u ze kunt vermijden en behandelen.
+                </li>
+              </ol>
+            </>
+          )}
+
+          {searching && loading && (
+            <h3 className={$.infoTitle}>Er wordt gezocht naar resultaten...</h3>
+          )}
+
+          {Array.isArray(careInfo) && searching && !loading && (
+            <>
+              <h3 className={cs($.infoTitle, $.colorGreen)}>
+                Gevonden informatie over &quot;{searchValue}&quot;
+              </h3>
+              <h4 className={$.subInfoTitle}>Mogelijke ziekten:</h4>
+              {careInfo.map(
+                (
+                  item: {
+                    name: string;
+                    analysis: string;
+                    treatmentStaps: string[];
+                    treatmentToolsImagesPerStap: string[];
+                  },
+                  index: number
+                ) => (
+                  <div className={$.ziekteBlock} key={item.name}>
+                    <p className={cs($.infoItem, $.colorGreen)} key={index}>
+                      <strong>{item.name}</strong>
+                    </p>
+                    <p className={$.infoItem} key={index}>
+                      {item.analysis}
+                    </p>
+                    <h4 className={cs($.subInfoTitle, $.marginTop)}>
+                      Behandeling:
+                    </h4>
+                    <ol className={$.list}>
+                      {item.treatmentStaps.map(
+                        (step: string, index: number) => (
+                          <li className={$.infoItem} key={index}>
+                            {step}
+                          </li>
+                        )
+                      )}
+                    </ol>
+                    <h4 className={cs($.subInfoTitle, $.marginTop)}>
+                      Benodigde hulpmiddelen:
+                    </h4>
+                    <ol className={$.list}>
+                      {item.treatmentToolsImagesPerStap.map(
+                        (tool: string, index: number) => (
+                          <li className={$.infoItem} key={index}>
+                            {tool}
+                          </li>
+                        )
+                      )}
+                    </ol>
+                  </div>
+                )
+              )}
+            </>
+          )}
         </div>
       </section>
     </div>
