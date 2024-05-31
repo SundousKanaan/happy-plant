@@ -27,7 +27,7 @@ const Stap1: React.FC<stapProps> = ({ onRoomSelect }) => {
   };
 
   return (
-    <TutorialLayout>
+    <TutorialLayout cloudText="Laat ons eerst jouw zorglocatie kiezen!">
       <div className={$.stap1}>
         <ul className={$.iconsList}>
           <li className={$.icon}>

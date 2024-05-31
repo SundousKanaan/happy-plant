@@ -42,9 +42,9 @@ const Stap2 = () => {
     }
   };
 
+  // select a plant from the list and update the database with the new plant data
   const selectPlant = (plant: any) => {
-    // setChosenPlant(plant.name);
-
+    localStorage.setItem("chosenPlant", plant.name);
     // update the database with the new plant data of the plant with id 0
     if (userId === undefined) return;
     const userPlants = database[userId].plants;
@@ -100,7 +100,10 @@ const Stap2 = () => {
   };
 
   return (
-    <TutorialLayout disabledNext>
+    <TutorialLayout
+      disabledNext
+      cloudText="Wat een prachtige plek om je plant te verzorgen"
+    >
       <div className={$.stap2}>
         <ul className={$.iconsList}>
           <li className={cs($.icon)}>

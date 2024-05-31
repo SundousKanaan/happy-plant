@@ -5,7 +5,7 @@ import cs from "classnames";
 
 interface BudCloudProps {
   type: "login" | "normal" | "happy" | "scared";
-  text: string;
+  text: string | undefined;
   children?: React.ReactNode;
   isOpen: boolean;
 }
@@ -26,24 +26,26 @@ export const BudCloud: React.FC<BudCloudProps> = ({
   }
 
   return (
-    <div
-      className={cs($.budCloudContainer, {
-        [$.openCloud]: isOpen === true,
-        [$.closeCloud]: isOpen === false,
-      })}
-    >
-      <div className={$.imageContainer}>
-        <Image
-          src={imageSrc}
-          className={$.image}
-          layout="fill"
-          alt="Bud the assistent"
-        />
+    <>
+      <div
+        className={cs($.budCloudContainer, {
+          [$.openCloud]: isOpen === true,
+          [$.closeCloud]: isOpen === false,
+        })}
+      >
+        <div className={$.imageContainer}>
+          <Image
+            src={imageSrc}
+            className={$.image}
+            layout="fill"
+            alt="Bud the assistent"
+          />
+        </div>
+        <div className={cs($.textContainer, { [$.openText]: isOpen === true })}>
+          <p className={$.text}>{text}</p>
+        </div>
+        {children && <div className={$.children}>{children}</div>}
       </div>
-      <div className={cs($.textContainer, { [$.openText]: isOpen === true })}>
-        <p className={$.text}>{text}</p>
-      </div>
-      {children && <div className={$.children}>{children}</div>}
-    </div>
+    </>
   );
 };

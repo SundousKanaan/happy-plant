@@ -35,6 +35,9 @@ const Stap4: React.FC<stapProps> = ({}) => {
     x: 0,
     y: 0,
   });
+  const [textCloud, setTextCloud] = useState(
+    "Laten we jouw plant nu voor het eerst keer water geven!"
+  );
   const [disabledNextButton, setDisabledNextButton] = useState(true);
 
   useEffect(() => {
@@ -64,6 +67,9 @@ const Stap4: React.FC<stapProps> = ({}) => {
   const handelStopDragWater = () => {
     setGaveWater(true);
     setDragStoped(true);
+    setTextCloud(
+      "Je zaden beginnen te groeien, gefeliciteerd! Morgen moeten we weer water geven."
+    );
   };
 
   const handleClaim = () => {
@@ -76,13 +82,13 @@ const Stap4: React.FC<stapProps> = ({}) => {
     const timer = setTimeout(() => {
       setGaveWater(false);
       setDisabledNextButton(false);
-    }, 3500);
+    }, 5000);
 
     return () => clearTimeout(timer);
   }, [gaveWater]);
 
   return (
-    <TutorialLayout disabledNext={disabledNextButton}>
+    <TutorialLayout disabledNext={disabledNextButton} cloudText={textCloud}>
       {showAward && (
         <Award
           award="potted-plant-smile"
@@ -123,7 +129,10 @@ const Stap4: React.FC<stapProps> = ({}) => {
           transform: `translate(${savedPlantPosition.x}px, ${savedPlantPosition.y}px)`,
         }}
       >
-        <div className={cs($.fakePLant, { [$.grow]: dragStoped })}></div>
+        <div className={cs($.fakePLant, { [$.grow]: dragStoped })}>
+          <div className={cs($.leafRight, { [$.grow]: dragStoped })}></div>
+          <div className={cs($.leafLeft, { [$.grow]: dragStoped })}></div>
+        </div>
         <Image
           src="/images/icons/pot-default.svg"
           alt="stap3"

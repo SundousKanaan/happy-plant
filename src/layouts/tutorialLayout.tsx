@@ -12,24 +12,21 @@ import { useStapper } from "@/src/contexts/tutorialStapper/tutorialStapper";
 interface TutorialLayoutProps {
   children: React.ReactNode;
   disabledNext?: boolean;
+  cloudText: string;
 }
 
 const TutorialLayout: React.FC<TutorialLayoutProps> = ({
   children,
   disabledNext = false,
+  cloudText,
 }) => {
   const { tutorialStap, handleNexttStap, handlePreviousStap } = useStapper();
   const [disabledNextButton, setDisabledNextButton] = useState(false);
 
   const [bg, setBg] = useState("");
-  const [cloudText, setCloudText] = useState(0);
 
   const handelNextButton = () => {
     handleNexttStap();
-
-    // if (cloudText === 3) {
-    //   setCloudText(6);
-    // }
   };
 
   const handleBackButton = () => {
@@ -74,14 +71,9 @@ const TutorialLayout: React.FC<TutorialLayoutProps> = ({
 
       <>
         <span className={cs($.budCloud)}>
-          <BudCloud
-            type="happy"
-            // text={texts.budCloud(chosenPlant)[cloudText]}
-            text="test text"
-            isOpen
-          />
+          <BudCloud type="happy" text={cloudText} isOpen />
         </span>
-
+        {/* changeCloudText */}
         <div className={$.actionButtons}>
           <div
             className={cs($.backButton, {

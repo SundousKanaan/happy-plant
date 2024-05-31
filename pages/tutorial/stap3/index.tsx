@@ -21,6 +21,8 @@ const Stap3: React.FC<stapProps> = ({}) => {
   const [plantPosition, setPlantPosition] = useState({ x: 0, y: 0 });
   const [plantPositionCheck, setPlantPositionCheck] = useState<number>();
   const [disabledNextButton, setDisabledNextButton] = useState(true);
+  const [chosenPlant, setChosenPlant] = useState<string | undefined>();
+  const [textCloud, setTextCloud] = useState("");
 
   const handleResize = () => {
     setWindowSize({ width: window.innerWidth, height: window.innerHeight });
@@ -40,6 +42,8 @@ const Stap3: React.FC<stapProps> = ({}) => {
     BackgroundCheck.refresh();
   };
   const lightFunction = (mean: any) => {
+    setTextCloud("Deze plek is Goed voor je plant.");
+
     let Lighting = mean.toFixed(2);
     const percentage = (Lighting * 100).toFixed(0);
 
@@ -56,11 +60,21 @@ const Stap3: React.FC<stapProps> = ({}) => {
   };
 
   const darkFunction = (mean: any) => {
+    setTextCloud("Deze plek is Slecht voor je plant.");
     let Darkness = mean.toFixed(2);
     const percentage = (Darkness * 100).toFixed(0);
     setPlantPositionCheck(Number(percentage));
     setDisabledNextButton(true);
   };
+
+  useEffect(() => {
+    const chosenPlant = localStorage.getItem("chosenPlant");
+    if (!chosenPlant) return;
+    setChosenPlant(chosenPlant);
+    setTextCloud(
+      `Je schattige plant heet "${chosenPlant}" en heeft gedeeltelijke zon (max 3 tot 4 uur) nodig! Trek je plant en kijk waar hij het beste staat`
+    );
+  }, []);
 
   useEffect(() => {
     handleResize();
@@ -76,13 +90,8 @@ const Stap3: React.FC<stapProps> = ({}) => {
     localStorage.setItem("plantPosition", JSON.stringify(plantPosition));
   }, [plantPosition]);
 
-  const defaultPosition = {
-    x: (windowSize.width - 144) / 2, // De breedte van het Draggable element is 160px
-    y: (windowSize.height - 144) / 2, // De hoogte van het Draggable element is 160px
-  };
-
   return (
-    <TutorialLayout disabledNext={disabledNextButton}>
+    <TutorialLayout disabledNext={disabledNextButton} cloudText={textCloud}>
       <Draggable axis="both" handle=".draggableElement" onDrag={handelDrag}>
         <div
           className={cs("draggableElement", $.stap3, {

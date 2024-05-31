@@ -16,21 +16,123 @@
 }
 
 .fakePLant {
-  width: 0.8rem;
-  height: 6rem;
+  width: 0.6rem;
+  height: 3rem;
   background-color: var(--secondary-green);
   border-radius: 5rem;
 
   position: absolute;
-  left: calc(50% - 0.8rem / 2);
-  top: -30%;
+  left: calc(50% - 0.6rem / 2);
+  top: -20%;
 
   transform-origin: bottom;
   transform: scaleY(0);
+  box-shadow: var(--button-box-shadow);
+
+  &.grow {
+    animation: grow 3s 0.5s ease-in-out forwards;
+  }
+
+  &::after {
+    content: "";
+    width: 2rem;
+    height: 3rem;
+    background-color: rgb(255, 0, 102);
+    border-radius: 50% 50% 50% 50% / 70% 70% 30% 30%;
+    position: absolute;
+    top: -90%;
+    left: calc(50% - 2rem / 2);
+    opacity: 0;
+    transform-origin: center bottom;
+    box-shadow: var(--button-box-shadow);
+    animation: growFlower 3s 5s linear both;
+  }
 }
 
-.grow {
-  animation: grow 3s 0.5s ease-in-out forwards;
+.leafRight {
+  width: 1.5rem;
+  height: 2rem;
+  background-color: red;
+  background-color: var(--secondary-green);
+  border-radius: 100% 0% 100% 0% / 100% 0% 100% 0%;
+  position: absolute;
+  top: -10%;
+  left: 80%;
+  opacity: 0;
+  transform-origin: left bottom;
+
+  box-shadow: var(--button-box-shadow);
+
+  &.grow {
+    animation: growleafRight 2s 4.5s linear both;
+  }
+}
+
+.leafLeft {
+  width: 1.5rem;
+  height: 2rem;
+  background-color: red;
+  background-color: var(--secondary-green);
+  border-radius: 0% 100% 0% 100% / 0% 100% 0% 100%;
+  position: absolute;
+  top: -10%;
+  left: -240%;
+  opacity: 0;
+  transform-origin: right bottom;
+  box-shadow: var(--button-box-shadow);
+
+  &.grow {
+    animation: growleafLeft 2s 4s linear both;
+  }
+}
+
+@keyframes growFlower {
+  0% {
+    opacity: 0;
+
+    transform: scale(0);
+  }
+  50% {
+    opacity: 100%;
+
+    transform: scale(0.5);
+  }
+  100% {
+    opacity: 100%;
+    transform: scale(1);
+  }
+}
+
+@keyframes growleafRight {
+  0% {
+    opacity: 0;
+
+    transform: scaleX(0) scaleY(0) rotate(15deg);
+  }
+  50% {
+    opacity: 100%;
+    transform: scaleX(0.5) scaleY(0.5) rotate(15deg);
+  }
+  100% {
+    opacity: 100%;
+    transform: scaleX(1) scaleY(1) rotate(15deg);
+  }
+}
+
+@keyframes growleafLeft {
+  0% {
+    opacity: 0;
+
+    transform: scaleX(0) scaleY(0) rotate(-10deg);
+  }
+  50% {
+    opacity: 100%;
+    transform: scaleX(0.5) scaleY(0.5) rotate(-10deg);
+  }
+  100% {
+    opacity: 100%;
+    transform: scaleX(1) scaleY(1) rotate(-10deg);
+  }
 }
 
 @keyframes grow {
