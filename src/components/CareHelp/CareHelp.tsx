@@ -4,6 +4,7 @@ import Button from "@/src/components/Button/Button";
 import { useRouter } from "next/router";
 import cs from "classnames";
 import plantsDataBase from "@/data/plantsDatabase.json";
+import careInfoDatabase from "@/data/careInfoDatabase.json";
 
 interface CareHelpProps {
   currentPath?: string | undefined;
@@ -13,12 +14,12 @@ interface CareHelpProps {
 const filterItems = [
   "Tips",
   "Hele plant",
-  "Bladeren",
-  "Bloem",
-  "Stam",
-  "Wortels",
   "Plagen",
+  "Bloem",
   "Fruit",
+  "Wortels",
+  "Bladeren",
+  "Stam",
 ];
 
 const CareHelp: React.FC<CareHelpProps> = ({
@@ -29,17 +30,11 @@ const CareHelp: React.FC<CareHelpProps> = ({
   const [searchValue, setSearchValue] = useState<string>("");
   const [plantIndex, setPlantIndex] = useState<number>(-1);
   const [careInfo, setCareInfo] = useState<any>([]);
-
-  useEffect(() => {
-    setCareInfo(plantsDataBase[plantIndex]?.diseases);
-    console.log("careInfo", careInfo);
-  }, [plantIndex]);
-
-  // const careInfo = plantsDataBase[plantIndex].diseases;
-
   const [searching, setSearching] = useState<boolean>(false);
   const [loading, setLoading] = useState<boolean>(false);
+  const [filterInfo, setFilterInfo] = useState<any>();
 
+  // Haal de opgeslagen informatie op
   useEffect(() => {
     if (currentPath) localStorage.setItem("currentPath", currentPath);
     if (openCareHelp) {
@@ -49,8 +44,16 @@ const CareHelp: React.FC<CareHelpProps> = ({
     }
   });
 
+  // Haal de zorginformatie op van de geselecteerde plant
+  useEffect(() => {
+    setCareInfo(plantsDataBase[plantIndex]?.diseases);
+    console.log("careInfo", careInfo);
+  }, [plantIndex]);
+
+  // Zoek de plant in de database op basis van de ingevoerde naam
   const searchPlants = (e: React.ChangeEvent<HTMLInputElement>) => {
     setSearching(true);
+    setFilterInfo(undefined);
     const searchValue = e.target.value;
     if (searchValue === "") {
       setSearching(false);
@@ -78,6 +81,12 @@ const CareHelp: React.FC<CareHelpProps> = ({
     }
   };
 
+  // Filter de informatie op basis van de geselecteerde filter
+  const handleFilter = (filterIndex: number) => () => {
+    const data = careInfoDatabase.filter((info) => info.id === filterIndex);
+    setFilterInfo(data[0].category.info);
+  };
+
   return (
     <div className={$.container}>
       <section className={$.buttonsContainer}>
@@ -91,7 +100,7 @@ const CareHelp: React.FC<CareHelpProps> = ({
             minpadding
           />
         </div>
-        <div className={$.buttonItem}>
+        <div className={cs($.buttonItem, $.disabled)}>
           <Button
             color="white"
             icon="house"
@@ -107,30 +116,33 @@ const CareHelp: React.FC<CareHelpProps> = ({
           <input
             type="search"
             name="search"
-            placeholder="Het plant naam of type ..."
+            placeholder="Zoek een plant naam ..."
             className={$.search}
             onChange={searchPlants}
           />
         </label>
 
         <ul className={$.mainFilters}>
-          {filterItems.map((item, index) => (
-            <li className={$.filterItem} key={index}>
-              <Button
-                color="white"
-                text={item}
-                // TODO: make database for filters
-                onClick={() => console.log("filter")}
-                minpadding
-                textSize=".65rem"
-              />
-            </li>
-          ))}
+          {filterItems.map((item, index) => {
+            const disabled = careInfoDatabase.some((info) => info.id === index);
+            return (
+              <li className={$.filterItem} key={index}>
+                <Button
+                  color="white"
+                  text={item}
+                  onClick={handleFilter(index)}
+                  minpadding
+                  textSize=".65rem"
+                  disabled={!disabled}
+                />
+              </li>
+            );
+          })}
         </ul>
       </section>
       <section className={$.reviewContainer}>
         <div className={$.info}>
-          {!searching && (
+          {!searching && !filterInfo && (
             <>
               <h3 className={$.infoTitle}>Wat kun je hier vinden?</h3>
               <p className={$.infoItem}>
@@ -153,11 +165,11 @@ const CareHelp: React.FC<CareHelpProps> = ({
             </>
           )}
 
-          {searching && loading && (
+          {searching && loading && !filterInfo && (
             <h3 className={$.infoTitle}>Er wordt gezocht naar resultaten...</h3>
           )}
 
-          {Array.isArray(careInfo) && searching && !loading && (
+          {Array.isArray(careInfo) && searching && !loading && !filterInfo && (
             <>
               <h3 className={cs($.infoTitle, $.colorGreen)}>
                 Gevonden informatie over &quot;{searchValue}&quot;
@@ -205,6 +217,27 @@ const CareHelp: React.FC<CareHelpProps> = ({
                       )}
                     </ol>
                   </div>
+                )
+              )}
+            </>
+          )}
+
+          {Array.isArray(filterInfo) && filterInfo && (
+            <>
+              {filterInfo.map(
+                (item: { title: string; text: string[] }, index: number) => (
+                  <React.Fragment key={index}>
+                    <div className={$.infoContainer}>
+                      <h3 className={cs($.infoTitle, $.colorGreen)}>
+                        {item.title}
+                      </h3>
+                      {item.text.map((text, index) => (
+                        <p className={$.infoItem} key={index}>
+                          {text}
+                        </p>
+                      ))}
+                    </div>
+                  </React.Fragment>
                 )
               )}
             </>

@@ -15,45 +15,48 @@ export const StapperProvider = ({
   const router = useRouter();
   const [tutorialStap, setTutorialStap] = useState(1);
   const [savedpreviousStap, setSavedPreviousStap] = useState<string>("");
-  const [disabledNextButton, setDisabledNextButton] = useState<boolean>(false);
 
+  const [showAward, setShowAward] = useState<boolean>(false);
+
+  // this function is used to go to the next tutorial step
   const handleNexttStap = () => {
-    setTutorialStap(tutorialStap + 1);
-    router.push(`/tutorial/stap${tutorialStap + 1}`);
+    if (tutorialStap + 1 >= 5) {
+      console.log("tutorialStap + 1 >= 5");
+      setShowAward(true);
+    } else {
+      setTutorialStap(tutorialStap + 1);
+      router.push(`/tutorial/stap${tutorialStap + 1}`);
+    }
   };
 
+  // this function is used to go to the previous tutorial step
   const handlePreviousStap = () => {
     setTutorialStap(tutorialStap - 1);
     router.push(`/tutorial/stap${tutorialStap - 1}`);
   };
 
+  // this function is used to go to a specific tutorial step
   const handleCustomStap = (stap: number) => {
     setTutorialStap(stap);
+    router.push(`/tutorial/stap${stap}`);
   };
 
-  const handleDisableNextButton = (value: boolean) => {
-    setDisabledNextButton(value);
-  };
-
-  useEffect(() => {
-    if (tutorialStap === 2 || tutorialStap === 3) {
-      setDisabledNextButton(true);
-    } else {
-      setDisabledNextButton(false);
-    }
-
-    console.log("--tutorialStapper:", tutorialStap);
-  }, [tutorialStap]);
+  // useEffect(() => {
+  //   if (tutorialStap === 2 || tutorialStap === 3) {
+  //     setDisabledNextButton(true);
+  //     console.log("--tutorialStapper:", tutorialStap);
+  //   } else {
+  //     setDisabledNextButton(false);
+  //   }
+  // }, [tutorialStap]);
 
   const value = {
     tutorialStap,
     savedpreviousStap,
-    disabledNextButton,
+    showAward,
     handleNexttStap,
     handlePreviousStap,
-    setDisabledNextButton,
     handleCustomStap,
-    handleDisableNextButton,
   };
 
   return (

@@ -9,12 +9,7 @@ import plantsDatabase from "@/data/plantsDatabase.json";
 import TutorialLayout from "@/src/layouts/tutorialLayout";
 import { useStapper } from "@/src/contexts/tutorialStapper/tutorialStapper";
 
-interface stapProps {
-  // setTutorialStap: (stap: number) => void;
-  // setChosenPlant: (plant: string) => void;
-}
-
-const Stap2: React.FC<stapProps> = () => {
+const Stap2 = () => {
   const { handleNexttStap } = useStapper();
   const { account } = useAccount();
 
@@ -105,7 +100,7 @@ const Stap2: React.FC<stapProps> = () => {
   };
 
   return (
-    <TutorialLayout>
+    <TutorialLayout disabledNext>
       <div className={$.stap2}>
         <ul className={$.iconsList}>
           <li className={cs($.icon)}>

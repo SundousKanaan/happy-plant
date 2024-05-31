@@ -11,16 +11,18 @@ import $ from "./stap4.module.scss";
 import Draggable from "react-draggable";
 import { Icon } from "@/src/components/Icon/Icon";
 import { Award } from "@/src/components/Award/Award";
+import { useRouter } from "next/router";
 
 interface stapProps {}
 
 const Stap4: React.FC<stapProps> = ({}) => {
+  const router = useRouter();
   const { account } = useAccount();
-  const { handlePreviousStap } = useStapper();
+  const { handlePreviousStap, showAward } = useStapper();
   const [popUpIsOpen, setPopUpIsOpen] = useState<boolean>(false);
   const [dragging, setDragging] = useState<boolean>(false);
+  const [dragStoped, setDragStoped] = useState<boolean>(false);
   const [gaveWater, setGaveWater] = useState<boolean>(false);
-  const [showAward, setShowAward] = useState<boolean>(false);
   const [careInfo, setCareInfo] = useState<careInfo>({
     Watering: "",
     amountOfWater: "",
@@ -33,6 +35,7 @@ const Stap4: React.FC<stapProps> = ({}) => {
     x: 0,
     y: 0,
   });
+  const [disabledNextButton, setDisabledNextButton] = useState(true);
 
   useEffect(() => {
     setSavedPlantPosition(
@@ -56,22 +59,30 @@ const Stap4: React.FC<stapProps> = ({}) => {
   const handelDragWater = (e: any, data: any) => {
     setDragging(true);
     console.log(data.x, data.y);
+  };
+
+  const handelStopDragWater = () => {
     setGaveWater(true);
+    setDragStoped(true);
   };
 
   const handleClaim = () => {
-    setShowAward(false);
+    router.push("/homePage");
   };
 
-  // met click knop W wordt setShowAward(true)
-  const handleKeyDown = (e: any) => {
-    if (e.key === "w") {
-      setShowAward(true);
-    }
-  };
+  // set timer to setGaveWater false after 5 seconds
+  useEffect(() => {
+    if (!gaveWater) return;
+    const timer = setTimeout(() => {
+      setGaveWater(false);
+      setDisabledNextButton(false);
+    }, 3500);
+
+    return () => clearTimeout(timer);
+  }, [gaveWater]);
 
   return (
-    <TutorialLayout>
+    <TutorialLayout disabledNext={disabledNextButton}>
       {showAward && (
         <Award
           award="potted-plant-smile"
@@ -112,7 +123,7 @@ const Stap4: React.FC<stapProps> = ({}) => {
           transform: `translate(${savedPlantPosition.x}px, ${savedPlantPosition.y}px)`,
         }}
       >
-        <div className={$.fakePLant}></div>
+        <div className={cs($.fakePLant, { [$.grow]: dragStoped })}></div>
         <Image
           src="/images/icons/pot-default.svg"
           alt="stap3"
@@ -138,6 +149,7 @@ const Stap4: React.FC<stapProps> = ({}) => {
         axis="both"
         handle=".draggableElement"
         onDrag={handelDragWater}
+        onStop={handelStopDragWater}
       >
         <div
           className={cs(
@@ -146,9 +158,7 @@ const Stap4: React.FC<stapProps> = ({}) => {
             {
               [$.toDrag]: !dragging,
             },
-            {
-              [$.dragging]: dragging,
-            }
+            { [$.stopDrag]: dragStoped }
           )}
         >
           <Icon icon="watering" text="water" />

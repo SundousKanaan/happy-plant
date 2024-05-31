@@ -19,6 +19,11 @@
   height: fit-content;
 }
 
+.disabled {
+  background-color: var(--half-white);
+  border-radius: var(--paper-border-radius);
+}
+
 .note {
   font-size: 0.6rem;
   text-align: center;
@@ -90,6 +95,7 @@
 .test {
   color: red;
 }
+
 .reviewContainer {
   grid-area: 1/2/2/3;
   background-color: var(--white);
@@ -113,6 +119,7 @@
   font-family: var(--primary-font);
   color: var(--secondary-brown);
   margin-bottom: 0.5rem;
+  line-height: 1.2rem;
 }
 
 .subInfoTitle {
@@ -144,4 +151,9 @@
 
 .list {
   padding-left: 2rem;
+}
+
+.infoContainer {
+  width: 29rem;
+  margin-bottom: 1rem;
 }

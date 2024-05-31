@@ -43,6 +43,7 @@ const CameraPage = () => {
     handleCustomStap(1);
   };
 
+  // Save the image to the database
   const handleSaveImage = async () => {
     if (!savedBackgroundImage) return;
     const user = localStorage.getItem("account");

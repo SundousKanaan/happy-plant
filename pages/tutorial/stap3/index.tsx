@@ -16,11 +16,11 @@ const Stap3: React.FC<stapProps> = ({}) => {
     [key: string]: { plants: PlantType[] };
   } = require("@/data/database.json");
   const BackgroundCheck = require("@/pages/api/background-check.js");
-  const { handleDisableNextButton } = useStapper();
   const [windowSize, setWindowSize] = useState({ width: 0, height: 0 });
   const [isDragging, setIsDragging] = useState(false);
   const [plantPosition, setPlantPosition] = useState({ x: 0, y: 0 });
   const [plantPositionCheck, setPlantPositionCheck] = useState<number>();
+  const [disabledNextButton, setDisabledNextButton] = useState(true);
 
   const handleResize = () => {
     setWindowSize({ width: window.innerWidth, height: window.innerHeight });
@@ -44,7 +44,7 @@ const Stap3: React.FC<stapProps> = ({}) => {
     const percentage = (Lighting * 100).toFixed(0);
 
     setPlantPositionCheck(Number(percentage));
-    handleDisableNextButton(false);
+    setDisabledNextButton(false);
 
     const userId = account?.id;
     if (userId === undefined) return;
@@ -59,7 +59,7 @@ const Stap3: React.FC<stapProps> = ({}) => {
     let Darkness = mean.toFixed(2);
     const percentage = (Darkness * 100).toFixed(0);
     setPlantPositionCheck(Number(percentage));
-    handleDisableNextButton(true);
+    setDisabledNextButton(true);
   };
 
   useEffect(() => {
@@ -82,7 +82,7 @@ const Stap3: React.FC<stapProps> = ({}) => {
   };
 
   return (
-    <TutorialLayout>
+    <TutorialLayout disabledNext={disabledNextButton}>
       <Draggable axis="both" handle=".draggableElement" onDrag={handelDrag}>
         <div
           className={cs("draggableElement", $.stap3, {

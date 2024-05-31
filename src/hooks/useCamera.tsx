@@ -8,6 +8,7 @@ const UseCamera = () => {
   >(null);
   const videoRef = useRef<HTMLVideoElement>(null);
 
+  // Capture the image from the camera and display it in the video element on the page
   const captureImage = async () => {
     try {
       const stream = await navigator.mediaDevices.getUserMedia({ video: true });
@@ -19,6 +20,7 @@ const UseCamera = () => {
     }
   };
 
+  // Take a picture of the background and save it to the state and local storage as a base64 string
   const takeBackgroundImage = async () => {
     if (videoRef.current) {
       const video = videoRef.current;
@@ -36,10 +38,12 @@ const UseCamera = () => {
     }
   };
 
+  // Get the saved background image from local storage
   const getSavedBackgroundImage = () => {
     setSavedBackgroundImage(localStorage.getItem("backgroundImage"));
   };
 
+  // Take a picture of the plant and save it to the state as a base64 string
   const takePlantImage = async () => {
     if (videoRef.current) {
       const video = videoRef.current;

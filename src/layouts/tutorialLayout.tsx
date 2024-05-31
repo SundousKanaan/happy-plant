@@ -11,15 +11,15 @@ import { useStapper } from "@/src/contexts/tutorialStapper/tutorialStapper";
 
 interface TutorialLayoutProps {
   children: React.ReactNode;
+  disabledNext?: boolean;
 }
 
-const TutorialLayout: React.FC<TutorialLayoutProps> = ({ children }) => {
-  const {
-    tutorialStap,
-    handleNexttStap,
-    handlePreviousStap,
-    disabledNextButton,
-  } = useStapper();
+const TutorialLayout: React.FC<TutorialLayoutProps> = ({
+  children,
+  disabledNext = false,
+}) => {
+  const { tutorialStap, handleNexttStap, handlePreviousStap } = useStapper();
+  const [disabledNextButton, setDisabledNextButton] = useState(false);
 
   const [bg, setBg] = useState("");
   const [cloudText, setCloudText] = useState(0);
@@ -38,6 +38,7 @@ const TutorialLayout: React.FC<TutorialLayoutProps> = ({ children }) => {
 
   useEffect(() => {
     const storedBg = localStorage.getItem("backgroundImage");
+    console.log("storedBg", typeof storedBg);
 
     if (storedBg) {
       setBg(storedBg);
@@ -95,7 +96,7 @@ const TutorialLayout: React.FC<TutorialLayoutProps> = ({ children }) => {
               text="Volgende"
               color="green"
               onClick={handelNextButton}
-              disabled={disabledNextButton}
+              disabled={disabledNextButton || disabledNext}
             />
           </div>
         </div>
