@@ -125,7 +125,7 @@ const Agenda = () => {
           <Button
             icon="columnsview"
             color="transparent"
-            onClick={() => console.log("column")}
+            onClick={() => setGridView(!gridView)}
           />
         </div>
         <label className={cs($.checkbox, { [$.checked]: !gridView })}>
@@ -139,7 +139,7 @@ const Agenda = () => {
           <Button
             icon="gridview"
             color="transparent"
-            onClick={() => console.log("list")}
+            onClick={() => setGridView(gridView)}
           />
         </div>
       </div>

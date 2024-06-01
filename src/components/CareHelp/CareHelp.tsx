@@ -47,7 +47,6 @@ const CareHelp: React.FC<CareHelpProps> = ({
   // get the plant information from the database
   useEffect(() => {
     setCareInfo(plantsDataBase[plantIndex]?.diseases);
-    console.log("careInfo", careInfo);
   }, [plantIndex]);
 
   // search the plant in the database
@@ -73,10 +72,8 @@ const CareHelp: React.FC<CareHelpProps> = ({
     setPlantIndex(plantIndex);
 
     if (valueDataIndex === -1) {
-      console.log("loading");
       setLoading(true);
     } else {
-      console.log("not loading");
       setLoading(false);
     }
   };
@@ -105,7 +102,6 @@ const CareHelp: React.FC<CareHelpProps> = ({
             color="white"
             icon="house"
             text="Kies uit je echte planten"
-            onClick={() => console.log("echt plant kiezen")}
             rowDirection
             minpadding
             disabled

@@ -31,7 +31,6 @@ export default function handelr(req, res) {
     // find the plant with plantId
     const plantIndex = user.plants.findIndex((plant) => plant.id === plantId);
 
-    console.log({ plantIndex });
     if (plantIndex !== -1) {
       // Delete the old image
       const oldBackgroundImage = user.plants[plantIndex].backgroundImage;

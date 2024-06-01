@@ -29,8 +29,6 @@ const CameraPage = () => {
 
   // Take a shot of the background
   const takeAshot = async () => {
-    console.log("takeAshot");
-
     await takeBackgroundImage();
     openDialog();
   };

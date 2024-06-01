@@ -66,7 +66,6 @@ const Stap4: React.FC<stapProps> = ({}) => {
   // handel the drag event of the water icon
   const handelDragWater = (e: any, data: any) => {
     setDragging(true);
-    console.log(data.x, data.y);
   };
 
   // handel the stop drag event of the water icon

@@ -28,8 +28,6 @@ const CameraPage = () => {
   useEffect(() => {
     captureImage();
 
-    console.log("photosArray", photosArray);
-
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [photosArray]);
 
@@ -42,8 +40,6 @@ const CameraPage = () => {
     if (plantImage) {
       setPhotosArray([...photosArray, { plantImage, id: photosArray.length }]);
     }
-
-    console.log("photosArray", photosArray.length);
 
     if (photosArray.length === 2) {
       setCameraButtonDisabled(true);

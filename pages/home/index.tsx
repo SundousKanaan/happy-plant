@@ -94,7 +94,6 @@ const Home = () => {
     setSavedPlantPosition(
       SavedPlantPosition ? JSON.parse(SavedPlantPosition) : { x: 0, y: 0 }
     );
-    console.log({ savedPlantPosition });
   }, []);
 
   // make a timer to make a countdown for the next watering

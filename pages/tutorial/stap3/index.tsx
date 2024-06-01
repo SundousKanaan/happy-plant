@@ -85,7 +85,6 @@ const Stap3: React.FC<stapProps> = ({}) => {
   // check if the plant is in a good position
   useEffect(() => {
     handelResize();
-    console.log({ plantPositionCheck });
 
     window.addEventListener("resize", handelResize);
     handelResize();

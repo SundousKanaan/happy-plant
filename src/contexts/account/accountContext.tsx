@@ -130,10 +130,10 @@ export const AccountProvider: React.FC<{ children: React.ReactNode }> = ({
         const updatedAccount = JSON.parse(storedAccount);
         setAccount(updatedAccount);
       } catch (error) {
-        console.log("Error parsing account data:", error);
+        console.error("Error parsing account data:", error);
       }
     } else {
-      console.log("No account data found in localStorage");
+      console.error("No account data found in localStorage");
     }
   };
 
