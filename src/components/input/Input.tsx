@@ -18,6 +18,7 @@ const Input: React.FC<InputProps> = ({
   const [inputType, setInputType] = useState(type);
   const [boldFont, setBoldFont] = useState(false);
 
+  // Function to show password
   const showPassword = (event: React.MouseEvent<HTMLButtonElement>) => {
     event.preventDefault();
     setInputType((prevType) => (prevType === "password" ? "text" : "password"));

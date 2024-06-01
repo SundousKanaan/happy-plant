@@ -33,6 +33,7 @@ const CameraPage = () => {
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [photosArray]);
 
+  // takeAshot is een functie die een foto maakt van de plant
   const takeAshot = async () => {
     await takePlantImage();
   };
@@ -48,11 +49,10 @@ const CameraPage = () => {
       setCameraButtonDisabled(true);
       setCorrectsignDisabled(false);
     }
-  }, [plantImage]);
+  }, [plantImage, photosArray]);
 
+  // handelBackAction is een functie die de gebruiker terugstuurt naar de vorige pagina
   const handelBackAction = () => {
-    console.log({ previusStap });
-
     if (previusStap) router.push(previusStap);
   };
 
@@ -61,16 +61,14 @@ const CameraPage = () => {
     "Maak een foto van de plant vanuit een andere hoek",
   ];
 
-  const handelCorrectsignClick = () => {
-    console.log("checkData");
-  };
-
+  // removePhoto is een functie die een foto verwijdert uit de photosArray
   const removePhoto = (id: number) => () => {
     setPhotosArray(photosArray.filter((photo) => photo.id !== id));
     setCameraButtonDisabled(false);
     setCorrectsignDisabled(true);
   };
 
+  // handelcloseDialog is een functie die de dialog sluit
   const handelcloseDialog = () => {
     closeDialog();
     setCameraButtonDisabled(false);
@@ -78,6 +76,7 @@ const CameraPage = () => {
     setPhotosArray([]);
   };
 
+  // handelDoneClick is een functie die de dialog sluit en de gebruiker terugstuurt naar de homepagina
   const handelDoneClick = () => {
     closeDialog();
     setCameraButtonDisabled(false);

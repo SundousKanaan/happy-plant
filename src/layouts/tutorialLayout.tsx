@@ -32,6 +32,7 @@ const TutorialLayout: React.FC<TutorialLayoutProps> = ({
     handelPreviousStap();
   };
 
+  // get the background image from the local storage
   useEffect(() => {
     const storedBg = localStorage.getItem("backgroundImage");
     console.log("storedBg", typeof storedBg);

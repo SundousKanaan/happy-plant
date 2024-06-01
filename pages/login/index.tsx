@@ -14,6 +14,7 @@ const Login = () => {
   const [firstName, setFirstName] = useState("");
   const [lastName, setLastName] = useState("");
 
+  // handel the input
   const handelInputChange = (event: React.ChangeEvent<HTMLInputElement>) => {
     refreshErrorMessage();
     const { type, value, name } = event.target;
@@ -32,6 +33,7 @@ const Login = () => {
     }
   };
 
+  // handel the signup
   const handelSignup = () => {
     signup(email, password, firstName, lastName);
     if (errorMessage !== "") {
@@ -39,6 +41,7 @@ const Login = () => {
     }
   };
 
+  // handel the login
   const handelLogin = () => {
     login(email, password);
     if (errorMessage !== "") {

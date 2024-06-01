@@ -41,6 +41,7 @@ const Stap4: React.FC<stapProps> = ({}) => {
   const [disabledNextButton, setDisabledNextButton] = useState(true);
   const [showAward, setShowAward] = useState<boolean>(false);
 
+  // get the saved plant position from the local storage
   useEffect(() => {
     setSavedPlantPosition(
       JSON.parse(localStorage.getItem("plantPosition") || "{}")
@@ -54,17 +55,21 @@ const Stap4: React.FC<stapProps> = ({}) => {
     const userPlants = database[account.id].plants;
     const tutorialPlantIndex = userPlants.findIndex((plant) => plant.id === 0);
     setCareInfo(userPlants[tutorialPlantIndex].careInfo);
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
+  // handel the back button
   const handelBackButton = () => {
     handelPreviousStap();
   };
 
+  // handel the drag event of the water icon
   const handelDragWater = (e: any, data: any) => {
     setDragging(true);
     console.log(data.x, data.y);
   };
 
+  // handel the stop drag event of the water icon
   const handelStopDragWater = () => {
     setGaveWater(true);
     setDragStoped(true);
@@ -73,6 +78,7 @@ const Stap4: React.FC<stapProps> = ({}) => {
     );
   };
 
+  // handel the claim of the award
   const handelClaim = () => {
     router.push("/home");
   };

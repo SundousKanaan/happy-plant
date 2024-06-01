@@ -1,8 +1,6 @@
 import React from "react";
 import $ from "./MenuList.module.scss";
 import Button from "@/src/components/Button/Button";
-import cs from "classnames";
-import { useRouter } from "next/router";
 
 interface MenulistProps {
   handelColeMenu: () => void;
@@ -13,7 +11,6 @@ const Menulist: React.FC<MenulistProps> = ({
   handelColeMenu,
   openCareHelp,
 }) => {
-  const roeter = useRouter();
   return (
     <div className={$.container}>
       <button className={$.xsignal} onClick={handelColeMenu}></button>

@@ -23,6 +23,7 @@ const Stap2 = () => {
   const [disableToTop, setDisableToTop] = useState(true);
   const [disableToBottom, setDisableToBottom] = useState(false);
 
+  // scroll to the top of the flouwer list
   const scrollToTop = () => {
     if (listContainerRef.current) {
       listContainerRef.current.scrollTop = 0;
@@ -32,6 +33,7 @@ const Stap2 = () => {
     }
   };
 
+  // scroll to the bottom of the plants list
   const scrollToBottom = () => {
     if (listContainerRef.current) {
       listContainerRef.current.scrollTop =
@@ -91,6 +93,7 @@ const Stap2 = () => {
     handelNexttStap();
   };
 
+  // open and close the options list
   const handelOpenOptionsList = () => {
     if (openOptionsList) {
       setOpenOptionsList(false);

@@ -44,13 +44,13 @@ const CareHelp: React.FC<CareHelpProps> = ({
     }
   });
 
-  // Haal de zorginformatie op van de geselecteerde plant
+  // get the plant information from the database
   useEffect(() => {
     setCareInfo(plantsDataBase[plantIndex]?.diseases);
     console.log("careInfo", careInfo);
   }, [plantIndex]);
 
-  // Zoek de plant in de database op basis van de ingevoerde naam
+  // search the plant in the database
   const searchPlants = (e: React.ChangeEvent<HTMLInputElement>) => {
     setSearching(true);
     setFilterInfo(undefined);
@@ -65,7 +65,7 @@ const CareHelp: React.FC<CareHelpProps> = ({
       (plant) => plant.name === searchValue
     );
 
-    // Zoek de plant in de database op basis van de ingevoerde naam
+    // get the plant index
     const plantIndex = plantsDataBase.findIndex(
       (plant) => plant.name === searchValue
     );
@@ -81,7 +81,7 @@ const CareHelp: React.FC<CareHelpProps> = ({
     }
   };
 
-  // Filter de informatie op basis van de geselecteerde filter
+  // Filter the information based on the filter index
   const handelFilter = (filterIndex: number) => () => {
     const data = careInfoDatabase.filter((info) => info.id === filterIndex);
     setFilterInfo(data[0].category.info);

@@ -40,6 +40,7 @@ export const AccountProvider: React.FC<{ children: React.ReactNode }> = ({
     setErrorMessage("");
   };
 
+  // check if the user is logged in or not
   const login = (email: string, password: string) => {
     const users: AccountType[] = dataBase;
     const user = users.find((user) => user.email === email);
@@ -56,6 +57,7 @@ export const AccountProvider: React.FC<{ children: React.ReactNode }> = ({
     }
   };
 
+  // Create a new user account
   const signup = async (
     email: string,
     password: string,
@@ -120,6 +122,7 @@ export const AccountProvider: React.FC<{ children: React.ReactNode }> = ({
     }
   };
 
+  // Refresh the account data
   const refreshAccount = () => {
     const storedAccount = localStorage.getItem("account");
     if (storedAccount) {

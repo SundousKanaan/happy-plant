@@ -24,10 +24,12 @@ const Stap3: React.FC<stapProps> = ({}) => {
   const [chosenPlant, setChosenPlant] = useState<string | undefined>();
   const [textCloud, setTextCloud] = useState("");
 
+  // handel the resize of the window to get the new size of it
   const handelResize = () => {
     setWindowSize({ width: window.innerWidth, height: window.innerHeight });
   };
 
+  // handel the drag event of the plant
   const handelDrag = (e: any, data: any) => {
     setIsDragging(true);
     BackgroundCheck.init({
@@ -41,6 +43,8 @@ const Stap3: React.FC<stapProps> = ({}) => {
 
     BackgroundCheck.refresh();
   };
+
+  // light function to check if the plant is in a good position
   const lightFunction = (mean: any) => {
     setTextCloud("Deze plek is Goed voor je plant.");
 
@@ -59,6 +63,7 @@ const Stap3: React.FC<stapProps> = ({}) => {
     }
   };
 
+  // dark function to check if the plant is in a bad position
   const darkFunction = (mean: any) => {
     setTextCloud("Deze plek is Slecht voor je plant.");
     let Darkness = mean.toFixed(2);
@@ -67,6 +72,7 @@ const Stap3: React.FC<stapProps> = ({}) => {
     setDisabledNextButton(true);
   };
 
+  // get the chosen plant from the local storage
   useEffect(() => {
     const chosenPlant = localStorage.getItem("chosenPlant");
     if (!chosenPlant) return;
@@ -76,6 +82,7 @@ const Stap3: React.FC<stapProps> = ({}) => {
     );
   }, []);
 
+  // check if the plant is in a good position
   useEffect(() => {
     handelResize();
     console.log({ plantPositionCheck });
@@ -84,8 +91,10 @@ const Stap3: React.FC<stapProps> = ({}) => {
     handelResize();
 
     return () => window.removeEventListener("resize", handelResize);
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
+  // save the plant position to the local storage
   useEffect(() => {
     localStorage.setItem("plantPosition", JSON.stringify(plantPosition));
   }, [plantPosition]);

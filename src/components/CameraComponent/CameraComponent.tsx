@@ -1,13 +1,8 @@
 // CameraComponent.tsx
 import React, { useEffect } from "react";
-import useCamera from "@/src/hooks/useCamera";
 import $ from "./CameraComponent.module.scss";
 import Button from "@/src/components/Button/Button";
 import cs from "classnames";
-import Dialog from "../Dialog/Dialog";
-import { useRouter } from "next/router";
-import { useStapper } from "@/src/contexts/tutorialStapper/tutorialStapper";
-import { useDialog } from "@/src/contexts/dialogContext/dialogContext";
 
 interface CameraComponentProps {
   plantCheck?: boolean;
@@ -32,9 +27,6 @@ const CameraComponent: React.FC<CameraComponentProps> = ({
   goBack,
   handelCorrectsignClick,
 }) => {
-  const router = useRouter();
-  const { handelCustomStap } = useStapper();
-
   return (
     <>
       <div className={$.streamContainer}>

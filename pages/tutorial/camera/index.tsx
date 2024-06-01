@@ -27,6 +27,7 @@ const CameraPage = () => {
     getSavedBackgroundImage();
   });
 
+  // Take a shot of the background
   const takeAshot = async () => {
     console.log("takeAshot");
 
@@ -39,6 +40,7 @@ const CameraPage = () => {
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
+  // Go back to the previous step
   const goBack = () => {
     handelCustomStap(1);
   };
@@ -72,6 +74,7 @@ const CameraPage = () => {
     handelCustomStap(1);
   };
 
+  // Go back to the previous step
   const handelBackAction = () => {
     handelCustomStap(1);
   };

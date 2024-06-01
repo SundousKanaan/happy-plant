@@ -34,7 +34,6 @@ const daysNamesArray = [
 
 const Agenda = () => {
   const router = useRouter();
-
   const { account } = useAccount();
   const currentDate = new Date();
   const currentYear = currentDate.getFullYear();
@@ -50,6 +49,7 @@ const Agenda = () => {
   const [gridView, setGridView] = useState<boolean>(true);
   const [userPlants, setUserPlants] = useState<PlantType[]>([]);
 
+  // to get the data from the database over the user plant name
   useEffect(() => {
     const database: {
       [key: string]: { plants: PlantType[] };
@@ -60,11 +60,13 @@ const Agenda = () => {
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
+  // this will run when the month changes
   useEffect(() => {
     getMonthData(usedMonthIndex);
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [usedMonthIndex]);
 
+  // get the days of the month
   const getMonthData = (usedMonthIndex: number) => {
     // Aantal dagen in de huidige maand
     const daysInMonth = new Date(
@@ -73,7 +75,7 @@ const Agenda = () => {
       0
     ).getDate();
 
-    // Array van de dagen in de huidige maand
+    // Array of days in the month
     const daysArray = Array.from(
       { length: daysInMonth },
       (_, index) => index + 1
@@ -82,6 +84,7 @@ const Agenda = () => {
     setDaysDatesArray(daysArray);
   };
 
+  // handel the next month
   const handelNextMonth = () => {
     if (usedMonthIndex < 11) {
       setUsedMonthIndex(usedMonthIndex + 1);
@@ -90,6 +93,7 @@ const Agenda = () => {
     }
   };
 
+  // handel the previous month
   const handelPreviousMonth = () => {
     if (usedMonthIndex > 0) {
       setUsedMonthIndex(usedMonthIndex - 1);
