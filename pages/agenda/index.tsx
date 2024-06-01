@@ -5,6 +5,7 @@ import Button from "@/src/components/Button/Button";
 import AgendaNote from "@/src/components/agendaNote/AgendaNote";
 import { PlantType } from "@/ts/types";
 import { useAccount } from "@/src/contexts/account/accountContext";
+import { useRouter } from "next/router";
 
 const monthesArray = [
   "Januari",
@@ -32,7 +33,8 @@ const daysNamesArray = [
 ];
 
 const Agenda = () => {
-  // Huidige datum
+  const router = useRouter();
+
   const { account } = useAccount();
   const currentDate = new Date();
   const currentYear = currentDate.getFullYear();
@@ -110,7 +112,7 @@ const Agenda = () => {
         <Button
           icon="Xsignal"
           color="transparent"
-          onClick={() => console.log("back")}
+          onClick={() => router.push("/homePage")}
         />
       </div>
 
@@ -194,9 +196,9 @@ const Agenda = () => {
                 onClick={() => setUsedMonthIndex(index)}
                 style={{
                   borderBottom:
-                    date > currentDay
-                      ? "none"
-                      : "solid 0.5px var(--secondary-brown)",
+                    (date > currentDay &&
+                      "solid 0.5px var(--secondary-brown)") ||
+                    "",
                   width: date === 31 ? "99%" : "100%",
                   backgroundColor:
                     date === currentDay &&
@@ -224,12 +226,14 @@ const Agenda = () => {
                       plantType={plant.type}
                       careType="watering"
                       currentDay={
-                        date === currentDay
-                        // &&                 currentMonth === monthesArray[usedMonthIndex]
+                        date === currentDay &&
+                        currentMonth === monthesArray[usedMonthIndex]
                       }
                       careDone={
-                        date < currentDay &&
-                        currentMonth === monthesArray[usedMonthIndex]
+                        true
+                        // date < currentDay
+                        // &&
+                        // currentMonth === monthesArray[usedMonthIndex]
                       }
                     />
                   ))}
@@ -254,7 +258,7 @@ const Agenda = () => {
                   >
                     {date}
 
-                    {/* {userPlants.map((plant) => (
+                    {userPlants.map((plant) => (
                       <AgendaNote
                         key={plant.id}
                         plantName={plant.plantName}
@@ -269,7 +273,7 @@ const Agenda = () => {
                           currentMonth === monthesArray[usedMonthIndex]
                         }
                       />
-                    ))} */}
+                    ))}
                   </p>
                 </li>
               ))}

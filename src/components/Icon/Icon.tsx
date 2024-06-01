@@ -7,19 +7,34 @@ interface IconProps {
   icon?: string;
   bg?: string;
   text?: string;
+  isFixedSize?: boolean;
   intro?: boolean;
 }
 
-export const Icon: React.FC<IconProps> = ({ icon, bg, text, intro }) => {
+export const Icon: React.FC<IconProps> = ({
+  icon,
+  bg,
+  text,
+  intro,
+  isFixedSize = false,
+}) => {
+  // check if the icon is an icon or a background image
   let imageSrc;
   if (icon) {
     imageSrc = `/images/icons/${icon}.svg`;
   } else {
     imageSrc = `/images/${bg}.svg`;
   }
+
   return (
     <div className={$.container}>
-      <div className={cs($.imageContainer, { [$.noneText]: !text })}>
+      <div
+        className={cs(
+          $.imageContainer,
+          { [$.noneText]: !text },
+          { [$.number]: isFixedSize }
+        )}
+      >
         <Image
           src={imageSrc}
           className={cs($.iconImage, { [$.bgImage]: bg })}
@@ -32,7 +47,8 @@ export const Icon: React.FC<IconProps> = ({ icon, bg, text, intro }) => {
           className={cs(
             $.iconText,
             { [$.introStyle]: intro === true },
-            { [$.minMargin]: bg }
+            { [$.minMargin]: bg },
+            { [$.smallerText]: isFixedSize }
           )}
         >
           {text}

@@ -11,6 +11,7 @@ interface PopUpProps {
   pupUpType: "budPopup" | "page" | "addPlant";
   title?: string;
   backgroundColor?: "white" | "brown";
+  ClosePopUp?: () => void;
 }
 
 const PopUp: React.FC<PopUpProps> = ({
@@ -20,6 +21,7 @@ const PopUp: React.FC<PopUpProps> = ({
   pupUpType,
   title,
   backgroundColor,
+  ClosePopUp,
 }) => {
   return (
     <section
@@ -44,11 +46,7 @@ const PopUp: React.FC<PopUpProps> = ({
         <>
           <h2 className={$.title}>{title}</h2>
           <div className={$.backButton}>
-            <Button
-              icon="Xsignal"
-              color="transparent"
-              onClick={() => console.log("back")}
-            />
+            <Button icon="Xsignal" color="transparent" onClick={ClosePopUp} />
           </div>
 
           <div

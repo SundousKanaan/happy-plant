@@ -18,7 +18,7 @@ interface stapProps {}
 const Stap4: React.FC<stapProps> = ({}) => {
   const router = useRouter();
   const { account } = useAccount();
-  const { handlePreviousStap, showAward } = useStapper();
+  const { handlePreviousStap } = useStapper();
   const [popUpIsOpen, setPopUpIsOpen] = useState<boolean>(false);
   const [dragging, setDragging] = useState<boolean>(false);
   const [dragStoped, setDragStoped] = useState<boolean>(false);
@@ -39,6 +39,7 @@ const Stap4: React.FC<stapProps> = ({}) => {
     "Laten we jouw plant nu voor het eerst keer water geven!"
   );
   const [disabledNextButton, setDisabledNextButton] = useState(true);
+  const [showAward, setShowAward] = useState<boolean>(false);
 
   useEffect(() => {
     setSavedPlantPosition(
@@ -81,11 +82,26 @@ const Stap4: React.FC<stapProps> = ({}) => {
     if (!gaveWater) return;
     const timer = setTimeout(() => {
       setGaveWater(false);
-      setDisabledNextButton(false);
     }, 5000);
 
-    return () => clearTimeout(timer);
+    return () => {
+      clearTimeout(timer);
+    };
   }, [gaveWater]);
+
+  useEffect(() => {
+    if (!gaveWater) return;
+
+    const awardTimer = setTimeout(() => {
+      if (!showAward) {
+        setShowAward(true);
+      }
+    }, 5000);
+
+    return () => {
+      clearTimeout(awardTimer);
+    };
+  }, [gaveWater, showAward]);
 
   return (
     <TutorialLayout disabledNext={disabledNextButton} cloudText={textCloud}>

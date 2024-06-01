@@ -16,14 +16,9 @@ export const StapperProvider = ({
   const [tutorialStap, setTutorialStap] = useState(1);
   const [savedpreviousStap, setSavedPreviousStap] = useState<string>("");
 
-  const [showAward, setShowAward] = useState<boolean>(false);
-
   // this function is used to go to the next tutorial step
   const handleNexttStap = () => {
-    if (tutorialStap + 1 >= 5) {
-      console.log("tutorialStap + 1 >= 5");
-      setShowAward(true);
-    } else {
+    if (tutorialStap + 1 < 5) {
       setTutorialStap(tutorialStap + 1);
       router.push(`/tutorial/stap${tutorialStap + 1}`);
     }
@@ -41,19 +36,9 @@ export const StapperProvider = ({
     router.push(`/tutorial/stap${stap}`);
   };
 
-  // useEffect(() => {
-  //   if (tutorialStap === 2 || tutorialStap === 3) {
-  //     setDisabledNextButton(true);
-  //     console.log("--tutorialStapper:", tutorialStap);
-  //   } else {
-  //     setDisabledNextButton(false);
-  //   }
-  // }, [tutorialStap]);
-
   const value = {
     tutorialStap,
     savedpreviousStap,
-    showAward,
     handleNexttStap,
     handlePreviousStap,
     handleCustomStap,

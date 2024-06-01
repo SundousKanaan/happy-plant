@@ -1,0 +1,509 @@
+.container {
+  width: 100%;
+  height: 100vh;
+  display: grid;
+  grid-template-columns: 2rem repeat(7, 1fr) 4rem 2rem;
+  grid-template-rows: 1rem repeat(5, 1fr) 1rem;
+  gap: 0.5rem;
+}
+
+.bgContainer {
+  width: 100%;
+  height: 100%;
+  grid-area: 1/1/-1/-1;
+  position: relative;
+  transform: rotateY(180deg);
+  z-index: -1;
+
+  &.bg {
+    width: auto;
+    height: 100%;
+    object-fit: cover;
+    object-position: bottom;
+    position: absolute;
+  }
+}
+
+.userContainer {
+  grid-area: 2/2/3/4;
+  z-index: 2;
+}
+
+.sittingsContainer {
+  grid-area: 2/9/3/10;
+  width: 100%;
+  aspect-ratio: 1;
+  z-index: 2;
+  visibility: visible;
+}
+
+.tasksContainer {
+  width: 26rem;
+  height: 14rem;
+
+  position: absolute;
+  top: 0;
+  right: 15%;
+  z-index: 100;
+  border-radius: 0 0 1rem 1rem;
+
+  border: solid 3px var(--primary-brown);
+  border-top: none;
+  transform: translateY(-100%);
+  transition: 0.5s;
+
+  &.open {
+    transform: translateY(0);
+  }
+}
+
+.tasksButton {
+  width: 6rem;
+  border: none;
+  padding: 0.5rem 1rem 0.5rem 2rem;
+  background-color: var(--primary-brown);
+  font-size: 1rem;
+  font-family: var(--primary-font);
+  color: var(--white);
+  border-radius: 0 0 0.5rem 0.5rem;
+  position: absolute;
+  top: 100%;
+  left: calc(50% - 6rem / 2);
+
+  &::before {
+    content: "";
+    display: block;
+    width: 1.3rem;
+    height: 1.3rem;
+    position: absolute;
+    top: calc(50% - 1.3rem / 2);
+    left: 5%;
+    background-color: transparent;
+    background-image: url("/images/icons/whiteArrow.svg");
+    background-size: contain;
+    background-repeat: no-repeat;
+    background-position: center;
+    transition: 0.5s;
+  }
+
+  .open &::before {
+    transform: rotate(180deg);
+  }
+}
+
+.tasksList {
+  width: 100%;
+  height: 100%;
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  overflow-y: auto;
+  scrollbar-color: var(--primary-brown) transparent;
+  scrollbar-width: thin;
+  background-color: var(--primary-beige);
+  position: relative;
+  border-radius: 0 0 1rem 1rem;
+}
+
+.taskItem {
+  width: 85%;
+  margin-bottom: 1rem;
+  padding-left: 3rem;
+  position: relative;
+
+  &::before {
+    content: "";
+    display: block;
+    width: 1.2rem;
+    aspect-ratio: 1;
+    border-radius: 50%;
+    position: absolute;
+    top: calc(50% - 0.5rem);
+    left: 3.5%;
+    z-index: 1;
+    background-color: white;
+    box-shadow: inset 0 0 0 3px var(--primary-green);
+  }
+
+  &::after {
+    content: "";
+    display: block;
+    width: 0.3rem;
+    height: 100%;
+    position: absolute;
+    left: 5.3%;
+    top: 80%;
+    background-image: repeating-linear-gradient(
+      var(--primary-green) 0.4rem 0.8rem,
+      transparent 0.8rem 1rem,
+      var(--primary-green) 0.12rem 1.2rem
+    );
+  }
+
+  &.doel::before {
+    background-image: url("/images/icons/taskStar.svg");
+    background-position: center;
+    background-size: contain;
+    background-repeat: no-repeat;
+    background-color: transparent;
+    width: 2rem;
+    aspect-ratio: 1;
+    top: calc(50% - 2rem / 2);
+    left: 2%;
+    border-radius: 0;
+    box-shadow: none;
+  }
+
+  &.doen::after {
+    background-image: none;
+    background-color: var(--primary-green);
+  }
+
+  &.doen::before {
+    background-color: var(--primary-green);
+  }
+
+  &.doel.doen::before {
+    background-image: url("/images/icons/taskStarFull.svg");
+    background-color: transparent;
+  }
+}
+
+.nextTaskText {
+  grid-area: 2/5/3/9;
+  width: fit-content;
+  height: fit-content;
+  padding: 0.2rem 0.7rem;
+  margin: 0;
+  margin-top: 0.7rem;
+  text-align: center;
+  background-color: var(--half-white);
+  border-radius: 0.5rem;
+  font-size: 0.9rem;
+}
+
+.nextAward {
+  grid-area: 2/4/3/5;
+  align-self: center;
+  margin-left: 0.5rem;
+  width: 50%;
+  aspect-ratio: 1;
+  background-color: var(--half-white);
+  border-radius: 15%;
+  position: relative;
+
+  &::before {
+    content: "";
+    display: block;
+    width: 0;
+    height: 0;
+    transform: scale(3);
+    background-color: transparent;
+    border: solid 3px var(--half-white);
+    border-left-color: transparent;
+    border-bottom-color: transparent;
+    border-top-color: transparent;
+    position: absolute;
+    right: 111%;
+    top: calc(50% - 3px);
+  }
+}
+
+.icon {
+  width: 120%;
+  aspect-ratio: 1;
+  position: absolute;
+  top: -15%;
+  transform: rotate(30deg);
+}
+
+.awardText {
+  width: fit-content;
+  position: absolute;
+  bottom: -40%;
+  left: 50%;
+  transform: translateX(-50%);
+  font-family: var(--primary-font);
+  font-size: 0.8rem;
+  text-align: center;
+  -webkit-text-stroke-width: 1px;
+  -webkit-text-stroke-color: var(--white);
+  paint-order: stroke fill;
+}
+
+.actionButtons {
+  grid-area: 3/9/6/10;
+  width: 100%;
+  height: 100%;
+  display: grid;
+  grid-template-columns: 1fr;
+  grid-template-rows: repeat(3, 1fr);
+  gap: 0.5rem;
+
+  z-index: 1;
+}
+
+.buttonItem {
+  &:nth-of-type(2) {
+    height: 70%;
+    align-self: center;
+  }
+}
+
+.button {
+  width: 100%;
+  background-color: transparent;
+  border: none;
+  padding: 0;
+  position: relative;
+}
+
+.wateringIcon {
+  width: 100%;
+  aspect-ratio: 1/0.8;
+  position: relative;
+  opacity: 50%;
+}
+
+.wateringText {
+  width: fit-content;
+  line-height: 0.8rem;
+  font-family: var(--primary-font);
+  font-size: 0.8rem;
+  text-align: center;
+  margin: 0;
+
+  -webkit-text-stroke-width: 1px;
+  -webkit-text-stroke-color: var(--white);
+  paint-order: stroke fill;
+
+  position: absolute;
+  bottom: 2%;
+  left: -10%;
+}
+
+.menuButton {
+  grid-area: 6/9/7/10;
+  height: 90%;
+  align-self: center;
+  aspect-ratio: 1;
+  display: flex;
+  justify-content: center;
+}
+
+.menuButton .button {
+  width: 100%;
+  padding: 0.3rem 0rem;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+
+  border-radius: 15%;
+  background-color: var(--tertiary-brown);
+  box-shadow: var(--button-box-shadow);
+}
+
+.menuIcon {
+  flex-shrink: 0;
+  height: 75%;
+  aspect-ratio: 1;
+  position: relative;
+}
+
+.buttonText {
+  width: 100%;
+  line-height: 0.9rem;
+  font-family: var(--primary-font);
+  font-size: 0.8rem;
+  color: var(--white);
+  text-align: center;
+  margin: 0;
+}
+
+.menuList {
+  grid-area: 6/5/7/10;
+  justify-self: end;
+  width: fit-content;
+  height: 100%;
+  align-self: center;
+}
+
+.changeButton {
+  grid-area: 3/2/4/3;
+  justify-self: center;
+  height: 5rem;
+  aspect-ratio: 1;
+  z-index: 2;
+  position: relative;
+  opacity: 50%;
+}
+
+.changeButtonText {
+  width: fit-content;
+  position: absolute;
+  -webkit-text-stroke-width: 1px;
+  -webkit-text-stroke-color: var(--white);
+  paint-order: stroke fill;
+  line-height: 0.9rem;
+  text-align: center;
+  font-family: var(--secondary-font);
+  font-weight: var(--font-bold);
+  font-size: 0.9rem;
+  margin-top: -0.9rem;
+}
+
+.plant {
+  width: 8rem;
+  aspect-ratio: 1;
+  position: fixed;
+  top: calc(50% - 8rem / 2);
+  left: calc(50% - 8rem / 2);
+}
+
+.potImage {
+  width: 100%;
+  height: 100%;
+  object-fit: contain;
+  object-position: bottom;
+  position: absolute;
+}
+
+.nameContainer {
+  width: 100%;
+  height: fit-content;
+  position: absolute;
+  top: -100%;
+  display: flex;
+  justify-content: center;
+  transform: scale(0.8);
+}
+
+.plantName {
+  width: fit-content;
+  margin: 0;
+  padding: 0.2rem 0.8rem;
+  background-color: var(--half-white);
+  border-radius: 0.5rem;
+
+  &::before {
+    content: "";
+    display: block;
+    width: 0;
+    height: 0;
+    transform: scale(3);
+    background-color: transparent;
+    border: solid 3px var(--half-white);
+    border-left-color: transparent;
+    border-bottom-color: transparent;
+    border-right-color: transparent;
+    position: absolute;
+    top: 115%;
+    left: calc(50% - 3px);
+  }
+}
+
+.fakePLant {
+  width: 0.6rem;
+  height: 3rem;
+  background-color: var(--secondary-green);
+  border-radius: 5rem;
+
+  position: absolute;
+  left: calc(50% - 0.6rem / 2);
+  top: -20%;
+
+  transform-origin: bottom;
+  box-shadow: var(--button-box-shadow);
+
+  &::after {
+    content: "";
+    width: 2rem;
+    height: 3rem;
+    background-color: rgb(255, 0, 102);
+    border-radius: 50% 50% 50% 50% / 70% 70% 30% 30%;
+    position: absolute;
+    top: -90%;
+    left: calc(50% - 2rem / 2);
+    box-shadow: var(--button-box-shadow);
+    opacity: 100%;
+    transform: scale(1);
+  }
+}
+
+.leafRight {
+  width: 1.5rem;
+  height: 2rem;
+  background-color: var(--secondary-green);
+  border-radius: 100% 0% 100% 0% / 100% 0% 100% 0%;
+  position: absolute;
+  top: -5%;
+  left: 120%;
+  transform: scaleX(1) scaleY(1) rotate(15deg);
+  box-shadow: var(--button-box-shadow);
+}
+
+.leafLeft {
+  width: 1.5rem;
+  height: 2rem;
+  background-color: var(--secondary-green);
+  border-radius: 0% 100% 0% 100% / 0% 100% 0% 100%;
+  position: absolute;
+  top: -7%;
+  left: -260%;
+  transform: scaleX(1) scaleY(1) rotate(-10deg);
+  box-shadow: var(--button-box-shadow);
+}
+
+.renameContainer {
+  width: 100vw;
+  height: 100vh;
+  position: fixed;
+  top: 0;
+  z-index: 1000;
+  background-color: var(--light-black);
+}
+
+.renameBlock {
+  width: 26rem;
+  height: fit-content;
+  padding: 1rem 0.5rem 1rem 6rem;
+  background-color: var(--primary-beige);
+  position: absolute;
+  top: calc(50% - 10rem / 2);
+  left: calc(50% - 25rem / 2);
+  border-radius: var(--paper-border-radius);
+
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 1rem;
+  position: relative;
+
+  &::before {
+    content: "";
+    width: 10rem;
+    height: 20rem;
+    background-image: url("/images/Bud/Budnormaal.svg");
+    background-size: cover;
+    background-repeat: no-repeat;
+    background-position: center;
+    position: absolute;
+    top: -60%;
+    left: -15%;
+  }
+}
+
+.renameTitle {
+  width: fit-content;
+  margin: 0;
+  text-align: center;
+  font-family: var(--primary-font);
+  font-size: 1rem;
+  color: var(--secondary-green);
+}
+
+.input {
+  width: 85%;
+  height: 3rem;
+}

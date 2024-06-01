@@ -6,7 +6,6 @@ import { BudCloud } from "@/src/components/BudCloud/BudCloud";
 import Button from "@/src/components/Button/Button";
 import cs from "classnames";
 import $ from "./tutorialLayout.module.scss";
-import texts from "@/ts/texts";
 import { useStapper } from "@/src/contexts/tutorialStapper/tutorialStapper";
 
 interface TutorialLayoutProps {
@@ -73,11 +72,10 @@ const TutorialLayout: React.FC<TutorialLayoutProps> = ({
         <span className={cs($.budCloud)}>
           <BudCloud type="happy" text={cloudText} isOpen />
         </span>
-        {/* changeCloudText */}
         <div className={$.actionButtons}>
           <div
             className={cs($.backButton, {
-              [$.visible]: tutorialStap > 1,
+              [$.visible]: tutorialStap > 1 && tutorialStap < 5,
             })}
           >
             <Button text="Terug" color="brown" onClick={handleBackButton} />

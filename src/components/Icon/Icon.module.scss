@@ -9,12 +9,15 @@
 }
 
 .imageContainer {
-  width: inherit;
+  width: 100%;
   aspect-ratio: 1;
-  position: relative;
 
   &.noneText {
     width: 100%;
+  }
+
+  &.number {
+    width: 4rem;
   }
 }
 
@@ -42,6 +45,11 @@
   -webkit-text-stroke-width: 1px;
   -webkit-text-stroke-color: var(--white);
   paint-order: stroke fill;
+
+  &.smallerText {
+    font-size: 0.5rem;
+    margin-top: -2rem;
+  }
 
   &.introStyle {
     max-width: fit-content;
