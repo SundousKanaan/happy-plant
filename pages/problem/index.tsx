@@ -3,14 +3,17 @@ import Image from "next/image";
 import { User } from "@/src/components/User/User";
 import { Icon } from "@/src/components/Icon/Icon";
 import cs from "classnames";
-import $ from "./homePage.module.scss";
+import $ from "@/pages/homePage/homePage.module.scss";
+import styles from "./problem.module.scss";
 import { useRouter } from "next/router";
 import PopUP from "@/src/components/PopUp/PopUp";
 import CareHelp from "@/src/components/CareHelp/CareHelp";
 import Menulist from "@/src/components/menuList/MenuList";
 import { PlantPosition } from "@/ts/types";
+import dataBase from "@/data/database.json";
 import Input from "@/src/components/Input/Input";
 import Button from "@/src/components/Button/Button";
+import { BudCloud } from "@/src/components/BudCloud/BudCloud";
 
 const tasks = [
   {
@@ -65,7 +68,7 @@ const tasks = [
   },
 ];
 
-const HomePage = () => {
+const Problem = () => {
   const router = useRouter();
   const [bg, setBg] = useState("");
   const [isRenameOpen, setIsRenameOpen] = useState(true);
@@ -85,6 +88,9 @@ const HomePage = () => {
     x: 0,
     y: 0,
   });
+  const [textCloud, setTextCloud] =
+    useState(`Ellie is ziek! Wij hebben haar hulp nodig!
+  Bekijk haar probleem!`);
 
   useEffect(() => {
     const SavedPlantPosition = localStorage.getItem("plantPosition");
@@ -178,6 +184,10 @@ const HomePage = () => {
         </div>
       )}
 
+      <span className={cs(styles.budCloud)}>
+        <BudCloud type="happy" text={textCloud} isOpen />
+      </span>
+
       <div className={$.bgContainer}>
         {bg !== "" && (
           <Image
@@ -199,7 +209,7 @@ const HomePage = () => {
         <Icon icon="settings" />
       </div>
 
-      <div className={cs($.tasksContainer, { [$.open]: tasksListIsOpen })}>
+      <div className={cs($.tasksContainer)}>
         <button
           className={$.tasksButton}
           onClick={() => setTasksListIsOpen(!tasksListIsOpen)}
@@ -223,12 +233,6 @@ const HomePage = () => {
           })}
         </ul>
       </div>
-
-      {tasks.find((task) => task.doen === false) && (
-        <p className={$.nextTaskText}>
-          volgende: {tasks.find((task) => task.doen === false)?.text}
-        </p>
-      )}
 
       <div className={$.nextAward}>
         <div className={$.icon}>
@@ -273,7 +277,7 @@ const HomePage = () => {
         }}
       >
         <div className={$.nameContainer}>
-          <p className={$.plantName}>{plantName}</p>
+          <p className={cs($.plantName, styles.plantName)}>{plantName}</p>
         </div>
         <div className={cs($.fakePLant)}>
           <div className={$.leafRight}></div>
@@ -323,4 +327,4 @@ const HomePage = () => {
   );
 };
 
-export default HomePage;
+export default Problem;
