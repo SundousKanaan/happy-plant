@@ -12,7 +12,7 @@ interface stapProps {
 const Stap1: React.FC<stapProps> = ({ onRoomSelect }) => {
   // const [selectedRoom, setSelectedRoom] = React.useState("");
   const router = useRouter();
-  const handleRoomClick = (room: string) => {
+  const handelRoomClick = (room: string) => {
     // onRoomSelect(room);
     // if (room === "livingroom") {
     //   setSelectedRoom("livingroom");
@@ -21,7 +21,7 @@ const Stap1: React.FC<stapProps> = ({ onRoomSelect }) => {
     // }
   };
 
-  const handleCamera = () => {
+  const handelCamera = () => {
     // setSelectedRoom("");
     router.push("/tutorial/camera");
   };
@@ -31,7 +31,7 @@ const Stap1: React.FC<stapProps> = ({ onRoomSelect }) => {
       <div className={$.stap1}>
         <ul className={$.iconsList}>
           <li className={$.icon}>
-            <button className={$.iconButton} onClick={handleCamera}>
+            <button className={$.iconButton} onClick={handelCamera}>
               <Icon icon="camera" text="Mijn kamer" />
             </button>
           </li>
@@ -42,7 +42,7 @@ const Stap1: React.FC<stapProps> = ({ onRoomSelect }) => {
           >
             <button
               className={$.iconButton}
-              onClick={() => handleRoomClick("bedroom")}
+              onClick={() => handelRoomClick("bedroom")}
             >
               <Icon bg="bedroom" text="Slaapkamer" />
             </button>
@@ -56,7 +56,7 @@ const Stap1: React.FC<stapProps> = ({ onRoomSelect }) => {
           >
             <button
               className={$.iconButton}
-              onClick={() => handleRoomClick("livingroom")}
+              onClick={() => handelRoomClick("livingroom")}
             >
               <Icon bg="livingroom" text="Woonkamer" />
             </button>

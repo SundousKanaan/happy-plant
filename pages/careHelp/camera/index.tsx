@@ -50,7 +50,7 @@ const CameraPage = () => {
     }
   }, [plantImage]);
 
-  const handleBackAction = () => {
+  const handelBackAction = () => {
     console.log({ previusStap });
 
     if (previusStap) router.push(previusStap);
@@ -61,7 +61,7 @@ const CameraPage = () => {
     "Maak een foto van de plant vanuit een andere hoek",
   ];
 
-  const handleCorrectsignClick = () => {
+  const handelCorrectsignClick = () => {
     console.log("checkData");
   };
 
@@ -71,19 +71,19 @@ const CameraPage = () => {
     setCorrectsignDisabled(true);
   };
 
-  const handlecloseDialog = () => {
+  const handelcloseDialog = () => {
     closeDialog();
     setCameraButtonDisabled(false);
     setCorrectsignDisabled(true);
     setPhotosArray([]);
   };
 
-  const handleDoneClick = () => {
+  const handelDoneClick = () => {
     closeDialog();
     setCameraButtonDisabled(false);
     setCorrectsignDisabled(true);
     setPhotosArray([]);
-    router.push("/homePage");
+    router.push("/home");
   };
 
   return (
@@ -349,11 +349,11 @@ const CameraPage = () => {
               <Button
                 text="Nieuw schot"
                 color="brown"
-                onClick={handlecloseDialog}
+                onClick={handelcloseDialog}
               />
             </div>
             <div className={$.DialogButton}>
-              <Button text="Klaar" color="green" onClick={handleDoneClick} />
+              <Button text="Klaar" color="green" onClick={handelDoneClick} />
             </div>
           </div>
         </div>
@@ -362,8 +362,8 @@ const CameraPage = () => {
         text={cameraNotes[0]}
         cameraButton={takeAshot}
         videoRef={videoRef}
-        goBack={handleBackAction}
-        handleCorrectsignClick={openDialog}
+        goBack={handelBackAction}
+        handelCorrectsignClick={openDialog}
         plantCheck
         correctsignDisabled={correctsignDisabled}
         cameraButtonDisabled={cameraButtonDisabled}

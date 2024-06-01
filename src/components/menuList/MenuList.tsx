@@ -5,18 +5,18 @@ import cs from "classnames";
 import { useRouter } from "next/router";
 
 interface MenulistProps {
-  handleColeMenu: () => void;
+  handelColeMenu: () => void;
   openCareHelp: () => void;
 }
 
 const Menulist: React.FC<MenulistProps> = ({
-  handleColeMenu,
+  handelColeMenu,
   openCareHelp,
 }) => {
   const roeter = useRouter();
   return (
     <div className={$.container}>
-      <button className={$.xsignal} onClick={handleColeMenu}></button>
+      <button className={$.xsignal} onClick={handelColeMenu}></button>
       <ul className={$.buttonsList}>
         <li className={$.button}>
           <Button

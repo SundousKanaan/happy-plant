@@ -384,6 +384,8 @@
   padding: 0.2rem 0.8rem;
   background-color: var(--half-white);
   border-radius: 0.5rem;
+  font-weight: var(--font-bold);
+  color: var(--secondary-green);
 
   &::before {
     content: "";

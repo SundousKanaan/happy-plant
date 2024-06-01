@@ -18,7 +18,7 @@ interface stapProps {}
 const Stap4: React.FC<stapProps> = ({}) => {
   const router = useRouter();
   const { account } = useAccount();
-  const { handlePreviousStap } = useStapper();
+  const { handelPreviousStap } = useStapper();
   const [popUpIsOpen, setPopUpIsOpen] = useState<boolean>(false);
   const [dragging, setDragging] = useState<boolean>(false);
   const [dragStoped, setDragStoped] = useState<boolean>(false);
@@ -56,8 +56,8 @@ const Stap4: React.FC<stapProps> = ({}) => {
     setCareInfo(userPlants[tutorialPlantIndex].careInfo);
   }, []);
 
-  const handleBackButton = () => {
-    handlePreviousStap();
+  const handelBackButton = () => {
+    handelPreviousStap();
   };
 
   const handelDragWater = (e: any, data: any) => {
@@ -73,8 +73,8 @@ const Stap4: React.FC<stapProps> = ({}) => {
     );
   };
 
-  const handleClaim = () => {
-    router.push("/homePage");
+  const handelClaim = () => {
+    router.push("/home");
   };
 
   // set timer to setGaveWater false after 5 seconds
@@ -109,7 +109,7 @@ const Stap4: React.FC<stapProps> = ({}) => {
         <Award
           award="potted-plant-smile"
           text="plant pot"
-          handleClaim={handleClaim}
+          handelClaim={handelClaim}
         />
       )}
 
@@ -129,7 +129,7 @@ const Stap4: React.FC<stapProps> = ({}) => {
           helpen.
         </p>
         <div className={$.popUpButtons}>
-          <Button text="Terug" color="brown" onClick={handleBackButton} />
+          <Button text="Terug" color="brown" onClick={handelBackButton} />
 
           <Button
             text="Doorgaan"

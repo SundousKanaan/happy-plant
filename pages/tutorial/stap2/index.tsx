@@ -10,7 +10,7 @@ import TutorialLayout from "@/src/layouts/tutorialLayout";
 import { useStapper } from "@/src/contexts/tutorialStapper/tutorialStapper";
 
 const Stap2 = () => {
-  const { handleNexttStap } = useStapper();
+  const { handelNexttStap } = useStapper();
   const { account } = useAccount();
 
   const userId = account?.id;
@@ -88,7 +88,7 @@ const Stap2 = () => {
 
       saveData(updatedData);
     }
-    handleNexttStap();
+    handelNexttStap();
   };
 
   const handelOpenOptionsList = () => {

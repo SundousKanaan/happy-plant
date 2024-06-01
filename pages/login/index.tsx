@@ -14,7 +14,7 @@ const Login = () => {
   const [firstName, setFirstName] = useState("");
   const [lastName, setLastName] = useState("");
 
-  const handleInputChange = (event: React.ChangeEvent<HTMLInputElement>) => {
+  const handelInputChange = (event: React.ChangeEvent<HTMLInputElement>) => {
     refreshErrorMessage();
     const { type, value, name } = event.target;
 
@@ -32,14 +32,14 @@ const Login = () => {
     }
   };
 
-  const handleSignup = () => {
+  const handelSignup = () => {
     signup(email, password, firstName, lastName);
     if (errorMessage !== "") {
       refreshErrorMessage();
     }
   };
 
-  const handleLogin = () => {
+  const handelLogin = () => {
     login(email, password);
     if (errorMessage !== "") {
       refreshErrorMessage();
@@ -53,13 +53,13 @@ const Login = () => {
       </div>
       {signingUp ? (
         <div className={$.formContainer}>
-          <SingupForm onChange={handleInputChange} />
+          <SingupForm onChange={handelInputChange} />
           <p className={$.ForgottenNote}>Forgotten password?</p>
 
           <span className={$.errorMessage}>{errorMessage}</span>
 
           <div className={$.buttonContainer}>
-            <Button text="Signup" color="brown" onClick={handleSignup} />
+            <Button text="Signup" color="brown" onClick={handelSignup} />
           </div>
           <p className={$.pElement}>Of</p>
           <div className={$.buttonContainer}>
@@ -72,14 +72,14 @@ const Login = () => {
         </div>
       ) : (
         <div className={$.formContainer}>
-          <LoginForm onChange={handleInputChange} />
+          <LoginForm onChange={handelInputChange} />
 
           <p className={$.ForgottenNote}>Forgotten password?</p>
 
           <span className={$.errorMessage}>{errorMessage}</span>
 
           <div className={$.buttonContainer}>
-            <Button text="Login" color="green" onClick={handleLogin} />
+            <Button text="Login" color="green" onClick={handelLogin} />
           </div>
           <p className={$.pElement}>Of</p>
 

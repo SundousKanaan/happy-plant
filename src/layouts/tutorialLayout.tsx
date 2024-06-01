@@ -19,17 +19,17 @@ const TutorialLayout: React.FC<TutorialLayoutProps> = ({
   disabledNext = false,
   cloudText,
 }) => {
-  const { tutorialStap, handleNexttStap, handlePreviousStap } = useStapper();
+  const { tutorialStap, handelNexttStap, handelPreviousStap } = useStapper();
   const [disabledNextButton, setDisabledNextButton] = useState(false);
 
   const [bg, setBg] = useState("");
 
   const handelNextButton = () => {
-    handleNexttStap();
+    handelNexttStap();
   };
 
-  const handleBackButton = () => {
-    handlePreviousStap();
+  const handelBackButton = () => {
+    handelPreviousStap();
   };
 
   useEffect(() => {
@@ -78,7 +78,7 @@ const TutorialLayout: React.FC<TutorialLayoutProps> = ({
               [$.visible]: tutorialStap > 1 && tutorialStap < 5,
             })}
           >
-            <Button text="Terug" color="brown" onClick={handleBackButton} />
+            <Button text="Terug" color="brown" onClick={handelBackButton} />
           </div>
 
           <div className={$.nextButton}>

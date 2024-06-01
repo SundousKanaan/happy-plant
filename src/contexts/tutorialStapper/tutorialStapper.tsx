@@ -17,7 +17,7 @@ export const StapperProvider = ({
   const [savedpreviousStap, setSavedPreviousStap] = useState<string>("");
 
   // this function is used to go to the next tutorial step
-  const handleNexttStap = () => {
+  const handelNexttStap = () => {
     if (tutorialStap + 1 < 5) {
       setTutorialStap(tutorialStap + 1);
       router.push(`/tutorial/stap${tutorialStap + 1}`);
@@ -25,13 +25,13 @@ export const StapperProvider = ({
   };
 
   // this function is used to go to the previous tutorial step
-  const handlePreviousStap = () => {
+  const handelPreviousStap = () => {
     setTutorialStap(tutorialStap - 1);
     router.push(`/tutorial/stap${tutorialStap - 1}`);
   };
 
   // this function is used to go to a specific tutorial step
-  const handleCustomStap = (stap: number) => {
+  const handelCustomStap = (stap: number) => {
     setTutorialStap(stap);
     router.push(`/tutorial/stap${stap}`);
   };
@@ -39,9 +39,9 @@ export const StapperProvider = ({
   const value = {
     tutorialStap,
     savedpreviousStap,
-    handleNexttStap,
-    handlePreviousStap,
-    handleCustomStap,
+    handelNexttStap,
+    handelPreviousStap,
+    handelCustomStap,
   };
 
   return (

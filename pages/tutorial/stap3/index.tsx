@@ -24,7 +24,7 @@ const Stap3: React.FC<stapProps> = ({}) => {
   const [chosenPlant, setChosenPlant] = useState<string | undefined>();
   const [textCloud, setTextCloud] = useState("");
 
-  const handleResize = () => {
+  const handelResize = () => {
     setWindowSize({ width: window.innerWidth, height: window.innerHeight });
   };
 
@@ -77,13 +77,13 @@ const Stap3: React.FC<stapProps> = ({}) => {
   }, []);
 
   useEffect(() => {
-    handleResize();
+    handelResize();
     console.log({ plantPositionCheck });
 
-    window.addEventListener("resize", handleResize);
-    handleResize();
+    window.addEventListener("resize", handelResize);
+    handelResize();
 
-    return () => window.removeEventListener("resize", handleResize);
+    return () => window.removeEventListener("resize", handelResize);
   }, []);
 
   useEffect(() => {

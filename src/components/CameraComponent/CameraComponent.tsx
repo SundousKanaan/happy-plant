@@ -18,7 +18,7 @@ interface CameraComponentProps {
   cameraButton?: () => void;
   videoRef: React.RefObject<HTMLVideoElement>;
   goBack?: () => void;
-  handleCorrectsignClick?: () => void;
+  handelCorrectsignClick?: () => void;
 }
 
 const CameraComponent: React.FC<CameraComponentProps> = ({
@@ -30,10 +30,10 @@ const CameraComponent: React.FC<CameraComponentProps> = ({
   cameraButton,
   videoRef,
   goBack,
-  handleCorrectsignClick,
+  handelCorrectsignClick,
 }) => {
   const router = useRouter();
-  const { handleCustomStap } = useStapper();
+  const { handelCustomStap } = useStapper();
 
   return (
     <>
@@ -59,7 +59,7 @@ const CameraComponent: React.FC<CameraComponentProps> = ({
               <Button
                 icon="correctsign"
                 color="transparent"
-                onClick={handleCorrectsignClick}
+                onClick={handelCorrectsignClick}
                 disabled={correctsignDisabled}
               />
             </div>

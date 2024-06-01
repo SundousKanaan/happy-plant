@@ -82,7 +82,7 @@ const CareHelp: React.FC<CareHelpProps> = ({
   };
 
   // Filter de informatie op basis van de geselecteerde filter
-  const handleFilter = (filterIndex: number) => () => {
+  const handelFilter = (filterIndex: number) => () => {
     const data = careInfoDatabase.filter((info) => info.id === filterIndex);
     setFilterInfo(data[0].category.info);
   };
@@ -130,7 +130,7 @@ const CareHelp: React.FC<CareHelpProps> = ({
                 <Button
                   color="white"
                   text={item}
-                  onClick={handleFilter(index)}
+                  onClick={handelFilter(index)}
                   minpadding
                   textSize=".65rem"
                   disabled={!disabled}

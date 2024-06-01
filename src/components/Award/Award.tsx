@@ -6,10 +6,10 @@ import Button from "../Button/Button";
 interface AwardProps {
   award: string;
   text: string;
-  handleClaim: () => void;
+  handelClaim: () => void;
 }
 
-export const Award: React.FC<AwardProps> = ({ award, text, handleClaim }) => {
+export const Award: React.FC<AwardProps> = ({ award, text, handelClaim }) => {
   return (
     <div className={$.container}>
       <h1 className={$.title}>Nieuwe Prijs</h1>
@@ -17,7 +17,7 @@ export const Award: React.FC<AwardProps> = ({ award, text, handleClaim }) => {
         <div className={$.awardImage}>
           <Image
             src={`/images/${award}.svg`}
-            alt="award"
+            alt={`${award}award`}
             layout="fill"
             className={$.image}
           />
@@ -29,7 +29,7 @@ export const Award: React.FC<AwardProps> = ({ award, text, handleClaim }) => {
         in de verzorging te voltooien!
       </p>
       <div className={$.button}>
-        <Button text="Claim" color="green" onClick={handleClaim} />
+        <Button text="Claim" color="green" onClick={handelClaim} />
       </div>
     </div>
   );

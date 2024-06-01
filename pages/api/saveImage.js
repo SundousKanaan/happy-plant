@@ -3,7 +3,7 @@ import fs from "fs";
 import path from "path";
 import { v4 as uuidv4 } from "uuid";
 
-export default function handler(req, res) {
+export default function handelr(req, res) {
   if (req.method === "POST") {
     const { dataImg, userId, plantId, plantType } = req.body;
 

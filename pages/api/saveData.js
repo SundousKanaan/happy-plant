@@ -2,7 +2,7 @@
 import fs from "fs";
 import path from "path";
 
-export default function handler(req, res) {
+export default function handelr(req, res) {
   if (req.method === "POST") {
     const data = req.body;
     const dataStr = JSON.stringify(data, null, 4);

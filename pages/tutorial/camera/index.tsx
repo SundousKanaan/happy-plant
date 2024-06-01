@@ -12,7 +12,7 @@ import { useRouter } from "next/router";
 import Dialog from "@/src/components/Dialog/Dialog";
 
 const CameraPage = () => {
-  const { handleCustomStap } = useStapper();
+  const { handelCustomStap } = useStapper();
   const { openDialog, closeDialog, isOpen } = useDialog();
   const {
     getSavedBackgroundImage,
@@ -40,11 +40,11 @@ const CameraPage = () => {
   }, []);
 
   const goBack = () => {
-    handleCustomStap(1);
+    handelCustomStap(1);
   };
 
   // Save the image to the database
-  const handleSaveImage = async () => {
+  const handelSaveImage = async () => {
     if (!savedBackgroundImage) return;
     const user = localStorage.getItem("account");
     const plantId = 0;
@@ -69,11 +69,11 @@ const CameraPage = () => {
       plantType: "digital",
     });
 
-    handleCustomStap(1);
+    handelCustomStap(1);
   };
 
-  const handleBackAction = () => {
-    handleCustomStap(1);
+  const handelBackAction = () => {
+    handelCustomStap(1);
   };
 
   return (
@@ -82,7 +82,7 @@ const CameraPage = () => {
         <p className={$.text}>{texts.cameraNote_1}</p>
         <p className={$.text}>{texts.cameraNote_2}</p>
         <div className={$.buttons}>
-          <Button text="Terug" color="brown" onClick={handleBackAction} />
+          <Button text="Terug" color="brown" onClick={handelBackAction} />
 
           <Button
             text="Doorgaan"
@@ -108,7 +108,7 @@ const CameraPage = () => {
               <Button text="Nieuw schot" color="brown" onClick={closeDialog} />
             </div>
             <div className={cs($.dialogButton, $.useButton)}>
-              <Button text="Gebruik" color="green" onClick={handleSaveImage} />
+              <Button text="Gebruik" color="green" onClick={handelSaveImage} />
             </div>
           </div>
         </div>

@@ -8,7 +8,7 @@ import cs from "classnames";
 const IntroPage = () => {
   const router = useRouter();
   const [step, setStep] = React.useState(1);
-  const handleStep = () => {
+  const handelStep = () => {
     if (step === 1) {
       setStep(2);
     } else {
@@ -59,7 +59,7 @@ const IntroPage = () => {
         {step === 2 && (
           <Button text="Terug" color="brown" onClick={() => setStep(1)} />
         )}
-        <Button text="Volgende" color="green" onClick={handleStep} />
+        <Button text="Volgende" color="green" onClick={handelStep} />
       </div>
     </section>
   );

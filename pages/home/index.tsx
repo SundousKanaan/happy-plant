@@ -65,14 +65,16 @@ const tasks = [
   },
 ];
 
-const HomePage = () => {
+const Home = () => {
   const router = useRouter();
   const [bg, setBg] = useState("");
   const [isRenameOpen, setIsRenameOpen] = useState(true);
   const [plantName, setPlantName] = useState("");
   const [disabledSaveName, setDisabledSaveName] = useState(true);
-
   const [countdown, setCountdown] = useState(24 * 60 * 60);
+  const [tasksListIsOpen, setTasksListIsOpen] = useState(false);
+
+  // get the background image from the local storage
   useEffect(() => {
     const storedBg = localStorage.getItem("backgroundImage");
     if (storedBg) {
@@ -86,6 +88,7 @@ const HomePage = () => {
     y: 0,
   });
 
+  // get the plant position from the local storage
   useEffect(() => {
     const SavedPlantPosition = localStorage.getItem("plantPosition");
     setSavedPlantPosition(
@@ -103,6 +106,7 @@ const HomePage = () => {
     return () => clearInterval(timer);
   }, []);
 
+  // get the plant name from the local storage
   useEffect(() => {
     const plantName = localStorage.getItem("plantName");
     if (plantName) {
@@ -111,7 +115,8 @@ const HomePage = () => {
     }
   }, []);
 
-  const handleRename = (e: React.ChangeEvent<HTMLInputElement>) => {
+  // handel the rename of the plant
+  const handelRename = (e: React.ChangeEvent<HTMLInputElement>) => {
     if (e.target.value.length > 0) {
       setPlantName(e.target.value);
       localStorage.setItem("plantName", e.target.value);
@@ -121,7 +126,8 @@ const HomePage = () => {
     }
   };
 
-  const handleSaveName = () => {
+  // save the name of the plant
+  const handelSaveName = () => {
     setIsRenameOpen(false);
   };
 
@@ -140,17 +146,13 @@ const HomePage = () => {
     setMenuIsOpen(!menuIsOpen);
   };
 
+  // open the care help
   const openCareHelp = () => {
     if (menuIsOpen) {
       setMenuIsOpen(!menuIsOpen);
     }
     setCareHelpIsOpen(!careHelpIsOpen);
   };
-
-  const [tasksListIsOpen, setTasksListIsOpen] = useState(false);
-
-  // add: gave name
-  // add de plant from stap 4
 
   return (
     <section className={$.container}>
@@ -163,7 +165,7 @@ const HomePage = () => {
                 type="text"
                 name="text"
                 placeholder="Jouw plant naam ..."
-                onChange={handleRename}
+                onChange={handelRename}
               />
             </div>
             <div>
@@ -171,7 +173,7 @@ const HomePage = () => {
                 text="Opslaan"
                 color="green"
                 disabled={disabledSaveName}
-                onClick={handleSaveName}
+                onClick={handelSaveName}
               />
             </div>
           </div>
@@ -304,7 +306,7 @@ const HomePage = () => {
 
       {menuIsOpen && (
         <div className={$.menuList}>
-          <Menulist handleColeMenu={openMenu} openCareHelp={openCareHelp} />
+          <Menulist handelColeMenu={openMenu} openCareHelp={openCareHelp} />
         </div>
       )}
 
@@ -323,4 +325,4 @@ const HomePage = () => {
   );
 };
 
-export default HomePage;
+export default Home;

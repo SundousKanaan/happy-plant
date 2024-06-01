@@ -82,7 +82,7 @@ const Agenda = () => {
     setDaysDatesArray(daysArray);
   };
 
-  const handleNextMonth = () => {
+  const handelNextMonth = () => {
     if (usedMonthIndex < 11) {
       setUsedMonthIndex(usedMonthIndex + 1);
     } else {
@@ -90,7 +90,7 @@ const Agenda = () => {
     }
   };
 
-  const handlePreviousMonth = () => {
+  const handelPreviousMonth = () => {
     if (usedMonthIndex > 0) {
       setUsedMonthIndex(usedMonthIndex - 1);
     } else {
@@ -112,7 +112,7 @@ const Agenda = () => {
         <Button
           icon="Xsignal"
           color="transparent"
-          onClick={() => router.push("/homePage")}
+          onClick={() => router.push("/home")}
         />
       </div>
 
@@ -283,14 +283,14 @@ const Agenda = () => {
       </div>
 
       <div className={$.nextMonthButton}>
-        <Button icon="Arrow" color="transparent" onClick={handleNextMonth} />
+        <Button icon="Arrow" color="transparent" onClick={handelNextMonth} />
       </div>
 
       <div className={$.backMonthButton}>
         <Button
           icon="Arrow"
           color="transparent"
-          onClick={handlePreviousMonth}
+          onClick={handelPreviousMonth}
         />
       </div>
     </div>
