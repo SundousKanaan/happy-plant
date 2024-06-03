@@ -7,6 +7,7 @@ import { PlantType } from "@/ts/types";
 import { useAccount } from "@/src/contexts/account/accountContext";
 import { useRouter } from "next/router";
 
+// Array of month names
 const monthesArray = [
   "Januari",
   "Februari",
@@ -22,6 +23,7 @@ const monthesArray = [
   "December",
 ];
 
+// Array of day names
 const daysNamesArray = [
   "Zondag",
   "Maandag",
