@@ -30,6 +30,7 @@ const Stap1: React.FC<stapProps> = ({ onRoomSelect }) => {
             <button
               className={$.iconButton}
               onClick={() => handelRoomClick("bedroom")}
+              disabled
             >
               <Icon bg="bedroom" text="Slaapkamer" />
             </button>
@@ -38,6 +39,7 @@ const Stap1: React.FC<stapProps> = ({ onRoomSelect }) => {
             <button
               className={$.iconButton}
               onClick={() => handelRoomClick("livingroom")}
+              disabled
             >
               <Icon bg="livingroom" text="Woonkamer" />
             </button>

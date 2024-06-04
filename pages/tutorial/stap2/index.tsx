@@ -103,10 +103,7 @@ const Stap2 = () => {
   };
 
   return (
-    <TutorialLayout
-      disabledNext
-      cloudText="Wat een prachtige plek om je plant te verzorgen"
-    >
+    <TutorialLayout disabledNext cloudText="Pluk en trek je eerste plant!">
       <div className={$.stap2}>
         <ul className={$.iconsList}>
           <li className={cs($.icon)}>

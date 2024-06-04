@@ -3,37 +3,13 @@
         "id": 0,
         "userName": {
             "firstName": "Sundous",
-            "lastName": "Kan"
+            "lastName": "Kanaan"
         },
         "email": "sundous.kn@hva.nl",
         "password": "123",
         "stars": 0,
         "userImage": "/images/user-placeholder-image.svg",
-        "plants": [
-            {
-                "id": 0,
-                "plantName": "Ellie",
-                "type": "Bloeiende plant",
-                "familyName": "Camelia",
-                "plantImage": "",
-                "backgroundImage": "1c8719f2-e0a0-4f64-8f1e-b02029d0d651.jpeg",
-                "note": "",
-                "careInfo": {
-                    "Watering": "een keer per week",
-                    "amountOfWater": "7ml",
-                    "Light": "indirect zonlicht",
-                    "Temperature": "15-20°C",
-                    "Poisoning": "",
-                    "careLevel": "Makkelijk"
-                },
-                "position": {
-                    "x": 0,
-                    "y": 0
-                },
-                "birthday": "",
-                "databaseId": 1
-            }
-        ],
+        "plants": [],
         "posts": [],
         "followers": [],
         "following": [],

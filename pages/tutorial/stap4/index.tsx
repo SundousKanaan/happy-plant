@@ -54,7 +54,7 @@ const Stap4: React.FC<stapProps> = ({}) => {
     if (account === undefined) return;
     const userPlants = database[account.id].plants;
     const tutorialPlantIndex = userPlants.findIndex((plant) => plant.id === 0);
-    setCareInfo(userPlants[tutorialPlantIndex].careInfo);
+    setCareInfo(userPlants[tutorialPlantIndex]?.careInfo);
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
@@ -122,7 +122,7 @@ const Stap4: React.FC<stapProps> = ({}) => {
         <p className={$.text}>
           Je plant heeft{" "}
           <span className={$.greenText}>
-            {careInfo.Watering} {careInfo.amountOfWater}
+            {careInfo?.Watering} {careInfo?.amountOfWater}
           </span>{" "}
           water nodig.
         </p>
